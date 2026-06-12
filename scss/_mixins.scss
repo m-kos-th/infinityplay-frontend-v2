@@ -1,0 +1,88 @@
+// ============================================================
+// _mixins.scss
+// ============================================================
+
+// --- Typography roles (brief-spec) -------------------------
+
+@mixin type-title {
+  font-family: var(--font-display);
+  font-size:   var(--fs-title);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-title);
+  letter-spacing: var(--ls-title);
+  text-transform: uppercase;
+  color: var(--color-white);
+}
+
+@mixin type-body {
+  font-family: var(--font-body);
+  font-size:   var(--fs-body);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-body);
+  color: var(--color-white-70);
+}
+
+@mixin type-label {
+  font-family: var(--font-body);
+  font-size:   var(--fs-label);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-label);
+  color: var(--color-grey-9464);
+}
+
+// --- Fluid type ------------------------------------------------
+@mixin fluid-type($min-size, $max-size, $min-vw: 360px, $max-vw: 1440px) {
+  font-size: clamp(#{$min-size}, #{$min-size} + (#{$max-size} - #{$min-size}) * ((100vw - #{$min-vw}) / (#{$max-vw} - #{$min-vw})), #{$max-size});
+}
+
+// --- Corner-bracket decoration (used in panels) ---------------
+@mixin corner-brackets($color: rgba(255,255,255,.5), $size: 10px, $border: 1px) {
+  position: relative;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: $size;
+    height: $size;
+    border: $border solid $color;
+  }
+
+  &::before {
+    top:  -1px;
+    left: -1px;
+    border-right: none;
+    border-bottom: none;
+  }
+
+  &::after {
+    bottom: -1px;
+    right:  -1px;
+    border-left: none;
+    border-top:  none;
+  }
+}
+
+// --- Position fill --------------------------------------------
+@mixin fill {
+  position: absolute;
+  inset: 0;
+}
+
+// --- Glassmorphism card ---------------------------------------
+@mixin glass($alpha: 0.55) {
+  background: rgba(10, 16, 46, $alpha);
+  border: 1px dashed rgba(255, 255, 255, 0.22);
+}
+
+// --- Breakpoint helper ----------------------------------------
+@mixin respond-to($bp) {
+  @if $bp == md { @media (max-width: $bp-md) { @content; } }
+  @else if $bp == sm { @media (max-width: $bp-sm) { @content; } }
+  @else { @media (max-width: $bp) { @content; } }
+}
+
+// --- Reduced-motion guard ------------------------------------
+@mixin no-motion {
+  @media (prefers-reduced-motion: reduce) { @content; }
+}

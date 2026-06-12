@@ -1,0 +1,61 @@
+// ============================================================
+// _tokens.scss — Design tokens / CSS custom properties
+// ============================================================
+
+:root {
+  // Colours
+  --color-navy:        #04081c;
+  --color-navy-2:      #070d2a;
+  --color-azure:       #0060ff;
+  --color-azure-bright:#1273ff;
+  --color-sky:         #4aa8ff;
+  --color-white:       #ffffff;
+  --color-ink:         #10131a;
+  --color-grey:        #8a8f9c;
+  --color-line:        #e6e6e6;
+  --color-beige:       #d6c9b3;
+
+  // Semantic colour roles (from brief)
+  --color-white-70:    rgba(255, 255, 255, 0.70);
+  --color-grey-9464:   rgba(224, 246, 255, 0.64);
+  --color-marquee-dark:rgba(27,  37,  64,  0.21);
+
+  // Font families
+  --font-display: "TT Norms Pro", "Barlow", system-ui, sans-serif;
+  --font-body:    "Inter", system-ui, sans-serif;
+  --font-mono:    "Doto", monospace;
+
+  // Font sizes (brief)
+  --fs-title:   40px;
+  --fs-body:    13.6px;
+  --fs-label:   12.2px;
+  --fs-marquee: 88px;
+
+  // Font weights
+  --fw-light:   300;
+  --fw-regular: 400;
+  --fw-bold:    700;
+
+  // Line heights
+  --lh-title:   120%;
+  --lh-body:    24px;
+  --lh-label:   20px;
+  --lh-marquee: 40px;
+
+  // Letter spacing
+  --ls-title:   0.8px;
+
+  // Border radius
+  --radius-card: 18px;
+  --radius-pill: 999px;
+  --radius-btn:  8px;
+}
+
+// ---- SCSS variables (use in calculations / mixins) ----------
+$azure:  #0060ff;
+$navy:   #04081c;
+$ink:    #10131a;
+$line:   #e6e6e6;
+
+$bp-md:  980px;
+$bp-sm:  680px;

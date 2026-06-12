@@ -1,0 +1,25 @@
+// ============================================================
+// main.scss — Entry point
+// Compile: npx sass scss/main.scss css/main.css --no-source-map --silence-deprecation=import
+// ============================================================
+
+// 1 · Foundations
+@import 'tokens';
+@import 'mixins';
+@import 'reset';
+@import 'typography';
+
+// 2 · Components
+@import 'components/pill';
+@import 'components/btn';
+@import 'components/marquee';
+@import 'components/feature';
+
+// 3 · Sections
+@import 'sections/nav';
+@import 'sections/hero';
+@import 'sections/about';
+@import 'sections/work';
+@import 'sections/stats';
+@import 'sections/services';
+@import 'sections/footer';

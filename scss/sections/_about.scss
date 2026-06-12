@@ -1,0 +1,88 @@
+// ============================================================
+// sections/_about.scss
+// ============================================================
+
+.about {
+  position: relative;
+  height: 130vh;
+  min-height: 900px;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  margin: 8px;
+  background: linear-gradient(
+    180deg,
+    #03061a   0%,
+    #051040  34%,
+    #0533b8  62%,
+    #1273ff  84%,
+    #3ea0ff 100%
+  );
+
+  &__content {
+    position: absolute;
+    left: 50%;
+    top: 44%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 3;
+    width: min(720px, 86vw);
+  }
+
+  &__title {
+    @include type-title;
+    @include fluid-type(30px, 46px);
+    margin-top: 30px;
+    line-height: 1.25;
+    letter-spacing: 0.06em;
+  }
+
+  &__description {
+    @include type-body;
+    margin-top: 26px;
+    color: rgba(255,255,255,.82);
+    font-size: 15px;
+    line-height: 1.75;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  // Side characters
+  &__character {
+    position: absolute;
+    bottom: 0;
+    width: clamp(260px, 30vw, 520px);
+    z-index: 2;
+    will-change: transform;
+
+    &--left  { left: 0;   bottom: 6%; }
+    &--right { right: 0;  bottom: 2%; }
+  }
+
+  &__character-image {
+    aspect-ratio: 3 / 4;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom;
+
+    .about__character--left  & { background-image: url('../assets/about-robot.png'); }
+    .about__character--right & { background-image: url('../assets/about-artist.png'); }
+  }
+
+  // Decorative clouds
+  &__cloud {
+    position: absolute;
+    width: 160px;
+    height: 70px;
+    background:
+      radial-gradient(closest-side, #fff 65%, transparent),
+      radial-gradient(closest-side, #fff 65%, transparent) 60px -18px / 110px 80px no-repeat;
+    border-radius: 60px;
+    filter: blur(2px);
+    opacity: 0.95;
+    z-index: 1;
+
+    &--1 { left: 16%;  bottom: 24%; }
+    &--2 { right: 7%;  bottom: 34%; transform: scale(0.8); }
+  }
+}
