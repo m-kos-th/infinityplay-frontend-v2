@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Infinity Play — Crafting Legendary Gaming Experiences</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Doto:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#04081c;
+  --navy-2:#070d2a;
+  --blue:#1e4fff;
+  --blue-bright:#1273ff;
+  --sky:#4aa8ff;
+  --beige:#d6c9b3;
+  --ink:#10131a;
+  --grey:#8a8f9c;
+  --line:#e6e6e6;
+  --paper:#ffffff;
+  --font-body:'Archivo',system-ui,sans-serif;
+  --font-dot:'Doto',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:auto}
+body{font-family:var(--font-body);background:#fff;color:var(--ink);overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+
+/* ---------- Fixed nav ---------- */
+.nav{position:fixed;top:24px;left:24px;z-index:1000;display:flex;flex-direction:column;align-items:flex-start}
+.nav-row{display:flex;box-shadow:0 6px 24px rgba(0,0,0,.12)}
+.nav-burger{width:52px;height:52px;background:var(--blue);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px;cursor:pointer;flex:none}
+.nav-burger span{display:block;height:2px;background:#fff;border-radius:2px}
+.nav-burger span:nth-child(1){width:18px;align-self:center;transform:translateX(-3px)}
+.nav-burger span:nth-child(2){width:12px;align-self:center;transform:translateX(-6px)}
+.nav-logo{background:#fff;color:#0d1330;display:flex;align-items:center;padding:0 26px;font-weight:800;letter-spacing:.14em;font-size:15px;height:52px}
+.nav-flame{width:46px;height:46px;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 24px rgba(0,0,0,.12)}
+.nav-flame svg{width:24px;height:24px;fill:var(--blue)}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;height:100vh;min-height:640px;background:
+  radial-gradient(60% 50% at 70% 30%,rgba(70,110,160,.35),transparent 70%),
+  linear-gradient(180deg,#0c1626 0%,#0a1422 55%,#070e19 100%);
+  overflow:hidden;border-radius:18px;margin:8px;}
+.hero-media{position:absolute;inset:0;background-image:url('assets/hero.jpg');background-size:cover;background-position:center;}
+.hero-media::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,8,18,.15),rgba(4,8,18,.05) 50%,rgba(4,8,18,.55))}
+.hero-copy{position:absolute;left:6vw;bottom:7vh;z-index:2;max-width:640px}
+.hero-copy h1{font-size:clamp(34px,3.6vw,52px);font-weight:700;letter-spacing:.12em;color:var(--beige);line-height:1.22;text-transform:uppercase}
+.hero-rule{width:100%;height:1px;background:rgba(214,201,179,.45);margin:30px 0 26px}
+.hero-copy p{color:#c8cdd6;font-size:15.5px;line-height:1.7;max-width:480px}
+
+/* ---------- About ---------- */
+.about{position:relative;height:130vh;min-height:900px;overflow:hidden;border-radius:18px;margin:8px;
+  background:linear-gradient(180deg,#03061a 0%,#051040 34%,#0533b8 62%,#1273ff 84%,#3ea0ff 100%)}
+.marquee{position:absolute;top:7vh;left:0;white-space:nowrap;font-family:var(--font-dot);font-weight:700;
+  font-size:clamp(60px,7.5vw,110px);letter-spacing:.18em;will-change:transform;user-select:none}
+.about .marquee{color:rgba(255,255,255,.07)}
+.about-center{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);text-align:center;z-index:3;width:min(720px,86vw)}
+.pill{display:inline-flex;align-items:center;justify-content:center;padding:11px 26px;border-radius:999px;
+  font-size:12px;letter-spacing:.22em;font-weight:600;text-transform:uppercase;color:#fff;
+  background:linear-gradient(180deg,rgba(255,255,255,.14),rgba(255,255,255,.03));
+  border:1px solid rgba(255,255,255,.25);box-shadow:0 8px 30px rgba(0,0,0,.25)}
+.about-center h2{margin-top:30px;color:#fff;font-weight:800;letter-spacing:.06em;
+  font-size:clamp(30px,3.2vw,46px);line-height:1.25;text-transform:uppercase}
+.about-center p{margin-top:26px;color:rgba(255,255,255,.82);font-size:15px;line-height:1.75;max-width:520px;margin-left:auto;margin-right:auto}
+.char{position:absolute;bottom:0;width:clamp(260px,30vw,520px);z-index:2;will-change:transform}
+.char-left{left:0;bottom:6%}
+.char-right{right:0;bottom:2%}
+.char .ph{aspect-ratio:3/4;background-size:contain;background-repeat:no-repeat;background-position:bottom}
+.char-left .ph{background-image:url('assets/about-robot.png')}
+.char-right .ph{background-image:url('assets/about-artist.png')}
+.cloud{position:absolute;width:160px;height:70px;background:radial-gradient(closest-side,#fff 65%,transparent),radial-gradient(closest-side,#fff 65%,transparent) 60px -18px/110px 80px no-repeat;border-radius:60px;filter:blur(2px);opacity:.95;z-index:1}
+.cloud-1{left:16%;bottom:24%}
+.cloud-2{right:7%;bottom:34%;transform:scale(.8)}
+
+/* ---------- Work (pinned) ---------- */
+.work{position:relative;background:#fff}
+.work-pin{height:100vh;overflow:hidden;position:relative}
+.work .marquee{top:6vh;color:#e3e3e3;z-index:0}
+.work-grid{position:absolute;inset:0;display:grid;grid-template-columns:28% 44% 28%;}
+.work-col{position:relative;overflow:hidden;border-left:1px solid var(--line);border-right:1px solid var(--line)}
+.work-strip{position:absolute;left:0;right:0;top:30vh;will-change:transform}
+.cell{height:100vh;background-size:cover;background-position:center;position:relative}
+.cell.dot{background:#fff;background-image:radial-gradient(rgba(0,0,0,.13) 1px,transparent 1.2px);background-size:9px 9px}
+.cell.media::after{content:'';position:absolute;inset:0;box-shadow:inset 0 0 0 1px var(--line)}
+.work-center{position:relative}
+.work-slides{position:absolute;left:0;right:0;top:30vh;will-change:transform}
+.wslide{height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;text-align:center;padding:7vh 6% 0;background:#fff;border-top:1px solid var(--line)}
+.wslide .logo{height:170px;display:flex;align-items:center;justify-content:center;margin-bottom:46px;background-size:contain;background-position:center;background-repeat:no-repeat;width:min(360px,80%)}
+.logo-dawn{background-image:url('assets/logo-dawn.png')}
+.logo-trick{background-image:url('assets/logo-trick.png')}
+.logo-outlanders{background-image:url('assets/logo-outlanders.png')}
+.logo-umt{background-image:url('assets/logo-umt.png')}
+.logo .fallback{font-weight:900;letter-spacing:.04em;font-size:54px;line-height:.95;text-transform:uppercase}
+.fallback.dawn{color:#e02020;font-family:var(--font-body)}
+.fallback.trick{color:#d2491d;-webkit-text-stroke:2px #221408;text-shadow:0 4px 0 #c9b896}
+.fallback.outlanders{color:#9aa3ad;font-weight:600;letter-spacing:.35em}
+.fallback.umt{color:#aab4c4;font-style:italic;text-shadow:0 2px 6px rgba(0,0,0,.35)}
+.wslide p{color:#5d626d;font-size:15px;margin-bottom:42px}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 30px;border-radius:8px;
+  background:linear-gradient(180deg,#f3f1ec,#e9e6df);border:1px solid #ddd9d0;color:#23262e;
+  font-size:12px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;
+  box-shadow:0 10px 24px rgba(0,0,0,.06);transition:transform .25s ease,box-shadow .25s ease}
+.btn:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(0,0,0,.1)}
+
+/* ---------- Stats ---------- */
+.stats{position:relative;background:#fff;overflow:hidden}
+.stats-hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:14vh 6vw 8vh}
+.circuit{position:absolute;inset:8% 10%;border:1px solid rgba(0,0,0,.05);border-radius:24px;
+  background:
+   linear-gradient(rgba(0,0,0,.04),rgba(0,0,0,.04)) 50% 0/1px 100% no-repeat,
+   linear-gradient(rgba(0,0,0,.04),rgba(0,0,0,.04)) 0 50%/100% 1px no-repeat;
+  pointer-events:none}
+.stats-hero h2{font-size:clamp(28px,2.9vw,42px);font-weight:800;letter-spacing:.04em;line-height:1.3;max-width:760px;text-transform:uppercase}
+.stats-hero .btn{margin-top:44px}
+.float-item{position:absolute;width:clamp(70px,8.5vw,130px);aspect-ratio:1;background-size:contain;background-repeat:no-repeat;background-position:center;
+  filter:drop-shadow(0 18px 30px rgba(0,0,0,.18));will-change:transform}
+.fi-1{top:14%;left:14%;background-image:url('assets/float-headphones.png')}
+.fi-2{top:13%;right:13%;background-image:url('assets/float-controller.png')}
+.fi-3{top:42%;left:21%;background-image:url('assets/float-coffee.png')}
+.fi-4{top:44%;right:21%;background-image:url('assets/float-folder.png')}
+.fi-5{bottom:18%;left:11%;background-image:url('assets/float-tablet.png')}
+.fi-6{bottom:16%;right:9%;background-image:url('assets/float-laptop.png')}
+.stats-rows{position:relative;padding:0 3vw 26vh}
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:2vw;border-top:1px solid var(--line)}
+.stats-row + .stats-row{margin-top:6vh}
+.stat{padding:28px 2vw 0;border-left:1px solid var(--line)}
+.stat:first-child{border-left:none}
+.stat .label{font-size:11px;letter-spacing:.22em;color:var(--grey);text-transform:uppercase;font-weight:600}
+.stat .value{font-family:var(--font-dot);font-weight:900;font-size:clamp(54px,6.5vw,104px);letter-spacing:.06em;margin-top:14px;color:#15181f}
+.stat .sub{font-size:11px;letter-spacing:.18em;color:var(--grey);text-transform:uppercase;font-weight:600;margin-top:10px;max-width:260px;line-height:1.6}
+.stats-glow{position:absolute;left:0;right:0;bottom:0;height:55vh;pointer-events:none;
+  background:linear-gradient(180deg,rgba(255,255,255,0) 0%,rgba(116,185,255,.55) 55%,#1273ff 100%);filter:blur(2px)}
+
+/* ---------- Services (pinned) ---------- */
+.services{position:relative}
+.services-pin{height:100vh;overflow:hidden;position:relative;background:#04081c}
+.sslide{position:absolute;inset:0;will-change:transform;display:flex;align-items:center}
+.sslide-inner{position:relative;width:100%;height:100%;display:flex;align-items:center}
+.sslide.first{background:
+  radial-gradient(120% 90% at 50% -10%,#eaf4ff 0%,#9fd0ff 18%,#2f7dff 45%,#0a2db0 75%,#04081c 100%)}
+.sslide.dark{background:
+  radial-gradient(60% 60% at 38% 50%,#0b1340 0%,#070d2e 45%,#04081c 100%)}
+.services-head{position:absolute;top:6vh;left:50%;transform:translateX(-50%);text-align:center;z-index:3;width:min(760px,90vw)}
+.services-head h2{margin-top:26px;color:#fff;font-weight:700;letter-spacing:.1em;font-size:clamp(28px,3vw,44px);line-height:1.3;text-transform:uppercase}
+.spanel{position:absolute;left:15%;top:50%;transform:translateY(-50%);width:min(540px,38vw);aspect-ratio:3/4.05;
+  border:1px solid rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center}
+.spanel::before,.spanel::after{content:'';position:absolute;width:10px;height:10px;border:1px solid rgba(255,255,255,.5)}
+.spanel::before{top:-1px;left:-1px;border-right:none;border-bottom:none}
+.spanel::after{bottom:-1px;right:-1px;border-left:none;border-top:none}
+.spanel .art{width:78%;aspect-ratio:3/4;background-size:contain;background-position:center;background-repeat:no-repeat}
+.sinfo{position:absolute;right:9%;top:50%;transform:translateY(-50%);width:min(420px,30vw);color:#fff}
+.sinfo h3{font-family:var(--font-dot);font-weight:700;font-size:clamp(40px,4.4vw,64px);letter-spacing:.1em;line-height:1.15;text-transform:uppercase;color:#eef3ff}
+.sinfo p{margin-top:24px;color:#aeb6cc;font-size:15px;line-height:1.75;max-width:300px}
+.feature{position:relative;display:flex;align-items:center;gap:12px;margin-top:16px;padding:15px 18px;
+  border:1px dashed rgba(255,255,255,.22);background:rgba(10,16,46,.55);font-size:13.5px;color:#dfe5f5}
+.feature::before,.feature::after{content:'';position:absolute;width:8px;height:8px;border:1px solid rgba(255,255,255,.5)}
+.feature::before{top:-1px;left:-1px;border-right:none;border-bottom:none}
+.feature::after{bottom:-1px;right:-1px;border-left:none;border-top:none}
+.feature svg{width:16px;height:16px;flex:none;stroke:#4d8cff}
+.features{margin-top:26px}
+.supported{margin-top:26px;padding:18px;border:1px dashed rgba(255,255,255,.22);background:rgba(10,16,46,.55)}
+.supported .lbl{font-size:12.5px;color:#aeb6cc;margin-bottom:12px}
+.supported .logos{display:flex;align-items:center;gap:22px;font-weight:800;letter-spacing:.06em;font-size:14px;color:#e8edf8}
+.snav{position:absolute;left:3vw;top:50%;transform:translateY(-50%);z-index:5;display:flex;flex-direction:column;gap:13px}
+.snav a{position:relative;display:flex;align-items:center;gap:14px;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.38);font-weight:600;transition:color .3s}
+.snav a::before{content:'';width:18px;height:1px;background:currentColor;opacity:.6}
+.snav a.active{color:#fff;font-weight:800}
+.snav a.active::before{width:26px}
+
+/* ---------- Footer ---------- */
+.footer{position:relative;min-height:100vh;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;
+  background:linear-gradient(180deg,#5e0a0a 0%,#b81e07 28%,#e8500a 58%,#ff9b1a 100%)}
+.footer-head{text-align:center;padding-top:12vh;position:relative;z-index:3}
+.footer-head h2{font-size:clamp(34px,4.2vw,62px);font-weight:800;letter-spacing:.06em;line-height:1.25;text-transform:uppercase;color:#ffb454}
+.footer-head h2 .hl{color:#ff8a1e;display:block}
+.footer-cols{position:relative;z-index:3;display:flex;justify-content:center;gap:30vw;margin-top:7vh}
+.fcol .flabel{font-size:11px;letter-spacing:.24em;color:rgba(255,255,255,.55);text-transform:uppercase;font-weight:700;margin-bottom:22px;text-align:center}
+.fcol ul{list-style:none;text-align:center}
+.fcol li{margin-bottom:14px}
+.fcol a{font-weight:800;letter-spacing:.08em;font-size:19px;color:#fff;text-transform:uppercase;transition:opacity .25s}
+.fcol.soon a{color:rgba(255,255,255,.5);pointer-events:none}
+.fcol a:hover{opacity:.7}
+.footer-char{position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:clamp(320px,38vw,640px);aspect-ratio:3/4;z-index:2;
+  background-image:url('assets/footer-samurai.png');background-size:contain;background-position:bottom center;background-repeat:no-repeat}
+.footer-giant{position:absolute;left:50%;bottom:1vh;transform:translateX(-50%);z-index:1;
+  font-size:clamp(90px,15.5vw,260px);font-weight:900;letter-spacing:.02em;color:#a01708;line-height:.85;white-space:nowrap;user-select:none}
+.footer-bar{position:relative;z-index:3;display:flex;justify-content:space-between;align-items:center;padding:18px 28px;font-size:11px;letter-spacing:.08em;color:rgba(255,255,255,.8)}
+.footer-bar .links{display:flex;gap:26px;font-weight:700;letter-spacing:.14em}
+
+/* ---------- Responsive ---------- */
+@media (max-width:980px){
+  .work-grid{grid-template-columns:18% 64% 18%}
+  .spanel{left:8%;width:42vw}
+  .sinfo{right:6%;width:40vw}
+  .snav{display:none}
+  .footer-cols{gap:14vw}
+}
+@media (max-width:680px){
+  .about-center{top:40%}
+  .char{width:46vw}
+  .work-grid{grid-template-columns:10% 80% 10%}
+  .stats-row{grid-template-columns:1fr}
+  .stat{border-left:none;border-top:1px solid var(--line)}
+  .spanel{display:none}
+  .sinfo{right:auto;left:8%;width:84vw}
+  .footer-cols{flex-direction:column;gap:6vh;align-items:center}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<!-- Fixed navigation -->
+<header class="nav">
+  <div class="nav-row">
+    <div class="nav-burger" aria-label="Menu"><span></span><span></span></div>
+    <div class="nav-logo">INFINITYPLAY</div>
+  </div>
+  <div class="nav-flame" aria-hidden="true">
+    <svg viewBox="0 0 24 24"><path d="M12 1.6c.6 3.4-1.1 5.1-2.7 6.8C7.6 10.2 6 11.9 6 15a6 6 0 0 0 12 0c0-2.1-.9-3.6-1.9-4.9-.4 1-1 1.7-1.9 2.2.3-2.9-.6-6.8-2.2-8.7-.6 1.6-1.7 2.6-2.6 3.5.8-2 .9-3.9 2.6-5.5z"/></svg>
+  </div>
+</header>
+
+<!-- 1 · HERO -->
+<section class="hero" id="home">
+  <div class="hero-media" data-slot="assets/hero.jpg → later replace with looping video (assets/hero.mp4)"></div>
+  <div class="hero-copy">
+    <h1>Crafting Legendary<br>Gaming Experiences</h1>
+    <div class="hero-rule"></div>
+    <p>We bring your wildest gaming visions to life. From concept to launch, Infinity Play delivers immersive worlds and unforgettable adventures.</p>
+  </div>
+</section>
+
+<!-- 2 · ABOUT -->
+<section class="about" id="about">
+  <div class="marquee" id="marqueeAbout">INFINITY PLAY&nbsp;&nbsp;&nbsp;INFINITY PLAY&nbsp;&nbsp;&nbsp;INFINITY PLAY&nbsp;&nbsp;&nbsp;INFINITY PLAY&nbsp;&nbsp;&nbsp;INFINITY PLAY&nbsp;&nbsp;&nbsp;INFINITY PLAY&nbsp;&nbsp;&nbsp;</div>
+  <div class="about-center">
+    <span class="pill">About Us</span>
+    <h2>Infinite Artistry<br>Expert Engineering</h2>
+    <p>We are a full-cycle game development studio and production house dedicated to pushing the boundaries of digital storytelling.</p>
+  </div>
+  <div class="cloud cloud-1"></div>
+  <div class="cloud cloud-2"></div>
+  <div class="char char-left"><div class="ph" data-slot="assets/about-robot.png"></div></div>
+  <div class="char char-right"><div class="ph" data-slot="assets/about-artist.png"></div></div>
+</section>
+
+<!-- 3-7 · FEATURED WORK (pinned, 4 projects) -->
+<section class="work" id="work">
+  <div class="work-pin">
+    <div class="marquee" id="marqueeWork">FEATURED WORK&nbsp;&nbsp;&nbsp;FEATURED WORK&nbsp;&nbsp;&nbsp;FEATURED WORK&nbsp;&nbsp;&nbsp;FEATURED WORK&nbsp;&nbsp;&nbsp;FEATURED WORK&nbsp;&nbsp;&nbsp;FEATURED WORK&nbsp;&nbsp;&nbsp;</div>
+    <div class="work-grid">
+      <div class="work-col">
+        <div class="work-strip" id="stripLeft">
+          <div class="cell media" style="background-image:url('assets/work-dawn.jpg')"></div>
+          <div class="cell dot"></div>
+          <div class="cell media" style="background-image:url('assets/work-outlanders.jpg')"></div>
+          <div class="cell dot"></div>
+          <div class="cell dot"></div>
+        </div>
+      </div>
+      <div class="work-center">
+        <div class="work-slides">
+          <div class="wslide" data-i="0">
+            <div class="logo logo-dawn"><span class="fallback dawn">Dawn<br>of the<br>Damned</span></div>
+            <p>Post-apocalyptic zombie survival shooter on Unreal Engine 5.</p>
+            <a class="btn" href="#">Discover</a>
+          </div>
+          <div class="wslide" data-i="1">
+            <div class="logo logo-trick"><span class="fallback trick">Trick<br>or Seek</span></div>
+            <p>Charming multiplayer hide-and-seek party game.</p>
+            <a class="btn" href="#">Discover</a>
+          </div>
+          <div class="wslide" data-i="2">
+            <div class="logo logo-outlanders"><span class="fallback outlanders">Outlanders</span></div>
+            <p>Blockchain-integrated MMORPG set in an open fantasy world.</p>
+            <a class="btn" href="#">Discover</a>
+          </div>
+          <div class="wslide" data-i="3">
+            <div class="logo logo-umt"><span class="fallback umt">UMT</span></div>
+            <p>Ultimate Muay Thai — competitive fighting experience.</p>
+            <a class="btn" href="#">Discover</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-col">
+        <div class="work-strip" id="stripRight">
+          <div class="cell dot"></div>
+          <div class="cell media" style="background-image:url('assets/work-trick.jpg')"></div>
+          <div class="cell dot"></div>
+          <div class="cell media" style="background-image:url('assets/work-umt.jpg')"></div>
+          <div class="cell dot"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8-10 · STATS -->
+<section class="stats">
+  <div class="stats-hero">
+    <div class="circuit"></div>
+    <div class="float-item fi-1" data-slot="assets/float-headphones.png"></div>
+    <div class="float-item fi-2" data-slot="assets/float-controller.png"></div>
+    <div class="float-item fi-3" data-slot="assets/float-coffee.png"></div>
+    <div class="float-item fi-4" data-slot="assets/float-folder.png"></div>
+    <div class="float-item fi-5" data-slot="assets/float-tablet.png"></div>
+    <div class="float-item fi-6" data-slot="assets/float-laptop.png"></div>
+    <h2>Fueling Infinite Possibilities With Our Passion For Gaming</h2>
+    <a class="btn" href="#work">See All Works</a>
+  </div>
+  <div class="stats-rows">
+    <div class="stats-row" id="statsRow1">
+      <div class="stat"><div class="label">Downloads</div><div class="value" data-count="3B+">3B+</div></div>
+      <div class="stat"><div class="label">Staffs</div><div class="value" data-count="60+">60+</div></div>
+      <div class="stat"><div class="label">Games Titles</div><div class="value" data-count="10+">10+</div></div>
+    </div>
+    <div class="stats-row" id="statsRow2">
+      <div class="stat"><div class="value">100+</div><div class="sub">Games Launched</div></div>
+      <div class="stat"><div class="value">15B+</div><div class="sub">Special parameters used to train AI model</div></div>
+      <div class="stat"><div class="value" style="font-size:clamp(38px,4.6vw,72px)">PROFESSIONAL</div><div class="sub">Data process and AI-ready</div></div>
+    </div>
+  </div>
+  <div class="stats-glow"></div>
+</section>
+
+<!-- 11-17 · SERVICES (pinned, slides load bottom → top) -->
+<section class="services" id="services">
+  <div class="services-pin" id="servicesPin">
+
+    <nav class="snav" id="snav">
+      <a href="#" data-s="0" class="active">3D Animation</a>
+      <a href="#" data-s="1">3D Art</a>
+      <a href="#" data-s="2">VFX &amp; Shaders</a>
+      <a href="#" data-s="3">2D Art</a>
+      <a href="#" data-s="4">Roblox</a>
+      <a href="#" data-s="5">Development</a>
+      <a href="#" data-s="6">AI Cinematic</a>
+    </nav>
+
+    <!-- Slide 1 -->
+    <div class="sslide first" data-s="0">
+      <div class="sslide-inner">
+        <div class="services-head">
+          <span class="pill">Services</span>
+          <h2>Infinite Artistry<br>Expert Engineering</h2>
+        </div>
+        <div class="spanel"><div class="art" style="background-image:url('assets/srv-3danim.png')" data-slot="assets/srv-3danim.png"></div></div>
+        <div class="sinfo">
+          <h3>3D<br>Animation</h3>
+          <p>Breathing life into characters with fluid mechanics and emotional depth.</p>
+          <div class="features">
+            <div class="feature"><svg viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="14" height="14"/><path d="M4 4l8 8M12 4l-8 8"/></svg>Advanced Rigging</div>
+            <div class="feature"><svg viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="14" height="14"/><path d="M4 4l8 8M12 4l-8 8"/></svg>Gameplay Animation</div>
+            <div class="feature"><svg viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="14" height="14"/><path d="M4 4l8 8M12 4l-8 8"/></svg>Cinematic &amp; Acting</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="sslide dark" data-s="1">
+      <div class="sslide-inner">
+        <div class="spanel"><div class="art" style="background-image:url('assets/srv-3dart.png')" data-slot="assets/srv-3dart.png"></div></div>
+        <div class="sinfo">
+          <h3>3D Art</h3>
+          <p>High-fidelity assets optimized for real-time rendering engines.</p>
+          <div class="features">
+            <div class="feature"><svg viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="14" height="14"/><path d="M4 4l8 8M12 4l-8 8"/></svg>Characters &amp; Creatures</div>
+            <div class="feature"><svg viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="14" height="14"/><path d="M4 4l8 8M12 4l-8 8"/></svg>Props &amp; Accessories</div>
+            <div class="feature"><svg viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="14" height="14"/><path d="M4 4l8 8M12 4l-8 8"/></svg>Vehicles &amp; Environments</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="sslide dark" data-s="2">
+      <div class="sslide-inner">
+        <div class="spanel"><div class="art" style="background-image:url('assets/srv-vfx.png')" data-slot="assets/srv-vfx.png"></div></div>
+        <div class="sinfo">
+          <h3>VFX &amp;<br>Shaders</h3>
+          <p>Visual magic that enhances immersion without sacrificing performance.</p>
+          <div class="features">
+            <div class="feature"><svg viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="14" height="14"/><path d="M4 4l8 8M12 4l-8 8"/></svg>2D &amp; 3D VFX Animation</div>
+            <div class="feature"><svg viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="14" height="14"/><path d="M4 4l8 8M12 4l-8 8"/></svg>Shader Graph &amp; HLSL</div>
+            <div class="feature"><svg viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="14" height="14"/><path d="M4 4l8 8M12 4l-8 8"/></svg>Particle Systems</div>
+          </div>
+          <div class="supported"><div class="lbl">Supported by</div><div class="logos"><span>UNREAL ENGINE</span><span>Unity</span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 4 -->
+    <div class="sslide dark" data-s="3">
+      <div class="sslide-inner">
+        <div class="spanel"><div class="art" style="background-image:url('assets/srv-2dart.png')" data-slot="assets/srv-2dart.png"></div></div>
+        <div class="sinfo">
+          <h3>2D Art</h3>
+          <p>Laying the visual foundation and storytelling elements.</p>
+          <div class="features">
+            <div class="feature"><svg viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="14" height="14"/><path d="M4 4l8 8M12 4l-8 8"/></svg>Spine/Frame Animation</div>
+            <div class="feature"><svg viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="14" height="14"/><path d="M4 4l8 8M12 4l-8 8"/></svg>Storyboarding</div>
+            <div class="feature"><svg viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="14" height="14"/><path d="M4 4l8 8M12 4l-8 8"/></svg>Concept Art</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 5 -->
+    <div class="sslide dark" data-s="4">
+      <div class="sslide-inner">
+        <div class="spanel"><div class="art" style="background-image:url('assets/srv-roblox.png')" data-slot="assets/srv-roblox.png"></div></div>
+        <div class="sinfo">
+          <h3>Roblox</h3>
+          <p>Laying the visual foundation and storytelling elements.</p>
+          <div class="features">
+            <div class="feature"><svg viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="14" height="14"/><path d="M4 4l8 8M12 4l-8 8"/></svg>Spine/Frame Animation</div>
+            <div class="feature"><svg viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="14" height="14"/><path d="M4 4l8 8M12 4l-8 8"/></svg>Storyboarding</div>
+            <div class="feature"><svg viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="14" height="14"/><path d="M4 4l8 8M12 4l-8 8"/></svg>Concept Art</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 6 -->
+    <div class="sslide dark" data-s="5">
+      <div class="sslide-inner">
+        <div class="spanel"><div class="art" style="background-image:url('assets/srv-dev.png')" data-slot="assets/srv-dev.png"></div></div>
+        <div class="sinfo">
+          <h3>Development</h3>
+          <p>Clean, scalable architecture for seamless gameplay experiences.</p>
+          <div class="features">
+            <div class="feature"><svg viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="14" height="14"/><path d="M4 4l8 8M12 4l-8 8"/></svg>Unity &amp; Unreal Engine</div>
+            <div class="feature"><svg viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="14" height="14"/><path d="M4 4l8 8M12 4l-8 8"/></svg>Engineering Support</div>
+            <div class="feature"><svg viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="14" height="14"/><path d="M4 4l8 8M12 4l-8 8"/></svg>Systems Architecture</div>
+          </div>
+          <div class="supported"><div class="lbl">Supported by</div><div class="logos"><span>UNREAL ENGINE</span><span>Unity</span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 7 -->
+    <div class="sslide dark" data-s="6">
+      <div class="sslide-inner">
+        <div class="spanel"><div class="art" style="background-image:url('assets/srv-ai.png')" data-slot="assets/srv-ai.png"></div></div>
+        <div class="sinfo">
+          <h3>AI<br>Cinematic</h3>
+          <p>Clean, scalable architecture for seamless gameplay experiences.</p>
+          <div class="features">
+            <div class="feature"><svg viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="14" height="14"/><path d="M4 4l8 8M12 4l-8 8"/></svg>Story board</div>
+            <div class="feature"><svg viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="14" height="14"/><path d="M4 4l8 8M12 4l-8 8"/></svg>VDO Result</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 18 · FOOTER -->
+<footer class="footer" id="contact">
+  <div class="footer-head">
+    <h2>Let`s Build Something <span class="hl">Legendary</span></h2>
+  </div>
+  <div class="footer-cols">
+    <div class="fcol">
+      <div class="flabel">Pages</div>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="fcol soon">
+      <div class="flabel">Coming Soon</div>
+      <ul>
+        <li><a href="#">TikTok</a></li>
+        <li><a href="#">Discord</a></li>
+        <li><a href="#">YouTube</a></li>
+        <li><a href="#">Instagram</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-giant">INFINITYPLAY</div>
+  <div class="footer-char" data-slot="assets/footer-samurai.png"></div>
+  <div class="footer-bar">
+    <div>© Infinity Play 2026. All rights reserved &nbsp;·&nbsp; Designed by KOS Design</div>
+    <div class="links"><a href="#">Privacy Policy</a><a href="#">Terms</a></div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- HERO intro ---------- */
+if(!reduced){
+  gsap.from('.hero-copy h1',{y:40,opacity:0,duration:1.1,ease:'power3.out',delay:.2});
+  gsap.from('.hero-rule',{scaleX:0,transformOrigin:'left',duration:1,ease:'power3.out',delay:.6});
+  gsap.from('.hero-copy p',{y:24,opacity:0,duration:1,ease:'power3.out',delay:.8});
+}
+
+/* ---------- Marquees: continuous loop, independent of scroll ---------- */
+function loopMarquee(sel, seconds, dir = 1){      // dir 1 = left→right, -1 = right→left
+  const el = document.querySelector(sel);
+  if(reduced){ return; }
+  gsap.set(el, {xPercent: dir === 1 ? -50 : 0});
+  gsap.to(el, {xPercent: dir === 1 ? 0 : -50, duration: seconds, ease:'none', repeat:-1});
+}
+loopMarquee('#marqueeAbout', 38, 1);
+loopMarquee('#marqueeWork', 34, 1);
+
+/* ---------- ABOUT: characters slide in ---------- */gsap.fromTo('.char-left',{xPercent:-110},{xPercent:0,ease:'power2.out',
+  scrollTrigger:{trigger:'.about',start:'top 75%',end:'center center',scrub:1}});
+gsap.fromTo('.char-right',{xPercent:110},{xPercent:0,ease:'power2.out',
+  scrollTrigger:{trigger:'.about',start:'top 75%',end:'center center',scrub:1}});
+
+gsap.from('.about-center > *',{y:36,opacity:0,stagger:.12,duration:.9,ease:'power3.out',
+  scrollTrigger:{trigger:'.about',start:'top 55%'}});
+
+/* ---------- WORK: pinned section, all three strips travel through full viewport ---------- */
+const N = 4;                              // 4 projects
+const workTL = gsap.timeline({
+  scrollTrigger:{
+    trigger:'.work-pin',
+    start:'top top',
+    end:'+=' + (N-1)*100 + '%',
+    pin:true,
+    scrub:0.6,
+    anticipatePin:1
+  }
+});
+
+for(let i=1;i<N;i++){
+  // side strips: one full cell per transition (left runs 6% faster → "peek" effect)
+  workTL.to('#stripLeft',   {y:()=>-(i*window.innerHeight*1.06), ease:'none', duration:1}, i-1);
+  workTL.to('#stripRight',  {y:()=>-(i*window.innerHeight),      ease:'none', duration:1}, i-1);
+  // center strip travels with them through the whole viewport (covers the marquee in transit)
+  workTL.to('.work-slides', {y:()=>-(i*window.innerHeight),      ease:'none', duration:1}, i-1);
+}
+
+/* ---------- STATS: floats drift, rows reveal ---------- */
+gsap.utils.toArray('.float-item').forEach((el,i)=>{
+  gsap.to(el,{y:(i%2?-26:26),rotation:(i%2?-8:8),ease:'none',
+    scrollTrigger:{trigger:'.stats-hero',start:'top bottom',end:'bottom top',scrub:1.2}});
+  if(!reduced) gsap.to(el,{y:'+=12',duration:2.4+i*.3,yoyo:true,repeat:-1,ease:'sine.inOut'});
+});
+gsap.from('#statsRow1 .stat',{y:60,opacity:0,stagger:.15,duration:.9,ease:'power3.out',
+  scrollTrigger:{trigger:'#statsRow1',start:'top 80%'}});
+gsap.from('#statsRow2 .stat',{y:60,opacity:0,stagger:.15,duration:.9,ease:'power3.out',
+  scrollTrigger:{trigger:'#statsRow2',start:'top 85%'}});
+
+/* ---------- SERVICES: pinned deck, slides load bottom→top ---------- */
+const sslides = gsap.utils.toArray('.sslide');
+const SN = sslides.length;                // 7 services
+gsap.set(sslides,{yPercent:(i)=> i===0 ? 0 : 100, zIndex:(i)=> i+1});
+
+const navLinks = gsap.utils.toArray('#snav a');
+function setActive(idx){
+  navLinks.forEach((a,i)=>a.classList.toggle('active', i===idx));
+}
+
+const srvTL = gsap.timeline({
+  scrollTrigger:{
+    trigger:'#servicesPin',
+    start:'top top',
+    end:'+=' + (SN-1)*90 + '%',
+    pin:true,
+    scrub:0.6,
+    anticipatePin:1,
+    onUpdate(self){
+      const idx = Math.min(SN-1, Math.round(self.progress*(SN-1)));
+      setActive(idx);
+    }
+  }
+});
+for(let i=1;i<SN;i++){
+  srvTL.to(sslides[i],{yPercent:0,ease:'none',duration:1}, i-1);
+  // subtle settle of the slide underneath
+  srvTL.to(sslides[i-1],{yPercent:-8,ease:'none',duration:1}, i-1);
+}
+
+/* sidebar click → jump scroll inside the pin */
+navLinks.forEach((a,i)=>{
+  a.addEventListener('click',(e)=>{
+    e.preventDefault();
+    const st = srvTL.scrollTrigger;
+    const y = st.start + (st.end - st.start) * (i/(SN-1));
+    window.scrollTo({top:y,behavior:'smooth'});
+  });
+});
+
+/* ---------- FOOTER: character & giant text parallax ---------- */
+gsap.from('.footer-char',{yPercent:18,ease:'none',
+  scrollTrigger:{trigger:'.footer',start:'top bottom',end:'center center',scrub:1}});
+gsap.from('.footer-giant',{yPercent:40,ease:'none',
+  scrollTrigger:{trigger:'.footer',start:'top bottom',end:'center center',scrub:1}});
+gsap.from('.footer-head h2',{y:50,opacity:0,duration:1,ease:'power3.out',
+  scrollTrigger:{trigger:'.footer',start:'top 70%'}});
+
+window.addEventListener('resize',()=>ScrollTrigger.refresh());
+</script>
+</body>
+</html>
