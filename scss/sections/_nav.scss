@@ -6,7 +6,13 @@
   position: fixed;
   top: 28px;
   left: 28px;
-  z-index: 1000;
+  z-index: 1;
+  transition: transform 0.3s ease;
+
+  &--hero-hidden {
+    z-index: 1;
+    pointer-events: none;
+  }
 
   &__stack {
     display: flex;
@@ -31,6 +37,7 @@
     width: 52px;
     height: 52px;
     padding: 0 24px;
+    background: transparent;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -51,7 +58,7 @@
   &__toggle-line {
     display: block;
     flex-shrink: 0;
-    background: rgba(255, 255, 255, 0.88);
+    background: currentColor;
     transition: transform 0.25s ease, opacity 0.25s ease, width 0.25s ease;
 
     &:nth-child(1) { width: 20px; height: 1px; align-self: center; transform: translateX(-3px); }
@@ -74,6 +81,8 @@
     font-size: 15px;
     color: rgba(250, 252, 255, 0.92);
     white-space: nowrap;
+    transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease,
+      box-shadow 0.25s ease;
   }
 
   &__brand-mark {
@@ -93,8 +102,10 @@
     border-right: 1px solid rgba(224, 246, 255, 0.20);
     border-bottom: 1px solid rgba(224, 246, 255, 0.20);
     border-left: 1px solid rgba(224, 246, 255, 0.20);
+    background: transparent;
     color: var(--color-white);
-    transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+    transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease,
+      color 0.25s ease, box-shadow 0.25s ease;
 
     &:hover {
       transform: translateY(-1px);
@@ -118,11 +129,14 @@
     display: grid;
     gap: 8px;
     border: 1px solid rgba(224, 246, 255, 0.20);
+    background: rgba(7, 13, 24, 0.82);
+    backdrop-filter: blur(18px);
     opacity: 0;
     visibility: hidden;
     transform: translateY(-10px);
     pointer-events: none;
-    transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.25s ease;
+    transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.25s ease,
+      background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
   }
 
   &__link {
@@ -162,6 +176,39 @@
     .site-nav__toggle-line:nth-child(2) {
       width: 18px;
       transform: translateX(5px) rotate(-45deg) translateY(-6px);
+    }
+  }
+
+  &--invert {
+    .site-nav__toggle {
+      background: #090703;
+      border-bottom-color: rgba(255, 255, 255, 0.16);
+      box-shadow: 0 20px 42px rgba(1, 2, 22, 0.18);
+    }
+
+    .site-nav__brand,
+    .site-nav__emblem {
+      background: rgba(255, 255, 255, 0.96);
+      border-color: rgba(9, 7, 3, 0.12);
+      color: var(--color-azure);
+      box-shadow: 0 20px 42px rgba(1, 2, 22, 0.16);
+    }
+
+    .site-nav__menu {
+      background: rgba(255, 255, 255, 0.96);
+      border-color: rgba(9, 7, 3, 0.12);
+      box-shadow: 0 20px 42px rgba(1, 2, 22, 0.16);
+    }
+
+    .site-nav__link {
+      color: var(--color-azure);
+
+      &:hover,
+      &:focus-visible {
+        color: #090703;
+        background: rgba(0, 96, 255, 0.08);
+        border-color: rgba(0, 96, 255, 0.18);
+      }
     }
   }
 
