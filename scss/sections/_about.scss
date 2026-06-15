@@ -4,7 +4,7 @@
 
 .about {
   position: relative;
-  height: 130vh;
+  height: 1633px;
   min-height: 900px;
   overflow: hidden;
   background: linear-gradient(
@@ -15,6 +15,18 @@
     #1273ff 84%,
     #3ea0ff 100%
   );
+
+  &::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: clamp(260px, 36vh, 440px);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #fff 63.46%, #fff 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
 
   &__marquee {
     width: 100%;
@@ -96,10 +108,12 @@
     background-position: bottom;
 
     .about__character--left & {
-      background-image: url("../images/about-robot.webp");
+      background-image: url("../images/about-robot.png");
+      background-position: bottom left;
     }
     .about__character--right & {
-      background-image: url("../images/about-artist.webp");
+      background-image: url("../images/about-artist.png");
+      background-position: bottom right;
     }
   }
 

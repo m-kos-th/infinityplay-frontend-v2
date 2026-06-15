@@ -1,0 +1,11 @@
+.about::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: clamp(260px, 36vh, 440px);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #fff 63.46%, #fff 100%);
+  pointer-events: none;
+  z-index: 0;
+}
