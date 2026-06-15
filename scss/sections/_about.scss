@@ -4,29 +4,9 @@
 
 .about {
   position: relative;
-  height: 1633px;
   min-height: 900px;
-  overflow: hidden;
-  background: linear-gradient(
-    180deg,
-    #03061a 0%,
-    #051040 34%,
-    #0533b8 62%,
-    #1273ff 84%,
-    #3ea0ff 100%
-  );
-
-  &::after {
-    content: "";
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    height: clamp(260px, 36vh, 440px);
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #fff 63.46%, #fff 100%);
-    pointer-events: none;
-    z-index: 0;
-  }
+  overflow-x: clip;
+  overflow-y: visible;
 
   &__marquee {
     width: 100%;
@@ -56,14 +36,32 @@
     overflow: hidden;
   }
 
+  &__content-wrapper {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    min-height: clamp(1180px, 150svh, 1560px);
+    padding: clamp(88px, 12vh, 128px) 0 clamp(220px, 30vh, 360px);
+    background: linear-gradient(180deg, var(--color-blue-4, #000216) 0%, var(--color-blue-8, #00042B) 6.46%, var(--color-azure-17, #011F58) 14.37%, var(--color-blue-27, #001D8A) 20.3%, var(--color-azure-36, #003DB7) 26.69%, var(--color-azure-49, #0080F8) 34.97%, var(--color-azure-67, #5FBDF7) 40.43%, var(--color-grey-91, #D3EFFB) 45.33%, var(--color-grey-910, rgba(211, 239, 252, 0.00)) 50%);
+    width: 100%;
+  }
+
   &__content {
-    position: absolute;
-    left: 50%;
-    top: 44%;
-    transform: translate(-50%, -50%);
+    position: sticky;
+    top: clamp(72px, calc(50svh - 419px), 160px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-self: flex-start;
+    width: min(720px, 86vw);
+    min-height: 838px;
+    margin: 0 auto;
+    padding-inline: 24px;
     text-align: center;
     z-index: 3;
-    width: min(720px, 86vw);
+    box-sizing: border-box;
   }
 
   &__title {
@@ -149,6 +147,19 @@
       top: 36px;
       width: min(1600px, calc(100% - 40px));
     }
+
+    &__content-wrapper {
+      min-height: clamp(1040px, 138svh, 1360px);
+      padding-top: 96px;
+      padding-bottom: 220px;
+    }
+
+    &__content {
+      top: 72px;
+      width: min(680px, calc(100% - 40px));
+      min-height: min(838px, calc(100svh - 144px));
+      padding-inline: 20px;
+    }
   }
 
   @include respond-to(sm) {
@@ -163,6 +174,19 @@
       &::after {
         bottom: 46px;
       }
+    }
+
+    &__content-wrapper {
+      min-height: clamp(920px, 122svh, 1160px);
+      padding-top: 84px;
+      padding-bottom: 180px;
+    }
+
+    &__content {
+      top: 64px;
+      width: calc(100% - 24px);
+      min-height: min(838px, calc(100svh - 112px));
+      padding-inline: 16px;
     }
   }
 }
