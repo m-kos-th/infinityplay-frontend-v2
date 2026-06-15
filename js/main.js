@@ -4,9 +4,51 @@
  */
 
 window.addEventListener('load', () => {
-  gsap.registerPlugin(ScrollTrigger);
-
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const siteNav = document.querySelector('.site-nav');
+  const navToggle = document.querySelector('.site-nav__toggle');
+  const navMenu = document.querySelector('.site-nav__menu');
+
+  if (siteNav && navToggle && navMenu) {
+    const setNavState = (isOpen) => {
+      siteNav.classList.toggle('site-nav--open', isOpen);
+      navToggle.setAttribute('aria-expanded', String(isOpen));
+      navToggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+    };
+
+    navToggle.addEventListener('click', () => {
+      setNavState(!siteNav.classList.contains('site-nav--open'));
+    });
+
+    navMenu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => setNavState(false));
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!siteNav.contains(event.target)) {
+        setNavState(false);
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        setNavState(false);
+      }
+    });
+  }
+
+  if (reduced) {
+    document.querySelectorAll('.hero__video').forEach((video) => {
+      video.pause();
+      video.removeAttribute('autoplay');
+    });
+  }
+
+  if (!window.gsap || !window.ScrollTrigger) {
+    return;
+  }
+
+  gsap.registerPlugin(ScrollTrigger);
 
   /* ----------------------------------------------------------------
    * HERO — entrance animation
@@ -25,7 +67,7 @@ window.addEventListener('load', () => {
 
   /* ----------------------------------------------------------------
    * MARQUEE — continuous loops
-   * dir: 1 = RTL scroll (element moves left), -1 = LTR
+   * dir: -1 = RTL scroll (element moves left), 1 = LTR
    * ---------------------------------------------------------------- */
   function loopMarquee(sel, seconds, dir = 1) {
     const el = document.querySelector(sel);
@@ -34,7 +76,7 @@ window.addEventListener('load', () => {
     gsap.to(el, { xPercent: dir === 1 ? 0 : -50, duration: seconds, ease: 'none', repeat: -1 });
   }
 
-  loopMarquee('#marquee-about', 38, 1);
+  loopMarquee('#marquee-about', 38, -1);
   loopMarquee('#marquee-work',  34, 1);
 
   /* ----------------------------------------------------------------

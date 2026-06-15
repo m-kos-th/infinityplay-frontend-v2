@@ -7,16 +7,40 @@
   height: 130vh;
   min-height: 900px;
   overflow: hidden;
-  border-radius: var(--radius-card);
-  margin: 8px;
   background: linear-gradient(
     180deg,
-    #03061a   0%,
-    #051040  34%,
-    #0533b8  62%,
-    #1273ff  84%,
+    #03061a 0%,
+    #051040 34%,
+    #0533b8 62%,
+    #1273ff 84%,
     #3ea0ff 100%
   );
+
+  &__marquee {
+    width: 100%;
+    height: 271px;
+    background: #010215;
+  }
+
+  &__marquee-band {
+    position: absolute;
+    left: 50%;
+    width: min(1600px, calc(100% - 64px));
+    height: 271px;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  &__marquee-surface {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
 
   &__content {
     position: absolute;
@@ -39,7 +63,7 @@
   &__description {
     @include type-body;
     margin-top: 26px;
-    color: rgba(255,255,255,.82);
+    color: rgba(255, 255, 255, 0.82);
     font-size: 15px;
     line-height: 1.75;
     max-width: 520px;
@@ -55,8 +79,14 @@
     z-index: 2;
     will-change: transform;
 
-    &--left  { left: 0;   bottom: 6%; }
-    &--right { right: 0;  bottom: 2%; }
+    &--left {
+      left: 0;
+      bottom: 6%;
+    }
+    &--right {
+      right: 0;
+      bottom: 2%;
+    }
   }
 
   &__character-image {
@@ -65,8 +95,12 @@
     background-repeat: no-repeat;
     background-position: bottom;
 
-    .about__character--left  & { background-image: url('../assets/about-robot.png'); }
-    .about__character--right & { background-image: url('../assets/about-artist.png'); }
+    .about__character--left & {
+      background-image: url("../images/about-robot.webp");
+    }
+    .about__character--right & {
+      background-image: url("../images/about-artist.webp");
+    }
   }
 
   // Decorative clouds
@@ -76,13 +110,43 @@
     height: 70px;
     background:
       radial-gradient(closest-side, #fff 65%, transparent),
-      radial-gradient(closest-side, #fff 65%, transparent) 60px -18px / 110px 80px no-repeat;
+      radial-gradient(closest-side, #fff 65%, transparent) 60px -18px / 110px
+        80px no-repeat;
     border-radius: 60px;
     filter: blur(2px);
     opacity: 0.95;
     z-index: 1;
 
-    &--1 { left: 16%;  bottom: 24%; }
-    &--2 { right: 7%;  bottom: 34%; transform: scale(0.8); }
+    &--1 {
+      left: 16%;
+      bottom: 24%;
+    }
+    &--2 {
+      right: 7%;
+      bottom: 34%;
+      transform: scale(0.8);
+    }
+  }
+
+  @include respond-to(md) {
+    &__marquee-band {
+      top: 36px;
+      width: min(1600px, calc(100% - 40px));
+    }
+  }
+
+  @include respond-to(sm) {
+    &__marquee-band {
+      top: 28px;
+      width: calc(100% - 24px);
+      height: 220px;
+
+      &::before {
+        top: 54px;
+      }
+      &::after {
+        bottom: 46px;
+      }
+    }
   }
 }

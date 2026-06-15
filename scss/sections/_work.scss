@@ -94,10 +94,10 @@
     background-repeat: no-repeat;
     width: min(360px, 80%);
 
-    &--dawn        { background-image: url('../assets/logo-dawn.png'); }
-    &--trick       { background-image: url('../assets/logo-trick.png'); }
-    &--outlanders  { background-image: url('../assets/logo-outlanders.png'); }
-    &--umt         { background-image: url('../assets/logo-umt.png'); }
+    &--dawn        { background-image: url('../images/logo-dawn.webp'); }
+    &--trick       { background-image: url('../images/logo-trick.webp'); }
+    &--outlanders  { background-image: url('../images/logo-outlanders.webp'); }
+    &--umt         { background-image: url('../images/logo-umt.webp'); }
   }
 
   // Fallback text logos
@@ -108,6 +108,7 @@
     line-height: 0.95;
     text-transform: uppercase;
     font-family: var(--font-body);
+    opacity: 0;
 
     &--dawn {
       color: #e02020;
