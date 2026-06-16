@@ -81,7 +81,7 @@ window.addEventListener('load', () => {
   }
 
   loopMarquee('#marquee-about', 38, -1);
-  loopMarquee('#marquee-work',  34, 1);
+  loopMarquee('#marquee-work',  34, -1);
 
   /* ----------------------------------------------------------------
    * ABOUT — characters + content reveal
@@ -124,25 +124,50 @@ window.addEventListener('load', () => {
 
   /* ----------------------------------------------------------------
    * WORK — pinned scroll, 4 projects
-   * Three strips (left, center/slides, right) travel in unison
+   * Each project is a full-viewport grid (.work__grid).
+   * Grids slide horizontally: incoming from right, outgoing to left.
+   * .work__content is flex-centered so it always sits mid-viewport.
    * ---------------------------------------------------------------- */
-  const WORK_SLIDES = 4;
+  const workGrids   = gsap.utils.toArray('.work__grid');
+  const WORK_SLIDES = workGrids.length;
+  const counterEl   = document.querySelector('.work__counter-current');
+
+  // All grids except the first start off-screen below
+  gsap.set(workGrids.slice(1), { yPercent: 100 });
 
   const workTL = gsap.timeline({
     scrollTrigger: {
       trigger: '.work__pin',
-      start: 'top top',
-      end: `+=${(WORK_SLIDES - 1) * 100}%`,
-      pin: true,
-      scrub: 0.6,
+      start:  'top top',
+      end:    `+=${(WORK_SLIDES - 1) * 100}%`,
+      pin:    true,
+      scrub:  0.5,
       anticipatePin: 1,
+      onUpdate(self) {
+        // Keep the counter in sync
+        if (!counterEl) return;
+        const idx = Math.min(WORK_SLIDES - 1, Math.round(self.progress * (WORK_SLIDES - 1)));
+        counterEl.textContent = String(idx + 1).padStart(2, '0');
+      },
     },
   });
 
+  // Build one transition per project pair
   for (let i = 1; i < WORK_SLIDES; i++) {
-    workTL.to('#strip-left',    { y: () => -(i * window.innerHeight * 1.06), ease: 'none', duration: 1 }, i - 1);
-    workTL.to('#strip-right',   { y: () => -(i * window.innerHeight),        ease: 'none', duration: 1 }, i - 1);
-    workTL.to('.work__slides',  { y: () => -(i * window.innerHeight),        ease: 'none', duration: 1 }, i - 1);
+    const position = i - 1;
+    workTL
+      // Previous grid drifts up slightly (parallax pull-back)
+      .to(workGrids[i - 1], {
+        yPercent: 0,
+        ease: 'none',
+        duration: 1,
+      }, position)
+      // Incoming grid sweeps up from bottom
+      .to(workGrids[i], {
+        yPercent: 0,
+        ease: 'none',
+        duration: 1,
+      }, position);
   }
 
   /* ----------------------------------------------------------------

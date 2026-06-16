@@ -1,5 +1,8 @@
 // ============================================================
 // sections/_work.scss — Pinned scroll section, 4 projects
+// Each project is a full-viewport 3-column grid.
+// .work__content is always flex-centered vertically.
+// Section height is controlled by GSAP ScrollTrigger pin.
 // ============================================================
 
 .work {
@@ -8,128 +11,140 @@
   z-index: 2;
   margin-top: -33%;
 
+  // Fade-in gradient over the about section below
   &::before {
     content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 15%;
     background: linear-gradient(
       180deg,
       rgba(255, 255, 255, 0) 0%,
-      #fff 60%,
+      #fff 90%,
       #fff 100%
     );
-    pointer-events: none;
-    z-index: 0;
+    top: -15%;
   }
 
+  // ── Sticky viewport container ──────────────────────────────
+  // GSAP will pin this element and add scroll-space to .work
   &__pin {
     height: 100vh;
     overflow: hidden;
     position: relative;
   }
 
+  // ── Per-project grid ───────────────────────────────────────
+  // Each grid is stacked absolutely inside __pin.
+  // GSAP slides them in/out vertically on scroll.
   &__grid {
     position: absolute;
     inset: 0;
-    display: grid;
-    grid-template-columns: 28% 44% 28%;
-
-    @include respond-to(md) {
-      grid-template-columns: 18% 64% 18%;
-    }
-    @include respond-to(sm) {
-      grid-template-columns: 10% 80% 10%;
-    }
-  }
-
-  &__col {
-    position: relative;
-    overflow: hidden;
-    border-left: 1px solid $line;
-    border-right: 1px solid $line;
-  }
-
-  &__strip {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 30vh;
-    will-change: transform;
-  }
-
-  // Individual cell inside a strip
-  &__cell {
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-    position: relative;
-
-    &--dot {
-      background-color: #fff;
-      background-image: radial-gradient(
-        rgba(0, 0, 0, 0.13) 1px,
-        transparent 1.2px
-      );
-      background-size: 9px 9px;
-    }
-
-    &--media::after {
-      content: "";
-      @include fill;
-      box-shadow: inset 0 0 0 1px $line;
-    }
-  }
-
-  // Centre column
-  &__center {
-    position: relative;
-  }
-
-  &__slides {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 30vh;
-    will-change: transform;
-  }
-
-  &__slide {
-    height: 100vh;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    justify-content: flex-start;
-    text-align: center;
-    padding: 7vh 6% 0;
-    background: #fff;
-    border-top: 1px solid $line;
+    justify-content: center;
+    will-change: transform;
   }
 
-  // Project logo placeholder
+  // ── Game screenshot image ──────────────────────────────────
+  &__image {
+    width: 451px;
+    height: 640px;
+    flex-shrink: 0;
+    background-size: cover;
+    background-position: center top;
+    position: relative;
+
+    &--dawn        { background-image: url("../images/work-dawn.webp"); }
+    &--trick       { background-image: url("../images/work-trick.webp"); }
+    &--outlanders  { background-image: url("../images/work-outlanders.webp"); }
+    &--umt         { background-image: url("../images/work-umt.webp"); }
+  }
+
+  // ── Content column — always vertically centred ─────────────
+  &__content {
+    display: flex;
+    width: 700px;
+    height: 900px;
+    padding: 299px 74px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    text-align: center;
+    background: #fff;
+    border-left:  1px solid $line;
+    border-right: 1px solid $line;
+
+    @include respond-to(sm) {
+      width: 100%;
+      height: 100%;
+      padding: 0 28px;
+      border: none;
+      background: rgba(255, 255, 255, 0.92);
+    }
+  }
+
+  // ── Dot-pattern decorative column ─────────────────────────
+  &__bg-pattern {
+    width: 450px;
+    height: 640px;
+    flex-shrink: 0;
+    background-color: #fff;
+    background-image: radial-gradient(
+      rgba(0, 0, 0, 0.12) 1px,
+      transparent 1.2px
+    );
+    background-size: 9px 9px;
+
+    @include respond-to(sm) {
+      display: none;
+    }
+  }
+
+  // ── Scroll counter (bottom-right) ──────────────────────────
+  &__counter {
+    position: absolute;
+    bottom: clamp(24px, 4vh, 40px);
+    right: clamp(20px, 3vw, 48px);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: var(--fw-light);
+    letter-spacing: 0.18em;
+    color: rgba(0, 0, 0, 0.28);
+    pointer-events: none;
+    user-select: none;
+    opacity: 0; // initially hidden, shown when JS initializes
+  }
+
+  &__counter-sep {
+    opacity: 0.45;
+  }
+
+  // ── Project logo ───────────────────────────────────────────
   &__logo {
-    height: 170px;
+    height: 160px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 46px;
+    margin-bottom: 36px;
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    width: min(360px, 80%);
+    width: min(300px, 80%);
 
-    &--dawn {
-      background-image: url("../images/logo-dawn.webp");
-    }
-    &--trick {
-      background-image: url("../images/logo-trick.webp");
-    }
-    &--outlanders {
-      background-image: url("../images/logo-outlanders.webp");
-    }
-    &--umt {
-      background-image: url("../images/logo-umt.webp");
-    }
+    &--dawn        { background-image: url("../images/logo-dawn.webp"); }
+    &--trick       { background-image: url("../images/logo-trick.webp"); }
+    &--outlanders  { background-image: url("../images/logo-outlanders.webp"); }
+    &--umt         { background-image: url("../images/logo-umt.webp"); }
   }
 
-  // Fallback text logos
+  // Fallback text logos (shown when image fails or for screen readers)
   &__logo-fallback {
     font-weight: 900;
     letter-spacing: 0.04em;
@@ -137,34 +152,20 @@
     line-height: 0.95;
     text-transform: uppercase;
     font-family: var(--font-body);
-    opacity: 0;
+    opacity: 0; // hidden — logo image is the primary display
 
-    &--dawn {
-      color: #e02020;
-    }
-
-    &--trick {
-      color: #d2491d;
-      -webkit-text-stroke: 2px #221408;
-      text-shadow: 0 4px 0 #c9b896;
-    }
-
-    &--outlanders {
-      color: #9aa3ad;
-      font-weight: 600;
-      letter-spacing: 0.35em;
-    }
-
-    &--umt {
-      color: #aab4c4;
-      font-style: italic;
-      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
-    }
+    &--dawn        { color: #e02020; }
+    &--trick       { color: #d2491d; -webkit-text-stroke: 2px #221408; text-shadow: 0 4px 0 #c9b896; }
+    &--outlanders  { color: #9aa3ad; font-weight: 600; letter-spacing: 0.35em; }
+    &--umt         { color: #aab4c4; font-style: italic; text-shadow: 0 2px 6px rgba(0,0,0,.35); }
   }
 
+  // ── Description & CTA ─────────────────────────────────────
   &__slide-description {
     color: #5d626d;
     font-size: 15px;
-    margin-bottom: 42px;
+    line-height: 1.65;
+    margin-bottom: 36px;
+    max-width: 240px;
   }
 }

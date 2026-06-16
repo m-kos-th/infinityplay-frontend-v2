@@ -178,6 +178,7 @@
        §3 · FEATURED WORK — pinned scroll, 4 projects
   ═════════════════════════════════════════════════════════════════ -->
   <section class="work" id="work" aria-labelledby="work-heading">
+    <h2 class="sr-only" id="work-heading">Featured Work</h2>
 
     <div class="work__pin">
 
@@ -186,83 +187,74 @@
         FEATURED WORK&nbsp;&nbsp;&nbsp;FEATURED WORK&nbsp;&nbsp;&nbsp;FEATURED WORK&nbsp;&nbsp;&nbsp;FEATURED WORK&nbsp;&nbsp;&nbsp;FEATURED WORK&nbsp;&nbsp;&nbsp;FEATURED WORK&nbsp;&nbsp;&nbsp;
       </div>
 
-      <div class="work__grid" role="presentation">
+      <!-- Scroll progress counter -->
+      <div class="work__counter" aria-hidden="true">
+        <span class="work__counter-current">01</span>
+        <span class="work__counter-sep">/</span>
+        <span class="work__counter-total">04</span>
+      </div>
 
-        <!-- Left strip -->
-        <div class="work__col" aria-hidden="true">
-          <div class="work__strip" id="strip-left">
-            <div class="work__cell work__cell--media" style="background-image:url('images/work-dawn.webp')"></div>
-            <div class="work__cell work__cell--dot"></div>
-            <div class="work__cell work__cell--media" style="background-image:url('images/work-outlanders.webp')"></div>
-            <div class="work__cell work__cell--dot"></div>
-            <div class="work__cell work__cell--dot"></div>
+      <div class="work__grid-wrapper">
+        <!-- Project 1: Dawn of the Damned -->
+        <article class="work__grid" data-index="0" aria-label="Project: Dawn of the Damned">
+          <div class="work__image work__image--dawn"></div>
+          <div class="work__content">
+            <div class="work__logo work__logo--dawn">
+              <span class="work__logo-fallback work__logo-fallback--dawn" aria-hidden="true">
+                Dawn<br>of the<br>Damned
+              </span>
+            </div>
+            <p class="work__slide-description">Post-apocalyptic zombie survival shooter on Unreal Engine 5.</p>
+            <a class="btn" href="#" aria-label="Discover Dawn of the Damned">Discover</a>
           </div>
-        </div>
+          <div class="work__bg-pattern"></div>
+        </article>
 
-        <!-- Centre — project slides -->
-        <div class="work__center">
-          <div class="work__slides">
-
-            <!-- Project 1: Dawn of the Damned -->
-            <article class="work__slide" data-index="0" aria-label="Project: Dawn of the Damned">
-              <div class="work__logo work__logo--dawn">
-                <span class="work__logo-fallback work__logo-fallback--dawn" aria-hidden="true">
-                  Dawn<br>of the<br>Damned
-                </span>
-              </div>
-              <p class="work__slide-description">Post-apocalyptic zombie survival shooter on Unreal Engine 5.</p>
-              <a class="btn" href="#" aria-label="Discover Dawn of the Damned">Discover</a>
-            </article>
-
-            <!-- Project 2: Trick or Seek -->
-            <article class="work__slide" data-index="1" aria-label="Project: Trick or Seek">
-              <div class="work__logo work__logo--trick">
-                <span class="work__logo-fallback work__logo-fallback--trick" aria-hidden="true">
-                  Trick<br>or Seek
-                </span>
-              </div>
-              <p class="work__slide-description">Charming multiplayer hide-and-seek party game.</p>
-              <a class="btn" href="#" aria-label="Discover Trick or Seek">Discover</a>
-            </article>
-
-            <!-- Project 3: Outlanders -->
-            <article class="work__slide" data-index="2" aria-label="Project: Outlanders">
-              <div class="work__logo work__logo--outlanders">
-                <span class="work__logo-fallback work__logo-fallback--outlanders" aria-hidden="true">
-                  Outlanders
-                </span>
-              </div>
-              <p class="work__slide-description">Blockchain-integrated MMORPG set in an open fantasy world.</p>
-              <a class="btn" href="#" aria-label="Discover Outlanders">Discover</a>
-            </article>
-
-            <!-- Project 4: UMT -->
-            <article class="work__slide" data-index="3" aria-label="Project: Ultimate Muay Thai">
-              <div class="work__logo work__logo--umt">
-                <span class="work__logo-fallback work__logo-fallback--umt" aria-hidden="true">UMT</span>
-              </div>
-              <p class="work__slide-description">Ultimate Muay Thai — competitive fighting experience.</p>
-              <a class="btn" href="#" aria-label="Discover Ultimate Muay Thai">Discover</a>
-            </article>
-
-          </div><!-- /.work__slides -->
-        </div><!-- /.work__center -->
-
-        <!-- Right strip -->
-        <div class="work__col" aria-hidden="true">
-          <div class="work__strip" id="strip-right">
-            <div class="work__cell work__cell--dot"></div>
-            <div class="work__cell work__cell--media" style="background-image:url('images/work-trick.webp')"></div>
-            <div class="work__cell work__cell--dot"></div>
-            <div class="work__cell work__cell--media" style="background-image:url('images/work-umt.webp')"></div>
-            <div class="work__cell work__cell--dot"></div>
+        <!-- Project 2: Trick or Seek -->
+        <article class="work__grid work__grid--reverse" data-index="1" aria-label="Project: Trick or Seek">
+          <div class="work__bg-pattern"></div>
+          <div class="work__content">
+            <div class="work__logo work__logo--trick">
+              <span class="work__logo-fallback work__logo-fallback--trick" aria-hidden="true">
+                Trick<br>or Seek
+              </span>
+            </div>
+            <p class="work__slide-description">Charming multiplayer hide-and-seek party game.</p>
+            <a class="btn" href="#" aria-label="Discover Trick or Seek">Discover</a>
           </div>
-        </div>
+          <div class="work__image work__image--trick"></div>
+        </article>
 
-      </div><!-- /.work__grid -->
+        <!-- Project 3: Outlanders -->
+        <article class="work__grid" data-index="2" aria-label="Project: Outlanders">
+          <div class="work__image work__image--outlanders"></div>
+          <div class="work__content">
+            <div class="work__logo work__logo--outlanders">
+              <span class="work__logo-fallback work__logo-fallback--outlanders" aria-hidden="true">
+                Outlanders
+              </span>
+            </div>
+            <p class="work__slide-description">Blockchain-integrated MMORPG set in an open fantasy world.</p>
+            <a class="btn" href="#" aria-label="Discover Outlanders">Discover</a>
+          </div>
+          <div class="work__bg-pattern"></div>
+        </article>
+
+        <!-- Project 4: UMT -->
+        <article class="work__grid" data-index="3" aria-label="Project: Ultimate Muay Thai">
+          <div class="work__image work__image--umt"></div>
+          <div class="work__content">
+            <div class="work__logo work__logo--umt">
+              <span class="work__logo-fallback work__logo-fallback--umt" aria-hidden="true">UMT</span>
+            </div>
+            <p class="work__slide-description">Ultimate Muay Thai — competitive fighting experience.</p>
+            <a class="btn" href="#" aria-label="Discover Ultimate Muay Thai">Discover</a>
+          </div>
+          <div class="work__bg-pattern"></div>
+        </article>
+      </div>
+
     </div><!-- /.work__pin -->
-
-    <h2 class="sr-only" id="work-heading">Featured Work</h2>
   </section>
 
   <!-- ════════════════════════════════════════════════════════════════
