@@ -9,6 +9,14 @@
   z-index: 1;
   transition: transform 0.3s ease;
 
+  &--hidden {
+    visibility: hidden;
+  }
+
+  &--active {
+    z-index: 1000;
+  }
+
   &--hero-hidden {
     z-index: 1;
     pointer-events: none;
@@ -44,9 +52,12 @@
     align-items: center;
     gap: 7.787px;
     border: 0;
-    border-bottom: 1px solid rgba(224, 246, 255, 0.20);
+    border-bottom: 1px solid rgba(224, 246, 255, 0.2);
     color: var(--color-white);
-    transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+    transition:
+      transform 0.25s ease,
+      background 0.25s ease,
+      border-color 0.25s ease;
 
     &:hover {
       transform: translateY(-1px);
@@ -59,10 +70,23 @@
     display: block;
     flex-shrink: 0;
     background: currentColor;
-    transition: transform 0.25s ease, opacity 0.25s ease, width 0.25s ease;
+    transition:
+      transform 0.25s ease,
+      opacity 0.25s ease,
+      width 0.25s ease;
 
-    &:nth-child(1) { width: 20px; height: 1px; align-self: center; transform: translateX(-3px); }
-    &:nth-child(2) { width: 12px; height: 1px; align-self: center; transform: translateX(-6px); }
+    &:nth-child(1) {
+      width: 20px;
+      height: 1px;
+      align-self: center;
+      transform: translateX(-3px);
+    }
+    &:nth-child(2) {
+      width: 12px;
+      height: 1px;
+      align-self: center;
+      transform: translateX(-6px);
+    }
   }
 
   &__brand {
@@ -73,7 +97,7 @@
     justify-content: center;
     align-items: flex-start;
     gap: 8px;
-    border: 1px solid rgba(224, 246, 255, 0.20);
+    border: 1px solid rgba(224, 246, 255, 0.2);
     min-width: 164px;
     font-family: var(--font-display);
     font-weight: 700;
@@ -81,7 +105,10 @@
     font-size: 15px;
     color: rgba(250, 252, 255, 0.92);
     white-space: nowrap;
-    transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease,
+    transition:
+      background 0.25s ease,
+      color 0.25s ease,
+      border-color 0.25s ease,
       box-shadow 0.25s ease;
   }
 
@@ -99,13 +126,17 @@
     align-items: center;
     justify-content: center;
     border-top: 0;
-    border-right: 1px solid rgba(224, 246, 255, 0.20);
-    border-bottom: 1px solid rgba(224, 246, 255, 0.20);
-    border-left: 1px solid rgba(224, 246, 255, 0.20);
+    border-right: 1px solid rgba(224, 246, 255, 0.2);
+    border-bottom: 1px solid rgba(224, 246, 255, 0.2);
+    border-left: 1px solid rgba(224, 246, 255, 0.2);
     background: transparent;
     color: var(--color-white);
-    transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease,
-      color 0.25s ease, box-shadow 0.25s ease;
+    transition:
+      transform 0.25s ease,
+      background 0.25s ease,
+      border-color 0.25s ease,
+      color 0.25s ease,
+      box-shadow 0.25s ease;
 
     &:hover {
       transform: translateY(-1px);
@@ -128,15 +159,20 @@
     padding: 16px;
     display: grid;
     gap: 8px;
-    border: 1px solid rgba(224, 246, 255, 0.20);
+    border: 1px solid rgba(224, 246, 255, 0.2);
     background: rgba(7, 13, 24, 0.82);
     backdrop-filter: blur(18px);
     opacity: 0;
     visibility: hidden;
     transform: translateY(-10px);
     pointer-events: none;
-    transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.25s ease,
-      background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    transition:
+      opacity 0.25s ease,
+      visibility 0.25s ease,
+      transform 0.25s ease,
+      background 0.25s ease,
+      border-color 0.25s ease,
+      box-shadow 0.25s ease;
   }
 
   &__link {
@@ -149,7 +185,10 @@
     text-transform: uppercase;
     color: rgba(240, 244, 248, 0.8);
     border: 1px solid transparent;
-    transition: color 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+    transition:
+      color 0.25s ease,
+      border-color 0.25s ease,
+      background 0.25s ease;
 
     &:hover,
     &:focus-visible {
@@ -183,7 +222,6 @@
     .site-nav__toggle {
       background: #090703;
       border-bottom-color: rgba(255, 255, 255, 0.16);
-      box-shadow: 0 20px 42px rgba(1, 2, 22, 0.18);
     }
 
     .site-nav__brand,
@@ -191,13 +229,11 @@
       background: rgba(255, 255, 255, 0.96);
       border-color: rgba(9, 7, 3, 0.12);
       color: var(--color-azure);
-      box-shadow: 0 20px 42px rgba(1, 2, 22, 0.16);
     }
 
     .site-nav__menu {
       background: rgba(255, 255, 255, 0.96);
       border-color: rgba(9, 7, 3, 0.12);
-      box-shadow: 0 20px 42px rgba(1, 2, 22, 0.16);
     }
 
     .site-nav__link {
