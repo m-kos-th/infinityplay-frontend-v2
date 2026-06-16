@@ -103,6 +103,7 @@
     top: clamp(136px, 16vh, 220px);
     will-change: left, right;
     pointer-events: none;
+    overflow: hidden;
 
     &--left {
       left: -100%;
@@ -160,6 +161,17 @@
       top: 26%;
       right: -100%;
     }
+  }
+
+  // ── "FEATURED WORK" marquee — sits at the bottom of the
+  //    content-wrapper as a visual bridge into the Work section.
+  //    .about__content-wrapper is position:relative, so absolute
+  //    placement here is relative to that container.
+  .marquee--work {
+    top: auto;
+    bottom: clamp(80px, 10vh, 160px);
+    z-index: 1;
+    color: rgba(27, 37, 64, 0.18);
   }
 
   @include respond-to(md) {
