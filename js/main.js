@@ -258,26 +258,26 @@ window.addEventListener('load', () => {
   /* ----------------------------------------------------------------
    * FOOTER — character + giant text parallax
    * ---------------------------------------------------------------- */
-  gsap.from('.footer__character', {
-    yPercent: 18, ease: 'none',
-    scrollTrigger: {
-      trigger: '.footer', start: 'top bottom', end: 'center center', scrub: 1,
-    },
-  });
+  // gsap.from('.footer__character', {
+  //   yPercent: 18, ease: 'none',
+  //   scrollTrigger: {
+  //     trigger: '.footer', start: 'top bottom', end: 'center center', scrub: 1,
+  //   },
+  // });
 
-  gsap.from('.footer__giant-text', {
-    yPercent: 40, ease: 'none',
-    scrollTrigger: {
-      trigger: '.footer', start: 'top bottom', end: 'center center', scrub: 1,
-    },
-  });
+  // gsap.from('.footer__giant-text', {
+  //   yPercent: 40, ease: 'none',
+  //   scrollTrigger: {
+  //     trigger: '.footer', start: 'top bottom', end: 'center center', scrub: 1,
+  //   },
+  // });
 
-  if (!reduced) {
-    gsap.from('.footer__headline', {
-      opacity: 0, duration: 1, ease: 'power3.out',
-      scrollTrigger: { trigger: '.footer', start: 'top 70%' },
-    });
-  }
+  // if (!reduced) {
+  //   gsap.from('.footer__headline', {
+  //     opacity: 0, duration: 1, ease: 'power3.out',
+  //     scrollTrigger: { trigger: '.footer', start: 'top 70%' },
+  //   });
+  // }
 
   /* ----------------------------------------------------------------
    * Refresh on resize
