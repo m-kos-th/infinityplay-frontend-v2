@@ -21,7 +21,7 @@
     background: linear-gradient(
       180deg,
       rgba(255, 255, 255, 0) 0%,
-      #fff 90%,
+      #fff 60%,
       #fff 100%
     );
     top: -15%;
@@ -31,7 +31,6 @@
   // GSAP will pin this element and add scroll-space to .work
   &__pin {
     height: 100vh;
-    overflow: hidden;
     position: relative;
   }
 

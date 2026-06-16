@@ -34,12 +34,13 @@
 
   // Work section — light grey on white bg
   &--work {
-    z-index: 0;
+    z-index: 1;
     color: rgba(27, 37, 64, 0.21);
     font-size: 88px;
     font-style: normal;
     font-weight: 300;
     line-height: 40px;
     text-transform: uppercase;
+    margin-top: -180px;
   }
 }
