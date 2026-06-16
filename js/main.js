@@ -8,35 +8,12 @@ window.addEventListener('load', () => {
   const siteNav = document.querySelector('.site-nav');
   const navToggle = document.querySelector('.site-nav__toggle');
   const navMenu = document.querySelector('.site-nav__menu');
-  // const aboutSection = document.querySelector('.about');
-
-  // const updateNavVisualState = () => {
-  //   if (!siteNav) {
-  //     return;
-  //   }
-
-  //   const isOpen = siteNav.classList.contains('site-nav--open');
-
-  //   if (!aboutSection) {
-  //     siteNav.classList.remove('site-nav--invert');
-  //     siteNav.classList.toggle('site-nav--hero-hidden', !isOpen);
-  //     return;
-  //   }
-
-  //   const switchPoint = siteNav.getBoundingClientRect().bottom + 24;
-  //   const aboutTop = aboutSection.getBoundingClientRect().top;
-  //   const isAboutState = aboutTop <= switchPoint;
-
-  //   siteNav.classList.toggle('site-nav--invert', isAboutState);
-  //   siteNav.classList.toggle('site-nav--hero-hidden', !isAboutState && !isOpen);
-  // };
 
   if (siteNav && navToggle && navMenu) {
     const setNavState = (isOpen) => {
       siteNav.classList.toggle('site-nav--open', isOpen);
       navToggle.setAttribute('aria-expanded', String(isOpen));
       navToggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
-      // updateNavVisualState();
     };
 
     navToggle.addEventListener('click', () => {
@@ -109,29 +86,38 @@ window.addEventListener('load', () => {
   /* ----------------------------------------------------------------
    * ABOUT — characters + content reveal
    * ---------------------------------------------------------------- */
-  gsap.fromTo('.about__character--left',
-    { xPercent: -110 },
-    {
-      xPercent: 0, ease: 'power2.out',
-      scrollTrigger: {
-        trigger: '.about', start: 'top 75%', end: 'center center', scrub: 1,
-      },
-    }
-  );
+  gsap.set('.about__character--left', { left: '-100%' });
+  gsap.set('.about__character--right', { right: '-100%' });
+  gsap.set('.about__character-image', { autoAlpha: 0 });
+  gsap.set('.about__cloud--1', { left: '-100%', autoAlpha: 0 });
+  gsap.set('.about__cloud--2', { right: '-100%', autoAlpha: 0 });
 
-  gsap.fromTo('.about__character--right',
-    { xPercent: 110 },
-    {
-      xPercent: 0, ease: 'power2.out',
-      scrollTrigger: {
-        trigger: '.about', start: 'top 75%', end: 'center center', scrub: 1,
-      },
-    }
-  );
+  const aboutCharactersTl = gsap.timeline({
+    paused: true,
+    defaults: {
+      duration: 1,
+      ease: 'power3.out',
+    },
+  });
+
+  aboutCharactersTl
+    .to('.about__cloud--1', { left: '-170px', autoAlpha: 1, duration: 0.8 }, 0)
+    .to('.about__cloud--2', { right: '-170px', autoAlpha: 1, duration: 0.8 }, 0.05)
+    .to('.about__character--left', { left: 0 }, 0.2)
+    .to('.about__character--right', { right: 0 }, 0.2)
+    .to('.about__character--left .about__character-image', { autoAlpha: 1, duration: 0.6 }, 0.3)
+    .to('.about__character--right .about__character-image', { autoAlpha: 1, duration: 0.6 }, 0.35);
+
+  ScrollTrigger.create({
+    trigger: '.about__content-wrapper',
+    start: 'top 30%',
+    onEnter: () => aboutCharactersTl.play(),
+    onLeaveBack: () => aboutCharactersTl.reverse(),
+  });
 
   if (!reduced) {
     gsap.from('.about__content > *', {
-      y: 36, opacity: 0, stagger: 0.12, duration: 0.9, ease: 'power3.out',
+      opacity: 0, stagger: 0.12, duration: 0.9, ease: 'power3.out',
       scrollTrigger: { trigger: '.about', start: 'top 55%' },
     });
   }
@@ -164,7 +150,6 @@ window.addEventListener('load', () => {
    * ---------------------------------------------------------------- */
   gsap.utils.toArray('.stats__float').forEach((el, i) => {
     gsap.to(el, {
-      y: i % 2 ? -26 : 26,
       rotation: i % 2 ? -8 : 8,
       ease: 'none',
       scrollTrigger: {
@@ -185,12 +170,12 @@ window.addEventListener('load', () => {
 
   if (!reduced) {
     gsap.from('#stats-row-1 .stats__item', {
-      y: 60, opacity: 0, stagger: 0.15, duration: 0.9, ease: 'power3.out',
+      opacity: 0, stagger: 0.15, duration: 0.9, ease: 'power3.out',
       scrollTrigger: { trigger: '#stats-row-1', start: 'top 80%' },
     });
 
     gsap.from('#stats-row-2 .stats__item', {
-      y: 60, opacity: 0, stagger: 0.15, duration: 0.9, ease: 'power3.out',
+      opacity: 0, stagger: 0.15, duration: 0.9, ease: 'power3.out',
       scrollTrigger: { trigger: '#stats-row-2', start: 'top 85%' },
     });
   }
@@ -264,7 +249,7 @@ window.addEventListener('load', () => {
 
   if (!reduced) {
     gsap.from('.footer__headline', {
-      y: 50, opacity: 0, duration: 1, ease: 'power3.out',
+      opacity: 0, duration: 1, ease: 'power3.out',
       scrollTrigger: { trigger: '.footer', start: 'top 70%' },
     });
   }
