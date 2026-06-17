@@ -172,11 +172,8 @@
       transparent 100%
     );
 
+    // Hidden on tablet & phone — the deck still advances on scroll.
     @include respond-to(md) {
-      left: 2vw;
-    }
-
-    @include respond-to(sm) {
       display: none;
     }
   }
@@ -300,20 +297,20 @@
       var(--color-azure-1832, rgba(27, 37, 64, 0.32));
     background: var(--color-white-0, rgba(255, 255, 255, 0));
 
+    // Tablet & phone — image moves to the UPPER area so the text sits below
+    // it (single-column stack, no overlap, nav hidden).
     @include respond-to(md) {
-      left: 10%;
-      width: 46vw;
-      height: 74vh;
+      left: 50%;
+      top: 29%;
+      transform: translate(-50%, -50%);
+      width: 80vw;
+      height: 42vh;
     }
 
     @include respond-to(sm) {
-      // Image moves to the UPPER area so the text can sit below it
-      // (no more overlap on a single narrow column).
-      left: 50%;
       top: 30%;
-      transform: translate(-50%, -50%);
-      width: 84vw;
-      height: 38vh;
+      width: 88vw;
+      height: 34vh;
     }
   }
 
@@ -345,6 +342,22 @@
     padding: 20px;
   }
 
+  // On tablet & phone the frame is smaller than the 545px artwork. Scale the
+  // image to fit with breathing room (padding insets the contain area, so the
+  // character sits at a comfortable ~75% of the frame, centred — not oversized).
+  @include respond-to(md) {
+    &__img {
+      width: 100%;
+      background-size: contain;
+      background-origin: content-box;
+      padding: 9% 11%;
+    }
+    &__img--video {
+      height: 100%;
+      padding: 9% 11%;
+    }
+  }
+
   /* ---------- RIGHT · text column (sits ~120px right of the frame) ---------- */
   &__texts {
     position: absolute;
@@ -355,13 +368,15 @@
     z-index: 3;
     overflow: hidden;
 
+    // Lower band, beneath the image (tablet & phone stacked layout).
     @include respond-to(md) {
-      left: calc(11% + 40vw + 40px);
-      width: 34vw;
+      left: 8vw;
+      width: 84vw;
+      top: 50%;
+      height: 48%;
     }
 
     @include respond-to(sm) {
-      // Lower band, beneath the image.
       left: 7vw;
       width: 86vw;
       top: 52%;
@@ -377,7 +392,7 @@
     justify-content: center;
     will-change: transform;
 
-    @include respond-to(sm) {
+    @include respond-to(md) {
       justify-content: flex-start;
     }
   }
@@ -394,14 +409,13 @@
     line-height: 110%;
     overflow-wrap: normal; // wrap only at spaces — never mid-word
 
-    // Smaller / tighter so long words (DEVELOPMENT, AI CINEMATIC) fit.
+    // Stacked layout has the full column width, so the title can stay large.
     @include respond-to(md) {
-      font-size: clamp(26px, 3.6vw, 36px);
+      font-size: clamp(30px, 5vw, 46px);
       letter-spacing: 0.06em;
     }
     @include respond-to(sm) {
-      font-size: clamp(30px, 9vw, 44px);
-      letter-spacing: 0.06em;
+      font-size: clamp(28px, 8vw, 40px);
     }
   }
 
