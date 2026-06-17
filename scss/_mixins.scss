@@ -63,6 +63,40 @@
   }
 }
 
+// --- Four corner brackets (drawn with the element's background) ---
+// L-shaped ticks at all four corners, no full border. Works on any element.
+@mixin corner-frame($color: rgba(255,255,255,.4), $len: 14px, $thick: 1px) {
+  background-image:
+    linear-gradient($color, $color), linear-gradient($color, $color), // top-left
+    linear-gradient($color, $color), linear-gradient($color, $color), // top-right
+    linear-gradient($color, $color), linear-gradient($color, $color), // bottom-left
+    linear-gradient($color, $color), linear-gradient($color, $color); // bottom-right
+  background-repeat: no-repeat;
+  background-size:
+    $len $thick, $thick $len,
+    $len $thick, $thick $len,
+    $len $thick, $thick $len,
+    $len $thick, $thick $len;
+  background-position:
+    top left, top left,
+    top right, top right,
+    bottom left, bottom left,
+    bottom right, bottom right;
+}
+
+// --- Four corner brackets from the design SVGs ----------------
+// Places service-border corner marks at all four corners via background.
+@mixin corner-svg($size: 14px) {
+  background-image:
+    url("../svg/service-border/service-border-3.svg"), // top-left
+    url("../svg/service-border/service-border-2.svg"), // top-right
+    url("../svg/service-border/service-border-1.svg"), // bottom-left
+    url("../svg/service-border/service-border.svg");   // bottom-right
+  background-repeat: no-repeat;
+  background-size: $size $size;
+  background-position: top left, top right, bottom left, bottom right;
+}
+
 // --- Position fill --------------------------------------------
 @mixin fill {
   position: absolute;
