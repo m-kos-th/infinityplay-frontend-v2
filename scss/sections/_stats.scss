@@ -6,6 +6,19 @@
   position: relative;
   background: #fff;
   overflow: hidden;
+  z-index: 5;
+  border-top: 1px solid $line;
+
+  &:before{
+    background: linear-gradient(180deg, #FFF 0%, rgba(255, 255, 255, 0.00) 100%);
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 250px;
+    width: 100%;
+    z-index: 1;
+  }
 
   &__hero {
     position: relative;
@@ -73,12 +86,12 @@
     will-change: transform;
     z-index: 2;
 
-    &--1 { top: 14%;    left: 14%;   background-image: url('../images/float-headphones.png'); }
-    &--2 { top: 13%;    right: 13%;  background-image: url('../images/float-controller.png'); }
-    &--3 { top: 42%;    left: 21%;   background-image: url('../images/float-coffee.png'); }
-    &--4 { top: 44%;    right: 21%;  background-image: url('../images/float-folder.png'); }
-    &--5 { bottom: 18%; left: 11%;   background-image: url('../images/float-tablet.png'); }
-    &--6 { bottom: 16%; right: 9%;   background-image: url('../images/float-laptop.png'); }
+    &--1 { top: 14%;    left: 14%;   background-image: url('../images/float-headphones.webp'); }
+    &--2 { top: 13%;    right: 13%;  background-image: url('../images/float-controller.webp'); }
+    &--3 { top: 42%;    left: 21%;   background-image: url('../images/float-coffee.webp'); }
+    &--4 { top: 44%;    right: 21%;  background-image: url('../images/float-folder.webp'); }
+    &--5 { bottom: 18%; left: 11%;   background-image: url('../images/float-tablet.webp'); }
+    &--6 { bottom: 16%; right: 9%;   background-image: url('../images/float-laptop.webp'); }
   }
 
   // Stats rows

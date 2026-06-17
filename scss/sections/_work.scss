@@ -1,8 +1,7 @@
 // ============================================================
-// sections/_work.scss — Pinned scroll section, 4 projects
-// Each project is a full-viewport 3-column grid.
-// .work__content is always flex-centered vertically.
-// Section height is controlled by GSAP ScrollTrigger pin.
+// sections/_work.scss — Stacked work cards
+// GSAP ScrollTrigger pins each project card when it reaches
+// the top of the viewport, then releases it as the next card arrives.
 // ============================================================
 
 .work {
@@ -27,50 +26,74 @@
     top: -15%;
   }
 
-  // ── Sticky viewport container ──────────────────────────────
-  // GSAP will pin this element and add scroll-space to .work
   &__pin {
     position: relative;
   }
 
   &__grid-wrapper {
     position: relative;
-    height: 100%;
   }
 
-  // ── Per-project grid ───────────────────────────────────────
-  // Each grid is stacked absolutely inside __pin.
-  // GSAP slides them in/out vertically on scroll.
   &__grid {
-    // position: absolute;
-    inset: 0;
+    position: relative;
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
-    will-change: transform;
-    height: 642px;
-    border-bottom:  1px solid $line;
+    height: auto;
+    min-height: 100vh;
+    background: #fff;
+    border-bottom: 1px solid $line;
+    isolation: isolate;
+    overflow: clip;
 
     &:first-child {
-      border-top:  1px solid $line;
+      border-top: 1px solid $line;
+    }
+
+    &[data-index="0"] {
+      z-index: 1;
+    }
+
+    &[data-index="1"] {
+      z-index: 2;
+    }
+
+    &[data-index="2"] {
+      z-index: 3;
+    }
+
+    &[data-index="3"] {
+      z-index: 4;
     }
   }
 
   // ── Game screenshot image ──────────────────────────────────
   &__image {
-    width: 451px;
-    height: 640px;
+    width: min(28.1875vw, 451px);
+    height: 100%;
+    min-height: 100vh;
     flex-shrink: 0;
     background-size: cover;
     background-position: center top;
     position: relative;
+    overflow: hidden;
 
-    &--dawn        { background-image: url("../images/work-dawn.webp"); }
-    &--trick       { background-image: url("../images/work-trick.webp"); }
+    &--dawn {
+      background-image: url("../images/work-dawn.webp");
+    }
+    &--trick {
+      background-image: url("../images/work-trick.webp");
+    }
     &--outlanders {
       .work__video {
         object-position: 80% 0;
+      }
+    }
+    &--umt {
+      .work__video {
+        object-position: 0 0;
+        scale: 1.5;
       }
     }
     // --outlanders and --umt use <video> — no background-image needed
@@ -88,31 +111,44 @@
   // ── Content column — always vertically centred ─────────────
   &__content {
     display: flex;
-    width: calc(100% - 900px);
-    height: 640px;
-    padding: 74px;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    position: relative;
+    flex: 1;
+    width: auto;
+    min-width: 0;
+    height: 100%;
+    min-height: 100vh;
+    padding: 0;
+    justify-content: stretch;
+    align-items: stretch;
     flex-shrink: 0;
     text-align: center;
-    background: #fff;
-    border-left:  1px solid $line;
+    border-left: 1px solid $line;
     border-right: 1px solid $line;
-    
+    background: #fff;
+
+    &-inner {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      height: 100%;
+      width: 100%;
+      padding: clamp(72px, 7vw, 96px) clamp(32px, 4vw, 74px) 64px;
+      background: #fff;
+    }
 
     @include respond-to(sm) {
       width: 100%;
-      height: 100%;
-      padding: 0 28px;
+      height: auto;
+      min-height: 0;
       border: none;
-      background: rgba(255, 255, 255, 0.92);
     }
   }
 
   // ── Dot-pattern decorative column ─────────────────────────
   &__bg-pattern {
-    width: 450px;
+    width: min(28.125vw, 450px);
     height: 640px;
     flex-shrink: 0;
     background-color: #fff;
@@ -158,10 +194,18 @@
     background-repeat: no-repeat;
     width: min(300px, 80%);
 
-    &--dawn        { background-image: url("../images/logo-dawn.webp"); }
-    &--trick       { background-image: url("../images/logo-trick.webp"); }
-    &--outlanders  { background-image: url("../images/logo-outlanders.webp"); }
-    &--umt         { background-image: url("../images/logo-umt.webp"); }
+    &--dawn {
+      background-image: url("../images/logo-dawn.webp");
+    }
+    &--trick {
+      background-image: url("../images/logo-trick.webp");
+    }
+    &--outlanders {
+      background-image: url("../images/logo-outlanders.webp");
+    }
+    &--umt {
+      background-image: url("../images/logo-umt.webp");
+    }
   }
 
   // Fallback text logos (shown when image fails or for screen readers)
@@ -174,10 +218,24 @@
     font-family: var(--font-body);
     opacity: 0; // hidden — logo image is the primary display
 
-    &--dawn        { color: #e02020; }
-    &--trick       { color: #d2491d; -webkit-text-stroke: 2px #221408; text-shadow: 0 4px 0 #c9b896; }
-    &--outlanders  { color: #9aa3ad; font-weight: 600; letter-spacing: 0.35em; }
-    &--umt         { color: #aab4c4; font-style: italic; text-shadow: 0 2px 6px rgba(0,0,0,.35); }
+    &--dawn {
+      color: #e02020;
+    }
+    &--trick {
+      color: #d2491d;
+      -webkit-text-stroke: 2px #221408;
+      text-shadow: 0 4px 0 #c9b896;
+    }
+    &--outlanders {
+      color: #9aa3ad;
+      font-weight: 600;
+      letter-spacing: 0.35em;
+    }
+    &--umt {
+      color: #aab4c4;
+      font-style: italic;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+    }
   }
 
   // ── Description & CTA ─────────────────────────────────────
@@ -186,6 +244,22 @@
     font-size: 15px;
     line-height: 1.65;
     margin-bottom: 36px;
-    max-width: 240px;
+  }
+
+  @include respond-to(sm) {
+    &__grid {
+      flex-direction: column;
+      height: auto;
+      min-height: 100svh;
+    }
+
+    &__image {
+      width: 100%;
+      height: min(52svh, 420px);
+    }
+
+    &__content-inner {
+      padding: 36px 28px 44px;
+    }
   }
 }
