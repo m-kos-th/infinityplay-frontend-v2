@@ -134,56 +134,150 @@ window.addEventListener('load', () => {
   }
 
   /* ----------------------------------------------------------------
-   * WORK — pinned scroll, 4 projects
-   * Each project is a full-viewport grid (.work__grid).
-   * Grids slide horizontally: incoming from right, outgoing to left.
-   * .work__content is flex-centered so it always sits mid-viewport.
+   * WORK — stacked project cards
+   * Each card pins when it reaches the top, then hands off to the
+   * next card as that card reaches the same top edge.
    * ---------------------------------------------------------------- */
-  const workGrids   = gsap.utils.toArray('.work__grid');
-  const WORK_SLIDES = workGrids.length;
-  const counterEl   = document.querySelector('.work__counter-current');
+  const workCards = gsap.utils.toArray('.work__grid');
+  const workCounter = document.querySelector('.work__counter');
+  const workCounterCurrent = document.querySelector('.work__counter-current');
+  const workCounterTotal = document.querySelector('.work__counter-total');
+  const workEndSection = document.querySelector('.stats');
+  const WORK_MIN_HEIGHT = 640;
 
-  // All grids except the first start off-screen below
-  gsap.set(workGrids.slice(1), { yPercent: 100 });
+  if (workCards.length) {
+    const setWorkDesktopHeight = () => {
+      if (window.innerWidth <= 680) {
+        workCards.forEach((card) => {
+          card.style.minHeight = '';
+          card.querySelectorAll('.work__image, .work__content, .work__bg-pattern').forEach((el) => {
+            el.style.height = '';
+            el.style.minHeight = '';
+          });
+        });
+        return;
+      }
 
-  const workTL = gsap.timeline({
-    scrollTrigger: {
-      trigger: '.work__pin',
-      start:  'top top',
-      end:    `+=${(WORK_SLIDES - 1) * 100}%`,
-      pin:    true,
-      scrub:  0.5,
-      anticipatePin: 1,
-      onUpdate(self) {
-        // Keep the counter in sync
-        if (!counterEl) return;
-        const idx = Math.min(WORK_SLIDES - 1, Math.round(self.progress * (WORK_SLIDES - 1)));
-        counterEl.textContent = String(idx + 1).padStart(2, '0');
-      },
-    },
-  });
+      const measuredHeight = Math.max(
+        WORK_MIN_HEIGHT,
+        ...workCards.map((card) => {
+          const imageHeight = card.querySelector('.work__image')?.offsetHeight || 0;
+          const contentHeight = card.querySelector('.work__content-inner')?.scrollHeight || 0;
+          return Math.max(imageHeight, contentHeight, card.scrollHeight);
+        })
+      );
 
-  // Build one transition per project pair
-  for (let i = 1; i < WORK_SLIDES; i++) {
-    const position = i - 1;
-    workTL
-      // Previous grid drifts up slightly (parallax pull-back)
-      .to(workGrids[i - 1], {
-        yPercent: 0,
-        ease: 'none',
-        duration: 1,
-      }, position)
-      // Incoming grid sweeps up from bottom
-      .to(workGrids[i], {
-        yPercent: 0,
-        ease: 'none',
-        duration: 1,
-      }, position);
+      workCards.forEach((card) => {
+        card.style.minHeight = `${measuredHeight}px`;
+        card.querySelectorAll('.work__image, .work__content, .work__bg-pattern').forEach((el) => {
+          el.style.height = `${measuredHeight}px`;
+          el.style.minHeight = `${measuredHeight}px`;
+        });
+      });
+    };
+
+    const syncWorkState = (activeIndex) => {
+      const clampedIndex = gsap.utils.clamp(0, workCards.length - 1, activeIndex);
+
+      workCards.forEach((card, index) => {
+        card.classList.toggle('work__grid--active', index === clampedIndex);
+      });
+
+      if (workCounterCurrent) {
+        workCounterCurrent.textContent = String(clampedIndex + 1).padStart(2, '0');
+      }
+    };
+
+    if (workCounterTotal) {
+      workCounterTotal.textContent = String(workCards.length).padStart(2, '0');
+    }
+
+    syncWorkState(0);
+
+    const workMM = gsap.matchMedia();
+
+    workMM.add('(min-width: 681px)', () => {
+      setWorkDesktopHeight();
+
+      if (workCounter) {
+        gsap.set(workCounter, { autoAlpha: 1 });
+      }
+
+      syncWorkState(0);
+
+      ScrollTrigger.addEventListener('refreshInit', setWorkDesktopHeight);
+
+      workCards.forEach((card, index) => {
+        const nextCard = workCards[index + 1];
+
+        ScrollTrigger.create({
+          trigger: card,
+          start: 'top top',
+          endTrigger: nextCard || workEndSection || card,
+          end: nextCard || workEndSection ? 'top top' : 'bottom top',
+          pin: true,
+          pinSpacing: false,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+          onRefresh: (self) => {
+            if (self.isActive) {
+              syncWorkState(index);
+            }
+          },
+          onEnter: () => syncWorkState(index),
+          onEnterBack: () => syncWorkState(index),
+          onLeave: () => {
+            if (nextCard) {
+              syncWorkState(index + 1);
+            }
+          },
+          onLeaveBack: () => syncWorkState(index - 1),
+        });
+      });
+
+      return () => {
+        ScrollTrigger.removeEventListener('refreshInit', setWorkDesktopHeight);
+
+        workCards.forEach((card) => {
+          card.style.minHeight = '';
+          card.querySelectorAll('.work__image, .work__content, .work__bg-pattern').forEach((el) => {
+            el.style.height = '';
+            el.style.minHeight = '';
+          });
+        });
+
+        if (workCounter) {
+          gsap.set(workCounter, { autoAlpha: 0 });
+        }
+      };
+    });
   }
 
   /* ----------------------------------------------------------------
    * STATS — floating items drift + idle bounce
    * ---------------------------------------------------------------- */
+  if (!reduced) {
+    gsap.from('.stats__circuit', {
+      opacity: 0,
+      y: 36,
+      duration: 1.1,
+      ease: 'power3.out',
+      scrollTrigger: { trigger: '.stats__hero', start: 'top 78%' },
+    });
+  }
+
+  gsap.to('.stats__circuit', {
+    yPercent: 8,
+    scale: 1.02,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: '.stats__hero',
+      start: 'top bottom',
+      end: 'bottom top',
+      scrub: 1.2,
+    },
+  });
+
   gsap.utils.toArray('.stats__float').forEach((el, i) => {
     gsap.to(el, {
       rotation: i % 2 ? -8 : 8,
