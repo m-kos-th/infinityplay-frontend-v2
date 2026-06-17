@@ -9,6 +9,7 @@
   background: #fff;
   z-index: 2;
   margin-top: -33%;
+  overflow: hidden;
 
   // Fade-in gradient over the about section below
   &::before {
