@@ -92,7 +92,7 @@ window.addEventListener('load', () => {
   }
 
   loopMarquee('#marquee-about', 38, -1);
-  // loopMarquee('#marquee-work',  34, -1);
+  loopMarquee('#marquee-work',  34, -1);
 
   /* ----------------------------------------------------------------
    * ABOUT — characters + content reveal
