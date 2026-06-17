@@ -210,10 +210,30 @@
     margin-top: 32px;
   }
 
+  // ── Tablet — compact the scrolling marquee ───────────────
+  @include respond-to(md) {
+    &__col { min-width: clamp(210px, 32vw, 300px); }
+
+    &__cell {
+      flex-basis: 24vh;
+      padding: 0 3.6vw;
+
+      &--top    { padding-top: 24px; }
+      &--bottom { padding-bottom: 24px; }
+    }
+
+    &__value   { font-size: clamp(44px, 8vw, 76px); }
+    &__sub     { max-width: 220px; }
+    &__marquee { padding-bottom: 14vh; }
+  }
+
+  // ── Mobile ───────────────────────────────────────────────
   @include respond-to(sm) {
     &__hero {
       padding: 10vh 16px 9vh;
     }
+
+    &__float { display: none; } // keep the headline / button area clean
 
     &__circuit {
       width: calc(100% - 24px);
@@ -225,5 +245,24 @@
     &__circuit::after {
       inset: 24% 10%;
     }
+
+    // Compact the marquee so a stat sits nicely on a narrow screen.
+    &__col { min-width: 62vw; }
+
+    &__cell {
+      flex-basis: 19vh;
+      padding: 0 7vw;
+
+      &--top    { padding-top: 20px; }
+      &--bottom { padding-bottom: 20px; }
+    }
+
+    &__value {
+      font-size: clamp(40px, 14vw, 62px);
+      margin-top: 10px;
+    }
+    &__label   { font-size: 10px; }
+    &__sub     { font-size: 10px; letter-spacing: 0.14em; max-width: 70vw; }
+    &__marquee { padding-bottom: 8vh; }
   }
 }

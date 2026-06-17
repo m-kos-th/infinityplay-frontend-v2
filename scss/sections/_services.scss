@@ -11,7 +11,9 @@
 }
 
 @keyframes pill-beam {
-  to { --pill-angle: 360deg; }
+  to {
+    --pill-angle: 360deg;
+  }
 }
 
 .services {
@@ -27,14 +29,14 @@
     background:
       linear-gradient(
         180deg,
-        var(--color-grey-910, rgba(211, 239, 252, 0.00)) 0%,
-        var(--color-grey-91, #D3EFFB) 9.34%,
-        var(--color-azure-67, #5FBDF7) 19.14%,
-        var(--color-azure-49, #0080F8) 30.06%,
-        var(--color-azure-36, #003DB7) 46.62%,
-        var(--color-blue-27, #001D8A) 59.4%,
-        var(--color-azure-17, #011F58) 71.26%,
-        var(--color-blue-8, #00042B) 87.08%,
+        var(--color-grey-910, rgba(211, 239, 252, 0)) 0%,
+        var(--color-grey-91, #d3effb) 9.34%,
+        var(--color-azure-67, #5fbdf7) 19.14%,
+        var(--color-azure-49, #0080f8) 30.06%,
+        var(--color-azure-36, #003db7) 46.62%,
+        var(--color-blue-27, #001d8a) 59.4%,
+        var(--color-azure-17, #011f58) 71.26%,
+        var(--color-blue-8, #00042b) 87.08%,
         #010216 100%
       ),
       #fff;
@@ -94,7 +96,7 @@
           linear-gradient(#000 0 0) content-box,
           linear-gradient(#000 0 0);
         -webkit-mask-composite: xor;
-                mask-composite: exclude;
+        mask-composite: exclude;
         animation: pill-beam 4s linear infinite;
         pointer-events: none;
       }
@@ -115,11 +117,21 @@
     margin-top: 28px;
     font-family: var(--font-display);
     font-weight: var(--fw-bold);
-    font-size: clamp(30px, 3.9vw, 54px);
-    line-height: 1.18;
-    letter-spacing: 0.005em;
+    font-size: clamp(30px, 3.9vw, 40px);
     text-transform: uppercase;
     color: #fff;
+    text-align: center;
+    leading-trim: both;
+    text-edge: cap;
+    font-style: normal;
+    line-height: 120%; /* 48px */
+    letter-spacing: 0.8px;
+
+    @include respond-to(sm) {
+      margin-top: 18px;
+      font-size: clamp(24px, 7vw, 34px);
+      padding: 0 6vw;
+    }
   }
 
   /* ---------- Deck wrapper (3 columns) ----------
@@ -143,10 +155,22 @@
     width: 210px;
     height: min(460px, 72vh); // viewport the list scrolls within
     overflow: hidden;
-    padding-left: 36px;       // room for the rail + tick
+    padding-left: 36px; // room for the rail + tick
     // Fade items in/out as they reach the top/bottom edges.
-    -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 18%, #000 82%, transparent 100%);
-            mask-image: linear-gradient(180deg, transparent 0%, #000 18%, #000 82%, transparent 100%);
+    -webkit-mask-image: linear-gradient(
+      180deg,
+      transparent 0%,
+      #000 18%,
+      #000 82%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      180deg,
+      transparent 0%,
+      #000 18%,
+      #000 82%,
+      transparent 100%
+    );
 
     @include respond-to(md) {
       left: 2vw;
@@ -199,7 +223,7 @@
       top: 0;
       bottom: 0;
       z-index: 1;
-    } 
+    }
 
     // Continuous vertical rail.
     &::before {
@@ -245,8 +269,8 @@
   /* ---------- CENTER · image stage ---------- */
   // Shared so the text column can sit a fixed gap to the right of the frame.
   $stage-left: 18%;
-  $stage-width: min(520px, 36vw);
-  $text-gap: 120px;
+  $stage-width: min(552px, 44vw); // design frame is 552px wide
+  $text-gap: 96px;
 
   &__stage {
     position: absolute;
@@ -254,21 +278,32 @@
     top: 50%;
     transform: translateY(-50%);
     width: $stage-width;
-    height: min(680px, 84vh);
+    height: min(740px, 88vh);
     z-index: 2;
-    border: var(--altcha-border-width, 1px) solid var(--color-azure-1832, rgba(27, 37, 64, 0.32));
+    // Design spec: padded, centred column frame.
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--item-spacing-8_87, 8.87px);
+    padding: 8.889px 10px;
+    border: var(--altcha-border-width, 1px) solid
+      var(--color-azure-1832, rgba(27, 37, 64, 0.32));
+    background: var(--color-white-0, rgba(255, 255, 255, 0));
 
     @include respond-to(md) {
-      left: 11%;
-      width: 40vw;
-      height: 70vh;
+      left: 10%;
+      width: 46vw;
+      height: 74vh;
     }
 
     @include respond-to(sm) {
+      // Image moves to the UPPER area so the text can sit below it
+      // (no more overlap on a single narrow column).
       left: 50%;
+      top: 30%;
       transform: translate(-50%, -50%);
-      width: 86vw;
-      height: 52vh;
+      width: 84vw;
+      height: 38vh;
     }
   }
 
@@ -276,7 +311,8 @@
     @include corner-svg(5.55px);
     position: relative;
     width: 100%;
-    height: 100%;
+    flex: 1 1 auto; // fill the padded stage, so the artwork scales up with it
+    min-height: 0;
     overflow: hidden; // crops the artwork; the corner marks are a background, so they stay
   }
 
@@ -287,6 +323,7 @@
     background-position: center;
     background-repeat: no-repeat;
     will-change: clip-path;
+    width: 545px;
   }
 
   // Video layer (e.g. AI Cinematic) — fit like a `contain` background image.
@@ -302,18 +339,21 @@
     left: calc(#{$stage-left} + #{$stage-width} + #{$text-gap});
     top: 0;
     height: 100%;
-    width: min(360px, 24vw);
+    width: min(420px, 28vw);
     z-index: 3;
     overflow: hidden;
 
     @include respond-to(md) {
-      left: calc(11% + 40vw + 56px);
-      width: 30vw;
+      left: calc(11% + 40vw + 40px);
+      width: 34vw;
     }
 
     @include respond-to(sm) {
+      // Lower band, beneath the image.
       left: 7vw;
       width: 86vw;
+      top: 52%;
+      height: 46%;
     }
   }
 
@@ -324,18 +364,33 @@
     flex-direction: column;
     justify-content: center;
     will-change: transform;
+
+    @include respond-to(sm) {
+      justify-content: flex-start;
+    }
   }
 
   &__title {
     font-family: var(--font-mono); // Doto (dotted)
     font-weight: var(--fw-bold);
-    font-size: clamp(40px, 4.6vw, 64px);
+    font-size: clamp(32px, 3.4vw, 50px);
     letter-spacing: 0.14em;
-    text-transform: uppercase; 
+    text-transform: uppercase;
     color: #fff;
     font-style: normal;
     font-weight: 200;
-    line-height: 110%; /* 70.4px */
+    line-height: 110%;
+    overflow-wrap: normal; // wrap only at spaces — never mid-word
+
+    // Smaller / tighter so long words (DEVELOPMENT, AI CINEMATIC) fit.
+    @include respond-to(md) {
+      font-size: clamp(26px, 3.6vw, 36px);
+      letter-spacing: 0.06em;
+    }
+    @include respond-to(sm) {
+      font-size: clamp(30px, 9vw, 44px);
+      letter-spacing: 0.06em;
+    }
   }
 
   &__desc {
@@ -345,6 +400,16 @@
     font-size: 15px;
     line-height: 1.7;
     max-width: 330px;
+
+    @include respond-to(md) {
+      margin-top: 16px;
+      font-size: 14px;
+    }
+    @include respond-to(sm) {
+      margin-top: 14px;
+      font-size: 14px;
+      max-width: none;
+    }
   }
 
   &__checklist {
@@ -352,6 +417,15 @@
     display: flex;
     flex-direction: column;
     gap: 14px;
+
+    @include respond-to(md) {
+      margin-top: 24px;
+      gap: 10px;
+    }
+    @include respond-to(sm) {
+      margin-top: 20px;
+      gap: 10px;
+    }
   }
 
   &__check {
@@ -367,6 +441,16 @@
     font-size: 14px;
     letter-spacing: 0.01em;
     color: #dbe1f3;
+
+    @include respond-to(md) {
+      padding: 12px 14px;
+      font-size: 13px;
+    }
+    @include respond-to(sm) {
+      padding: 11px 13px;
+      font-size: 13px;
+      gap: 10px;
+    }
   }
 
   &__check-icon {
@@ -392,15 +476,26 @@
     padding: 22px 18px;
     border: 1px solid rgba(27, 37, 64, 0.32);
     background-color: rgba(255, 255, 255, 0);
+
+    @include respond-to(md) {
+      margin-top: 18px;
+      padding: 16px 16px;
+    }
+    // Drop the "supported by" panel on phones to keep the slide compact.
+    @include respond-to(sm) {
+      display: none;
+    }
   }
 
   &__supported-label {
     font-family: var(--font-body);
-    font-size: 11px;
     letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.5);
-    margin-bottom: 12px;
+    margin-bottom: 12px; 
+    color: var(--color-grey-9464, rgba(224, 246, 255, 0.64)); 
+    font-size: 12.2px;
+    font-style: normal;
+    font-weight: var(--font-weight-400, 400);
+    line-height: var(--line-height-20, 20px); /* 163.934% */
   }
 
   &__supported-logos {
@@ -412,5 +507,13 @@
     font-weight: 700;
     letter-spacing: 0.04em;
     color: rgba(255, 255, 255, 0.75);
+  }
+
+  &__supported-img {
+    display: block;
+    height: 20px;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
   }
 }
