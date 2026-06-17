@@ -204,17 +204,8 @@ window.addEventListener('load', () => {
     }
   });
 
-  if (!reduced) {
-    gsap.from('#stats-row-1 .stats__item', {
-      opacity: 0, stagger: 0.15, duration: 0.9, ease: 'power3.out',
-      scrollTrigger: { trigger: '#stats-row-1', start: 'top 80%' },
-    });
-
-    gsap.from('#stats-row-2 .stats__item', {
-      opacity: 0, stagger: 0.15, duration: 0.9, ease: 'power3.out',
-      scrollTrigger: { trigger: '#stats-row-2', start: 'top 85%' },
-    });
-  }
+  // Stats values scroll left in a continuous loop
+  loopMarquee('#stats-track', 45, -1);
 
   /* ----------------------------------------------------------------
    * SERVICES — pinned 3-column deck.
