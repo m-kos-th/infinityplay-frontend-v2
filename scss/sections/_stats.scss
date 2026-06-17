@@ -94,37 +94,60 @@
     &--6 { bottom: 16%; right: 9%;   background-image: url('../images/float-laptop.webp'); }
   }
 
-  // Stats rows
-  &__rows {
+  // Stats — horizontal marquee (scrolls left, loops back from the right)
+  &__marquee {
     position: relative;
     z-index: 2;
     padding: 0 3vw 26vh;
+  } 
+
+  &__track {
+    display: flex;
+    width: max-content;
+    will-change: transform;
   }
 
-  &__row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2vw;
-    border-top: 1px solid $line;
+  &__group {
+    display: flex;
+    flex: 0 0 auto;
+  }
 
-    & + & { margin-top: 6vh; }
+  // Each column is split into a top half and a bottom half. Only one half
+  // carries a value; the opposite half stays empty (zig-zag layout).
+  &__col {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    min-width: clamp(300px, 30vw, 480px);
+  }
 
-    @include respond-to(sm) {
-      grid-template-columns: 1fr;
+  &__cell {
+    flex: 0 0 30vh;
+    display: flex;
+    flex-direction: column;
+    padding: 0 2.8vw;
+
+    // Top cell — content anchored to the top.
+    &--top {
+      justify-content: flex-start;
+      align-items: flex-start;
+      padding-top: 30px;
+      // Continuous middle horizontal rule across the whole band.
+      border-bottom: 1px solid $line;
+    }
+
+    // Bottom cell — content anchored to the bottom.
+    &--bottom {
+      justify-content: flex-end;
+      align-items: flex-start;
+      padding-bottom: 30px;
     }
   }
 
-  &__item {
-    padding: 28px 2vw 0;
-    border-left: 1px solid $line;
-
-    &:first-child { border-left: none; }
-
-    @include respond-to(sm) {
-      border-left: none;
-      border-top: 1px solid $line;
-    }
-  }
+  // Vertical divider lives in the EMPTY half of each column (right edge),
+  // producing the offset / brick border seen in the design.
+  &__col--top &__cell--bottom { border-right: 1px solid $line; }
+  &__col--bottom &__cell--top { border-right: 1px solid $line; }
 
   &__label {
     @include type-label;
@@ -136,13 +159,20 @@
   }
 
   &__value {
-    font-family: var(--font-mono);
-    font-weight: 900;
-    font-size: clamp(54px, 6.5vw, 104px);
+    font-family: var(--font-mono); // Doto — dot-matrix glyphs
+    font-weight: 200;
+    font-size: clamp(54px, 6.5vw, 100px);
+    line-height: 1.1; // 110%
     letter-spacing: 0.06em;
+    text-transform: uppercase;
     margin-top: 14px;
-    color: #15181f;
-    line-height: 1;
+    color: var(--color-black-solid, #000);
+    white-space: nowrap;
+
+    // PROFESSIONAL — same size as the numbers, just slightly tighter tracking.
+    &--word {
+      letter-spacing: 0.03em;
+    }
   }
 
   &__sub {
