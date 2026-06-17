@@ -37,9 +37,20 @@ window.addEventListener('load', () => {
     });
   }
 
-  // updateNavVisualState();
-  // window.addEventListener('scroll', updateNavVisualState, { passive: true });
-  // window.addEventListener('resize', updateNavVisualState);
+  const heroSection = document.querySelector('.hero');
+
+  function updateNavVisualState() {
+    if (!siteNav || !heroSection) return;
+    const hasScrolledPastHero = window.scrollY > (heroSection.offsetHeight + 700);
+    siteNav.classList.toggle('site-nav--active', hasScrolledPastHero);
+
+    const hasScrolledPastHeroHidden = window.scrollY > (heroSection.offsetHeight);
+    siteNav.classList.toggle('site-nav--hidden', !hasScrolledPastHeroHidden);
+  }
+
+  updateNavVisualState();
+  window.addEventListener('scroll', updateNavVisualState, { passive: true });
+  window.addEventListener('resize', updateNavVisualState);
 
   if (reduced) {
     document.querySelectorAll('.hero__video').forEach((video) => {
