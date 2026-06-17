@@ -50,8 +50,11 @@
     justify-content: center;
     will-change: transform;
     height: 642px;
-    border-top:  1px solid $line;
     border-bottom:  1px solid $line;
+
+    &:first-child {
+      border-top:  1px solid $line;
+    }
   }
 
   // ── Game screenshot image ──────────────────────────────────
