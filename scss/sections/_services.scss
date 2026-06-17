@@ -187,19 +187,19 @@
     position: absolute;
     left: 0;
     top: 103px; // fixed centre on the active label; the list scrolls under it
-    width: 14px;
+    width: 20px; // matches the LONG label tick
     height: 0;
     border-top: 1px solid #fff;
-    z-index: 3;
+    z-index: 4;
 
-    // Short vertical bracket sitting on the rail.
+    // Taller vertical bracket sitting on the rail (the `├` of the active item).
     &::after {
       content: "";
       position: absolute;
       left: 0;
-      top: -5px;
+      top: -15px;
       width: 1px;
-      height: 11px;
+      height: 30px;
       background: #fff;
     }
   }
@@ -209,52 +209,62 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 16px; // tighter, compact cluster (matches design)
+    gap: 22px; // open spacing to match the design
     will-change: transform;
 
-    // Rail + ticks ride WITH the list, so they only span the labels
-    // (no rail above the first item or below the last). Offset by the nav's
-    // padding-left so they sit on the nav's left edge. Absolute ⇒ not flex items.
-    &::before,
-    &::after {
+    // Continuous vertical rail running the height of the list. It rides WITH
+    // the list so it only spans the labels (no rail above the first / below
+    // the last). Offset by the nav's padding so it sits on the left edge.
+    &::before {
       content: "";
       position: absolute;
       left: -36px;
       top: 0;
       bottom: 0;
-      z-index: 1;
-    }
-
-    // Continuous vertical rail.
-    &::before {
       width: 1px;
       background: rgba(255, 255, 255, 0.22);
-    }
-
-    // Ruler ticks along the rail.
-    &::after {
-      width: 13px;
-      background: repeating-linear-gradient(
-        to bottom,
-        rgba(255, 255, 255, 0.22) 0,
-        rgba(255, 255, 255, 0.22) 1px,
-        transparent 1px,
-        transparent 33px
-      );
+      z-index: 1;
     }
   }
 
   &__nav-link {
     position: relative;
     font-family: "TT Norms Pro", var(--font-display);
-    font-size: 11px;
+    font-size: 15px;
     font-weight: 500;
     line-height: normal;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
     color: #fff;
-    opacity: 0.32;
+    opacity: 0.7;
     transition: opacity 0.3s;
+
+    // LONG ruler tick — centred on the label at the rail.
+    &::before {
+      content: "";
+      position: absolute;
+      left: -36px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.22);
+      z-index: 2;
+    }
+
+    // SHORT ruler tick — sits midway in the gap below each label (skipped on
+    // the last item). Long + short alternate → 13 ticks for the 7 labels.
+    &:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      left: -36px;
+      top: calc(100% + 11px); // gap is 22px → halfway down
+      transform: translateY(-50%);
+      width: 13px;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.22);
+      z-index: 2;
+    }
 
     &:hover {
       opacity: 0.55;
@@ -263,6 +273,7 @@
     &--active,
     &.active {
       opacity: 1;
+      font-weight: 700;
     }
   }
 
@@ -285,7 +296,6 @@
     flex-direction: column;
     align-items: center;
     gap: var(--item-spacing-8_87, 8.87px);
-    padding: 8.889px 10px;
     border: var(--altcha-border-width, 1px) solid
       var(--color-azure-1832, rgba(27, 37, 64, 0.32));
     background: var(--color-white-0, rgba(255, 255, 255, 0));
@@ -319,18 +329,20 @@
   &__img {
     position: absolute;
     inset: 0;
-    background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
     will-change: clip-path;
     width: 545px;
+    border-radius: 30px;
+    padding: 20px;
   }
 
   // Video layer (e.g. AI Cinematic) — fit like a `contain` background image.
   &__img--video {
     width: 100%;
-    height: 100%;
     object-fit: contain;
+    border-radius: 30px;
+    padding: 20px;
   }
 
   /* ---------- RIGHT · text column (sits ~120px right of the frame) ---------- */
@@ -396,10 +408,15 @@
   &__desc {
     @include type-body;
     margin-top: 22px;
-    color: #aeb6cc;
-    font-size: 15px;
-    line-height: 1.7;
     max-width: 330px;
+
+    color: var(--color-grey-9464, rgba(224, 246, 255, 0.64));
+
+    font-family: var(--font-family-Font-1, Inter);
+    font-size: 13.6px;
+    font-style: normal;
+    font-weight: var(--font-weight-400, 400);
+    line-height: var(--line-height-24, 24px);
 
     @include respond-to(md) {
       margin-top: 16px;
@@ -438,9 +455,11 @@
     border: 1px solid rgba(27, 37, 64, 0.32);
     background-color: rgba(255, 255, 255, 0);
     font-family: var(--font-body);
-    font-size: 14px;
-    letter-spacing: 0.01em;
-    color: #dbe1f3;
+    color: var(--color-grey-9464, rgba(224, 246, 255, 0.64));
+    font-size: 12.2px;
+    font-style: normal;
+    font-weight: var(--font-weight-400, 400);
+    line-height: var(--line-height-20, 20px); /* 163.934% */
 
     @include respond-to(md) {
       padding: 12px 14px;
@@ -490,8 +509,8 @@
   &__supported-label {
     font-family: var(--font-body);
     letter-spacing: 0.12em;
-    margin-bottom: 12px; 
-    color: var(--color-grey-9464, rgba(224, 246, 255, 0.64)); 
+    margin-bottom: 12px;
+    color: var(--color-grey-9464, rgba(224, 246, 255, 0.64));
     font-size: 12.2px;
     font-style: normal;
     font-weight: var(--font-weight-400, 400);
