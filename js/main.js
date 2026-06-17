@@ -92,7 +92,7 @@ window.addEventListener('load', () => {
   }
 
   loopMarquee('#marquee-about', 38, -1);
-  loopMarquee('#marquee-work',  34, -1);
+  // loopMarquee('#marquee-work',  34, -1);
 
   /* ----------------------------------------------------------------
    * ABOUT — characters + content reveal
@@ -139,51 +139,73 @@ window.addEventListener('load', () => {
    * Grids slide horizontally: incoming from right, outgoing to left.
    * .work__content is flex-centered so it always sits mid-viewport.
    * ---------------------------------------------------------------- */
-  const workGrids   = gsap.utils.toArray('.work__grid');
-  const WORK_SLIDES = workGrids.length;
-  const counterEl   = document.querySelector('.work__counter-current');
+  // const workGrids   = gsap.utils.toArray('.work__grid');
+  // const WORK_SLIDES = workGrids.length;
+  // const counterEl   = document.querySelector('.work__counter-current');
 
-  // All grids except the first start off-screen below
-  gsap.set(workGrids.slice(1), { yPercent: 100 });
+  // // All grids except the first start off-screen below
+  // gsap.set(workGrids.slice(1), { yPercent: 100 });
 
-  const workTL = gsap.timeline({
-    scrollTrigger: {
-      trigger: '.work__pin',
-      start:  'top top',
-      end:    `+=${(WORK_SLIDES - 1) * 100}%`,
-      pin:    true,
-      scrub:  0.5,
-      anticipatePin: 1,
-      onUpdate(self) {
-        // Keep the counter in sync
-        if (!counterEl) return;
-        const idx = Math.min(WORK_SLIDES - 1, Math.round(self.progress * (WORK_SLIDES - 1)));
-        counterEl.textContent = String(idx + 1).padStart(2, '0');
-      },
-    },
-  });
+  // const workTL = gsap.timeline({
+  //   scrollTrigger: {
+  //     trigger: '.work__pin',
+  //     start:  'top top',
+  //     end:    `+=${(WORK_SLIDES - 1) * 100}%`,
+  //     pin:    true,
+  //     scrub:  0.5,
+  //     anticipatePin: 1,
+  //     onUpdate(self) {
+  //       // Keep the counter in sync
+  //       if (!counterEl) return;
+  //       const idx = Math.min(WORK_SLIDES - 1, Math.round(self.progress * (WORK_SLIDES - 1)));
+  //       counterEl.textContent = String(idx + 1).padStart(2, '0');
+  //     },
+  //   },
+  // });
 
-  // Build one transition per project pair
-  for (let i = 1; i < WORK_SLIDES; i++) {
-    const position = i - 1;
-    workTL
-      // Previous grid drifts up slightly (parallax pull-back)
-      .to(workGrids[i - 1], {
-        yPercent: 0,
-        ease: 'none',
-        duration: 1,
-      }, position)
-      // Incoming grid sweeps up from bottom
-      .to(workGrids[i], {
-        yPercent: 0,
-        ease: 'none',
-        duration: 1,
-      }, position);
-  }
+  // // Build one transition per project pair
+  // for (let i = 1; i < WORK_SLIDES; i++) {
+  //   const position = i - 1;
+  //   workTL
+  //     // Previous grid drifts up slightly (parallax pull-back)
+  //     .to(workGrids[i - 1], {
+  //       yPercent: 0,
+  //       ease: 'none',
+  //       duration: 1,
+  //     }, position)
+  //     // Incoming grid sweeps up from bottom
+  //     .to(workGrids[i], {
+  //       yPercent: 0,
+  //       ease: 'none',
+  //       duration: 1,
+  //     }, position);
+  // }
 
   /* ----------------------------------------------------------------
    * STATS — floating items drift + idle bounce
    * ---------------------------------------------------------------- */
+  if (!reduced) {
+    gsap.from('.stats__circuit', {
+      opacity: 0,
+      y: 36,
+      duration: 1.1,
+      ease: 'power3.out',
+      scrollTrigger: { trigger: '.stats__hero', start: 'top 78%' },
+    });
+  }
+
+  gsap.to('.stats__circuit', {
+    yPercent: 8,
+    scale: 1.02,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: '.stats__hero',
+      start: 'top bottom',
+      end: 'bottom top',
+      scrub: 1.2,
+    },
+  });
+
   gsap.utils.toArray('.stats__float').forEach((el, i) => {
     gsap.to(el, {
       rotation: i % 2 ? -8 : 8,
