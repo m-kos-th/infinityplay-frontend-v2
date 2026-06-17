@@ -329,219 +329,190 @@
 
     <div class="services__pin" id="services-pin">
 
-      <!-- Sidebar nav -->
+      <!-- Dark backdrop — fades in past the intro so the deck reads on navy -->
+      <div class="services__bg-dark" aria-hidden="true"></div>
+
+      <!-- Section header — pinned at the top, stays put through the deck -->
+      <header class="services__head">
+        <span class="pill">Services</span>
+        <h3 class="services__head-title">Infinite Artistry<br>Expert Engineering</h3>
+      </header>
+
+      <!-- Deck of 3 columns — sits low under the header, rises to centre as it leaves -->
+      <div class="services__deck">
+
+      <!-- Sidebar nav — fixed rail + marker; the list scrolls past it -->
       <nav class="services__nav" aria-label="Services navigation">
-        <a href="#" class="services__nav-link services__nav-link--active active" data-slide="0">3D Animation</a>
-        <a href="#" class="services__nav-link" data-slide="1">3D Art</a>
-        <a href="#" class="services__nav-link" data-slide="2">VFX &amp; Shaders</a>
-        <a href="#" class="services__nav-link" data-slide="3">2D Art</a>
-        <a href="#" class="services__nav-link" data-slide="4">Roblox</a>
-        <a href="#" class="services__nav-link" data-slide="5">Development</a>
-        <a href="#" class="services__nav-link" data-slide="6">AI Cinematic</a>
+        <span class="services__nav-marker" aria-hidden="true"></span>
+        <div class="services__nav-track">
+          <a href="#" class="services__nav-link services__nav-link--active active" data-slide="0">3D Animation</a>
+          <a href="#" class="services__nav-link" data-slide="1">3D Art</a>
+          <a href="#" class="services__nav-link" data-slide="2">VFX &amp; Shaders</a>
+          <a href="#" class="services__nav-link" data-slide="3">2D Art</a>
+          <a href="#" class="services__nav-link" data-slide="4">Roblox</a>
+          <a href="#" class="services__nav-link" data-slide="5">Development</a>
+          <a href="#" class="services__nav-link" data-slide="6">AI Cinematic</a>
+        </div>
       </nav>
 
-      <!-- ── Slide 1: 3D Animation ── -->
-      <article class="services__slide services__slide--first" data-slide="0" aria-label="Service: 3D Animation">
-        <div class="services__slide-inner">
-          <header class="services__head">
-            <span class="pill">Services</span>
-            <h3 class="services__head-title">Infinite Artistry<br>Expert Engineering</h3>
-          </header>
-          <figure class="services__panel" aria-hidden="true">
-            <div class="services__panel-art" style="background-image:url('assets/srv-3danim.png')"></div>
-          </figure>
-          <div class="services__info">
-            <h4 class="services__info-title">3D<br>Animation</h4>
-            <p class="services__info-description">Breathing life into characters with fluid mechanics and emotional depth.</p>
-            <ul class="feature-list" aria-label="Features">
-              <li class="feature">
-                <svg class="feature__icon" viewBox="0 0 16 16" aria-hidden="true"><path stroke-width="1.5" d="M4 4l8 8M12 4l-8 8"/></svg>
-                Advanced Rigging
-              </li>
-              <li class="feature">
-                <svg class="feature__icon" viewBox="0 0 16 16" aria-hidden="true"><path stroke-width="1.5" d="M4 4l8 8M12 4l-8 8"/></svg>
-                Gameplay Animation
-              </li>
-              <li class="feature">
-                <svg class="feature__icon" viewBox="0 0 16 16" aria-hidden="true"><path stroke-width="1.5" d="M4 4l8 8M12 4l-8 8"/></svg>
-                Cinematic &amp; Acting
-              </li>
-            </ul>
-          </div>
+      <!-- CENTER — image stage; images slice/wipe between each other on scroll -->
+      <figure class="services__stage" aria-hidden="true">
+        <div class="services__frame">
+          <div class="services__img" data-img="0" style="background-image:url('images/Services/3D_ANIMATION.gif')"></div>
+          <div class="services__img" data-img="1" style="background-image:url('images/Services/3D_ART.png')"></div>
+          <div class="services__img" data-img="2" style="background-image:url('images/Services/VFX%26SHADERS.png')"></div>
+          <div class="services__img" data-img="3" style="background-image:url('images/Services/2D_ART.png')"></div>
+          <div class="services__img" data-img="4" style="background-image:url('images/Services/Roblox.png')"></div>
+          <div class="services__img" data-img="5" style="background-image:url('images/Services/Development.png')"></div>
+          <video class="services__img services__img--video" data-img="6" autoplay loop muted playsinline>
+            <source src="images/Services/AI_Cinematic.mp4" type="video/mp4">
+          </video>
         </div>
-      </article>
+      </figure>
 
-      <!-- ── Slide 2: 3D Art ── -->
-      <article class="services__slide services__slide--dark" data-slide="1" aria-label="Service: 3D Art">
-        <div class="services__slide-inner">
-          <figure class="services__panel" aria-hidden="true">
-            <div class="services__panel-art" style="background-image:url('assets/srv-3dart.png')"></div>
-          </figure>
-          <div class="services__info">
-            <h3 class="services__info-title">3D Art</h3>
-            <p class="services__info-description">High-fidelity assets optimised for real-time rendering engines.</p>
-            <ul class="feature-list" aria-label="Features">
-              <li class="feature">
-                <svg class="feature__icon" viewBox="0 0 16 16" aria-hidden="true"><path stroke-width="1.5" d="M4 4l8 8M12 4l-8 8"/></svg>
-                Characters &amp; Creatures
-              </li>
-              <li class="feature">
-                <svg class="feature__icon" viewBox="0 0 16 16" aria-hidden="true"><path stroke-width="1.5" d="M4 4l8 8M12 4l-8 8"/></svg>
-                Props &amp; Accessories
-              </li>
-              <li class="feature">
-                <svg class="feature__icon" viewBox="0 0 16 16" aria-hidden="true"><path stroke-width="1.5" d="M4 4l8 8M12 4l-8 8"/></svg>
-                Vehicles &amp; Environments
-              </li>
-            </ul>
-          </div>
-        </div>
-      </article>
+      <!-- RIGHT — title + description + checklist; scrolls per service -->
+      <div class="services__texts">
 
-      <!-- ── Slide 3: VFX & Shaders ── -->
-      <article class="services__slide services__slide--dark" data-slide="2" aria-label="Service: VFX and Shaders">
-        <div class="services__slide-inner">
-          <figure class="services__panel" aria-hidden="true">
-            <div class="services__panel-art" style="background-image:url('assets/srv-vfx.png')"></div>
-          </figure>
-          <div class="services__info">
-            <h3 class="services__info-title">VFX &amp;<br>Shaders</h3>
-            <p class="services__info-description">Visual magic that enhances immersion without sacrificing performance.</p>
-            <ul class="feature-list" aria-label="Features">
-              <li class="feature">
-                <svg class="feature__icon" viewBox="0 0 16 16" aria-hidden="true"><path stroke-width="1.5" d="M4 4l8 8M12 4l-8 8"/></svg>
-                2D &amp; 3D VFX Animation
-              </li>
-              <li class="feature">
-                <svg class="feature__icon" viewBox="0 0 16 16" aria-hidden="true"><path stroke-width="1.5" d="M4 4l8 8M12 4l-8 8"/></svg>
-                Shader Graph &amp; HLSL
-              </li>
-              <li class="feature">
-                <svg class="feature__icon" viewBox="0 0 16 16" aria-hidden="true"><path stroke-width="1.5" d="M4 4l8 8M12 4l-8 8"/></svg>
-                Particle Systems
-              </li>
-            </ul>
-            <div class="supported">
-              <p class="supported__label">Supported by</p>
-              <div class="supported__logos">
-                <span>UNREAL ENGINE</span>
-                <span>Unity</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </article>
+        <article class="services__text" data-text="0">
+          <h3 class="services__title">3D Animation</h3>
+          <p class="services__desc">Breathing life into characters with fluid mechanics and emotional depth.</p>
+          <ul class="services__checklist">
+            <li class="services__check">
+              <span class="services__check-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><rect x="1.5" y="1.5" width="13" height="13" rx="2.5"/><path d="M5 5l6 6M11 5l-6 6"/></svg></span>
+              Advanced Rigging
+            </li>
+            <li class="services__check">
+              <span class="services__check-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><rect x="1.5" y="1.5" width="13" height="13" rx="2.5"/><path d="M5 5l6 6M11 5l-6 6"/></svg></span>
+              Gameplay Animation
+            </li>
+            <li class="services__check">
+              <span class="services__check-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><rect x="1.5" y="1.5" width="13" height="13" rx="2.5"/><path d="M5 5l6 6M11 5l-6 6"/></svg></span>
+              Cinematic &amp; Acting
+            </li>
+          </ul>
+        </article>
 
-      <!-- ── Slide 4: 2D Art ── -->
-      <article class="services__slide services__slide--dark" data-slide="3" aria-label="Service: 2D Art">
-        <div class="services__slide-inner">
-          <figure class="services__panel" aria-hidden="true">
-            <div class="services__panel-art" style="background-image:url('assets/srv-2dart.png')"></div>
-          </figure>
-          <div class="services__info">
-            <h3 class="services__info-title">2D Art</h3>
-            <p class="services__info-description">Laying the visual foundation and storytelling elements.</p>
-            <ul class="feature-list" aria-label="Features">
-              <li class="feature">
-                <svg class="feature__icon" viewBox="0 0 16 16" aria-hidden="true"><path stroke-width="1.5" d="M4 4l8 8M12 4l-8 8"/></svg>
-                Spine / Frame Animation
-              </li>
-              <li class="feature">
-                <svg class="feature__icon" viewBox="0 0 16 16" aria-hidden="true"><path stroke-width="1.5" d="M4 4l8 8M12 4l-8 8"/></svg>
-                Storyboarding
-              </li>
-              <li class="feature">
-                <svg class="feature__icon" viewBox="0 0 16 16" aria-hidden="true"><path stroke-width="1.5" d="M4 4l8 8M12 4l-8 8"/></svg>
-                Concept Art
-              </li>
-            </ul>
-          </div>
-        </div>
-      </article>
+        <article class="services__text" data-text="1">
+          <h3 class="services__title">3D Art</h3>
+          <p class="services__desc">High-fidelity assets optimised for real-time rendering engines.</p>
+          <ul class="services__checklist">
+            <li class="services__check">
+              <span class="services__check-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><rect x="1.5" y="1.5" width="13" height="13" rx="2.5"/><path d="M5 5l6 6M11 5l-6 6"/></svg></span>
+              Characters &amp; Creatures
+            </li>
+            <li class="services__check">
+              <span class="services__check-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><rect x="1.5" y="1.5" width="13" height="13" rx="2.5"/><path d="M5 5l6 6M11 5l-6 6"/></svg></span>
+              Props &amp; Accessories
+            </li>
+            <li class="services__check">
+              <span class="services__check-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><rect x="1.5" y="1.5" width="13" height="13" rx="2.5"/><path d="M5 5l6 6M11 5l-6 6"/></svg></span>
+              Vehicles &amp; Environments
+            </li>
+          </ul>
+        </article>
 
-      <!-- ── Slide 5: Roblox ── -->
-      <article class="services__slide services__slide--dark" data-slide="4" aria-label="Service: Roblox">
-        <div class="services__slide-inner">
-          <figure class="services__panel" aria-hidden="true">
-            <div class="services__panel-art" style="background-image:url('assets/srv-roblox.png')"></div>
-          </figure>
-          <div class="services__info">
-            <h3 class="services__info-title">Roblox</h3>
-            <p class="services__info-description">Immersive Roblox experiences built for engagement and retention.</p>
-            <ul class="feature-list" aria-label="Features">
-              <li class="feature">
-                <svg class="feature__icon" viewBox="0 0 16 16" aria-hidden="true"><path stroke-width="1.5" d="M4 4l8 8M12 4l-8 8"/></svg>
-                Lua Scripting
-              </li>
-              <li class="feature">
-                <svg class="feature__icon" viewBox="0 0 16 16" aria-hidden="true"><path stroke-width="1.5" d="M4 4l8 8M12 4l-8 8"/></svg>
-                World Building
-              </li>
-              <li class="feature">
-                <svg class="feature__icon" viewBox="0 0 16 16" aria-hidden="true"><path stroke-width="1.5" d="M4 4l8 8M12 4l-8 8"/></svg>
-                UGC Item Design
-              </li>
-            </ul>
+        <article class="services__text" data-text="2">
+          <h3 class="services__title">VFX &amp; Shaders</h3>
+          <p class="services__desc">Visual magic that enhances immersion without sacrificing performance.</p>
+          <ul class="services__checklist">
+            <li class="services__check">
+              <span class="services__check-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><rect x="1.5" y="1.5" width="13" height="13" rx="2.5"/><path d="M5 5l6 6M11 5l-6 6"/></svg></span>
+              2D &amp; 3D VFX Animation
+            </li>
+            <li class="services__check">
+              <span class="services__check-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><rect x="1.5" y="1.5" width="13" height="13" rx="2.5"/><path d="M5 5l6 6M11 5l-6 6"/></svg></span>
+              Shader Graph &amp; HLSL
+            </li>
+            <li class="services__check">
+              <span class="services__check-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><rect x="1.5" y="1.5" width="13" height="13" rx="2.5"/><path d="M5 5l6 6M11 5l-6 6"/></svg></span>
+              Particle Systems
+            </li>
+          </ul>
+          <div class="services__supported">
+            <p class="services__supported-label">Supported by</p>
+            <div class="services__supported-logos"><span>UNREAL ENGINE</span><span>Unity</span></div>
           </div>
-        </div>
-      </article>
+        </article>
 
-      <!-- ── Slide 6: Development ── -->
-      <article class="services__slide services__slide--dark" data-slide="5" aria-label="Service: Development">
-        <div class="services__slide-inner">
-          <figure class="services__panel" aria-hidden="true">
-            <div class="services__panel-art" style="background-image:url('assets/srv-dev.png')"></div>
-          </figure>
-          <div class="services__info">
-            <h3 class="services__info-title">Development</h3>
-            <p class="services__info-description">Clean, scalable architecture for seamless gameplay experiences.</p>
-            <ul class="feature-list" aria-label="Features">
-              <li class="feature">
-                <svg class="feature__icon" viewBox="0 0 16 16" aria-hidden="true"><path stroke-width="1.5" d="M4 4l8 8M12 4l-8 8"/></svg>
-                Unity &amp; Unreal Engine
-              </li>
-              <li class="feature">
-                <svg class="feature__icon" viewBox="0 0 16 16" aria-hidden="true"><path stroke-width="1.5" d="M4 4l8 8M12 4l-8 8"/></svg>
-                Engineering Support
-              </li>
-              <li class="feature">
-                <svg class="feature__icon" viewBox="0 0 16 16" aria-hidden="true"><path stroke-width="1.5" d="M4 4l8 8M12 4l-8 8"/></svg>
-                Systems Architecture
-              </li>
-            </ul>
-            <div class="supported">
-              <p class="supported__label">Supported by</p>
-              <div class="supported__logos">
-                <span>UNREAL ENGINE</span>
-                <span>Unity</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </article>
+        <article class="services__text" data-text="3">
+          <h3 class="services__title">2D Art</h3>
+          <p class="services__desc">Laying the visual foundation and storytelling elements.</p>
+          <ul class="services__checklist">
+            <li class="services__check">
+              <span class="services__check-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><rect x="1.5" y="1.5" width="13" height="13" rx="2.5"/><path d="M5 5l6 6M11 5l-6 6"/></svg></span>
+              Spine / Frame Animation
+            </li>
+            <li class="services__check">
+              <span class="services__check-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><rect x="1.5" y="1.5" width="13" height="13" rx="2.5"/><path d="M5 5l6 6M11 5l-6 6"/></svg></span>
+              Storyboarding
+            </li>
+            <li class="services__check">
+              <span class="services__check-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><rect x="1.5" y="1.5" width="13" height="13" rx="2.5"/><path d="M5 5l6 6M11 5l-6 6"/></svg></span>
+              Concept Art
+            </li>
+          </ul>
+        </article>
 
-      <!-- ── Slide 7: AI Cinematic ── -->
-      <article class="services__slide services__slide--dark" data-slide="6" aria-label="Service: AI Cinematic">
-        <div class="services__slide-inner">
-          <figure class="services__panel" aria-hidden="true">
-            <div class="services__panel-art" style="background-image:url('assets/srv-ai.png')"></div>
-          </figure>
-          <div class="services__info">
-            <h3 class="services__info-title">AI<br>Cinematic</h3>
-            <p class="services__info-description">AI-driven cinematic pipelines that accelerate storytelling at scale.</p>
-            <ul class="feature-list" aria-label="Features">
-              <li class="feature">
-                <svg class="feature__icon" viewBox="0 0 16 16" aria-hidden="true"><path stroke-width="1.5" d="M4 4l8 8M12 4l-8 8"/></svg>
-                Storyboard Generation
-              </li>
-              <li class="feature">
-                <svg class="feature__icon" viewBox="0 0 16 16" aria-hidden="true"><path stroke-width="1.5" d="M4 4l8 8M12 4l-8 8"/></svg>
-                Video Output
-              </li>
-            </ul>
+        <article class="services__text" data-text="4">
+          <h3 class="services__title">Roblox</h3>
+          <p class="services__desc">Immersive Roblox experiences built for engagement and retention.</p>
+          <ul class="services__checklist">
+            <li class="services__check">
+              <span class="services__check-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><rect x="1.5" y="1.5" width="13" height="13" rx="2.5"/><path d="M5 5l6 6M11 5l-6 6"/></svg></span>
+              Lua Scripting
+            </li>
+            <li class="services__check">
+              <span class="services__check-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><rect x="1.5" y="1.5" width="13" height="13" rx="2.5"/><path d="M5 5l6 6M11 5l-6 6"/></svg></span>
+              World Building
+            </li>
+            <li class="services__check">
+              <span class="services__check-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><rect x="1.5" y="1.5" width="13" height="13" rx="2.5"/><path d="M5 5l6 6M11 5l-6 6"/></svg></span>
+              UGC Item Design
+            </li>
+          </ul>
+        </article>
+
+        <article class="services__text" data-text="5">
+          <h3 class="services__title">Development</h3>
+          <p class="services__desc">Clean, scalable architecture for seamless gameplay experiences.</p>
+          <ul class="services__checklist">
+            <li class="services__check">
+              <span class="services__check-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><rect x="1.5" y="1.5" width="13" height="13" rx="2.5"/><path d="M5 5l6 6M11 5l-6 6"/></svg></span>
+              Unity &amp; Unreal Engine
+            </li>
+            <li class="services__check">
+              <span class="services__check-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><rect x="1.5" y="1.5" width="13" height="13" rx="2.5"/><path d="M5 5l6 6M11 5l-6 6"/></svg></span>
+              Engineering Support
+            </li>
+            <li class="services__check">
+              <span class="services__check-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><rect x="1.5" y="1.5" width="13" height="13" rx="2.5"/><path d="M5 5l6 6M11 5l-6 6"/></svg></span>
+              Systems Architecture
+            </li>
+          </ul>
+          <div class="services__supported">
+            <p class="services__supported-label">Supported by</p>
+            <div class="services__supported-logos"><span>UNREAL ENGINE</span><span>Unity</span></div>
           </div>
-        </div>
-      </article>
+        </article>
+
+        <article class="services__text" data-text="6">
+          <h3 class="services__title">AI Cinematic</h3>
+          <p class="services__desc">AI-driven cinematic pipelines that accelerate storytelling at scale.</p>
+          <ul class="services__checklist">
+            <li class="services__check">
+              <span class="services__check-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><rect x="1.5" y="1.5" width="13" height="13" rx="2.5"/><path d="M5 5l6 6M11 5l-6 6"/></svg></span>
+              Storyboard Generation
+            </li>
+            <li class="services__check">
+              <span class="services__check-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><rect x="1.5" y="1.5" width="13" height="13" rx="2.5"/><path d="M5 5l6 6M11 5l-6 6"/></svg></span>
+              Video Output
+            </li>
+          </ul>
+        </article>
+
+      </div><!-- /.services__texts -->
+
+      </div><!-- /.services__deck -->
 
     </div><!-- /.services__pin -->
   </section>
