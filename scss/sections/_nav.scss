@@ -6,7 +6,7 @@
   position: fixed;
   top: 28px;
   left: 28px;
-  z-index: 1;
+  z-index: 8;
   transition: transform 0.3s ease;
 
   &--hidden {
@@ -14,11 +14,11 @@
   }
 
   &--active {
-    z-index: 2;
+    z-index: 12;
   }
 
   &--hero-hidden {
-    z-index: 1;
+    z-index: 8;
     pointer-events: none;
   }
 
@@ -200,6 +200,8 @@
   }
 
   &--open {
+    z-index: 14;
+
     .site-nav__menu {
       opacity: 1;
       visibility: visible;
