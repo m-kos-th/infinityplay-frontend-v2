@@ -8,17 +8,31 @@ window.addEventListener('load', () => {
   const siteNav = document.querySelector('.site-nav');
   const navToggle = document.querySelector('.site-nav__toggle');
   const navMenu = document.querySelector('.site-nav__menu');
+  const heroSection = document.querySelector('.hero');
+  const heroNavToggle = document.querySelector('.hero__nav-toggle');
 
   if (siteNav && navToggle && navMenu) {
     const setNavState = (isOpen) => {
       siteNav.classList.toggle('site-nav--open', isOpen);
       navToggle.setAttribute('aria-expanded', String(isOpen));
       navToggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+      updateNavVisualState();
     };
 
     navToggle.addEventListener('click', () => {
       setNavState(!siteNav.classList.contains('site-nav--open'));
     });
+
+    if (heroNavToggle) {
+      heroNavToggle.style.pointerEvents = 'auto';
+      heroNavToggle.style.cursor = 'pointer';
+
+      heroNavToggle.addEventListener('click', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        setNavState(!siteNav.classList.contains('site-nav--open'));
+      });
+    }
 
     navMenu.querySelectorAll('a').forEach((link) => {
       link.addEventListener('click', () => setNavState(false));
@@ -37,15 +51,14 @@ window.addEventListener('load', () => {
     });
   }
 
-  const heroSection = document.querySelector('.hero');
-
   function updateNavVisualState() {
     if (!siteNav || !heroSection) return;
-    const hasScrolledPastHero = window.scrollY > (heroSection.offsetHeight + 700);
-    siteNav.classList.toggle('site-nav--active', hasScrolledPastHero);
+    const heroBottom = heroSection.offsetTop + (heroSection.offsetHeight / 2);
+    const hasScrolledPastHero = window.scrollY >= heroBottom;
+    const isNavOpen = siteNav.classList.contains('site-nav--open');
 
-    const hasScrolledPastHeroHidden = window.scrollY > (heroSection.offsetHeight);
-    siteNav.classList.toggle('site-nav--hidden', !hasScrolledPastHeroHidden);
+    siteNav.classList.toggle('site-nav--active', hasScrolledPastHero || isNavOpen);
+    siteNav.classList.toggle('site-nav--hidden', !hasScrolledPastHero && !isNavOpen);
   }
 
   updateNavVisualState();
