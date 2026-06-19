@@ -1,8 +1,5 @@
 <?php
 defined('C5_EXECUTE') or die('Access Denied.');
-
-$pageTitle = t('404 Error') . ' | Infinity Play';
-$pageDescription = t('Page not found.');
 $this->inc('elements/header.php');
 ?>
 <main class="policy" id="main-content">

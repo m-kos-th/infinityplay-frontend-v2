@@ -1,12 +1,5 @@
 <?php
-defined('C5_EXECUTE') or die('Access Denied.');
-require_once __DIR__ . '/elements/function.php';
-
-$pageTitle = 'Privacy Policy | Infinity Play';
-$pageDescription = 'Privacy Policy for Infinity Play — how we collect, use, disclose, and protect information provided by clients who engage us for game development and related professional services.';
-$shareTitle = $pageTitle;
-$shareDescription = 'How Infinity Play collects, uses, discloses, and protects client information.';
-$canonicalUrl = kos_absolute_url(kos_privacy_url());
+defined('C5_EXECUTE') or die("Access Denied.");
 $this->inc('elements/header.php');
 ?>
 
