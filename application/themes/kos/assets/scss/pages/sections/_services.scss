@@ -1,0 +1,552 @@
+// ============================================================
+// sections/_services.scss — Pinned 3-column deck
+// LEFT: nav · CENTER: image (slice transition) · RIGHT: text
+// ============================================================
+
+// Drives the conic gradient that orbits the SERVICES pill border.
+@property --pill-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes pill-beam {
+  to {
+    --pill-angle: 360deg;
+  }
+}
+
+.services {
+  position: relative;
+
+  &__pin {
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    // Design gradient (image #17): white/light at the top fading down through
+    // azure to deep navy at the bottom. Uses the Figma ramp colours, flipped &
+    // stretched to fill the full height (the raw token only covered the top half).
+    background:
+      linear-gradient(
+        180deg,
+        var(--color-grey-910, rgba(211, 239, 252, 0)) 0%,
+        var(--color-grey-91, #d3effb) 9.34%,
+        var(--color-azure-67, #5fbdf7) 19.14%,
+        var(--color-azure-49, #0080f8) 30.06%,
+        var(--color-azure-36, #003db7) 46.62%,
+        var(--color-blue-27, #001d8a) 59.4%,
+        var(--color-azure-17, #011f58) 71.26%,
+        var(--color-blue-8, #00042b) 87.08%,
+        #010216 100%
+      ),
+      #fff;
+  }
+
+  // Dark backdrop over the gradient: transparent at the intro (image #17 shows
+  // through), fades to navy as the deck scrolls in so the labels stay readable.
+  &__bg-dark {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    opacity: 0;
+    pointer-events: none;
+    background: #010216;
+  }
+
+  /* ---------- Section header (on the dark lower band, centred) ----------
+     Sits on the dark part of the gradient (image #17). It scrolls up & away
+     over the first slide, and the deck rises into view behind it. */
+  &__head {
+    position: absolute;
+    top: 58%;
+    left: 0;
+    width: 100%;
+    z-index: 6;
+    text-align: center;
+    pointer-events: none; // never block the deck below
+    // NB: transform is reserved for GSAP (header scrolls up on the timeline).
+
+    .pill {
+      pointer-events: auto;
+      position: relative;
+      isolation: isolate;
+
+      // A glowing light that orbits the border (a "comet" sweeping the ring).
+      // ::before = sharp beam on the 1px ring · ::after = soft blurred halo.
+      &::before,
+      &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        padding: 1px; // ring thickness (matches the border)
+        background: conic-gradient(
+          from var(--pill-angle),
+          transparent 0deg 290deg,
+          rgba(170, 210, 255, 0.55) 325deg,
+          #f2f8ff 346deg,
+          rgba(170, 210, 255, 0.55) 352deg,
+          transparent 360deg
+        );
+        // Show only the ring: border-box minus content-box.
+        -webkit-mask:
+          linear-gradient(#000 0 0) content-box,
+          linear-gradient(#000 0 0);
+        mask:
+          linear-gradient(#000 0 0) content-box,
+          linear-gradient(#000 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        animation: pill-beam 4s linear infinite;
+        pointer-events: none;
+      }
+
+      // Soft glow trailing the beam.
+      &::after {
+        filter: blur(4px);
+        opacity: 0.85;
+      }
+    }
+
+    @include respond-to(sm) {
+      top: 54%;
+    }
+  }
+
+  &__head-title {
+    margin-top: 28px;
+    font-family: var(--font-display);
+    font-weight: var(--fw-bold);
+    font-size: clamp(30px, 3.9vw, 40px);
+    text-transform: uppercase;
+    color: #fff;
+    text-align: center;
+    leading-trim: both;
+    text-edge: cap;
+    font-style: normal;
+    line-height: 120%; /* 48px */
+    letter-spacing: 0.8px;
+
+    @include respond-to(sm) {
+      margin-top: 18px;
+      font-size: clamp(24px, 7vw, 34px);
+      padding: 0 6vw;
+    }
+  }
+
+  /* ---------- Deck wrapper (3 columns) ----------
+     Centred by default; GSAP drops it down at slide 0 (room for the header)
+     and lifts it back to centre as the header scrolls away. */
+  &__deck {
+    position: absolute;
+    inset: 0;
+    // Above the dark backdrop (GSAP's transform makes this a stacking context,
+    // so without an explicit z-index the whole deck would hide under the overlay).
+    z-index: 2;
+  }
+
+  /* ---------- LEFT · navigation (fixed rail + marker, list scrolls) ---------- */
+  &__nav {
+    position: absolute;
+    left: 3vw;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 5;
+    width: 210px;
+    height: min(460px, 72vh); // viewport the list scrolls within
+    overflow: hidden;
+    padding-left: 36px; // room for the rail + tick
+    // Fade items in/out as they reach the top/bottom edges.
+    -webkit-mask-image: linear-gradient(
+      180deg,
+      transparent 0%,
+      #000 18%,
+      #000 82%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      180deg,
+      transparent 0%,
+      #000 18%,
+      #000 82%,
+      transparent 100%
+    );
+
+    // Hidden on tablet & phone — the deck still advances on scroll.
+    @include respond-to(md) {
+      display: none;
+    }
+  }
+
+  // Fixed white marker: short horizontal tick with a bracket on the rail
+  // (a `├` that stops well before the label — never reaching the text).
+  &__nav-marker {
+    position: absolute;
+    left: 0;
+    top: 103px; // fixed centre on the active label; the list scrolls under it
+    width: 20px; // matches the LONG label tick
+    height: 0;
+    border-top: 1px solid #fff;
+    z-index: 4;
+
+    // Taller vertical bracket sitting on the rail (the `├` of the active item).
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: -15px;
+      width: 1px;
+      height: 30px;
+      background: #fff;
+    }
+  }
+
+  // The scrolling list of labels (translated by GSAP).
+  &__nav-track {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 22px; // open spacing to match the design
+    will-change: transform;
+
+    // Continuous vertical rail running the height of the list. It rides WITH
+    // the list so it only spans the labels (no rail above the first / below
+    // the last). Offset by the nav's padding so it sits on the left edge.
+    &::before {
+      content: "";
+      position: absolute;
+      left: -36px;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: rgba(255, 255, 255, 0.22);
+      z-index: 1;
+    }
+  }
+
+  &__nav-link {
+    position: relative;
+    font-family: "TT Norms Pro", var(--font-display);
+    font-size: 15px;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #fff;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+
+    // LONG ruler tick — centred on the label at the rail.
+    &::before {
+      content: "";
+      position: absolute;
+      left: -36px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.22);
+      z-index: 2;
+    }
+
+    // SHORT ruler tick — sits midway in the gap below each label (skipped on
+    // the last item). Long + short alternate → 13 ticks for the 7 labels.
+    &:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      left: -36px;
+      top: calc(100% + 11px); // gap is 22px → halfway down
+      transform: translateY(-50%);
+      width: 13px;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.22);
+      z-index: 2;
+    }
+
+    &:hover {
+      opacity: 0.55;
+    }
+
+    &--active,
+    &.active {
+      opacity: 1;
+      font-weight: 700;
+    }
+  }
+
+  /* ---------- CENTER · image stage ---------- */
+  // Shared so the text column can sit a fixed gap to the right of the frame.
+  $stage-left: 18%;
+  $stage-width: min(552px, 44vw); // design frame is 552px wide
+  $text-gap: 96px;
+
+  &__stage {
+    position: absolute;
+    left: $stage-left;
+    top: 50%;
+    transform: translateY(-50%);
+    width: $stage-width;
+    height: min(740px, 88vh);
+    z-index: 2;
+    // Design spec: padded, centred column frame.
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--item-spacing-8_87, 8.87px);
+    border: var(--altcha-border-width, 1px) solid
+      var(--color-azure-1832, rgba(27, 37, 64, 0.32));
+    background: var(--color-white-0, rgba(255, 255, 255, 0));
+
+    // Tablet & phone — image moves to the UPPER area so the text sits below
+    // it (single-column stack, no overlap, nav hidden).
+    @include respond-to(md) {
+      left: 50%;
+      top: 29%;
+      transform: translate(-50%, -50%);
+      width: 80vw;
+      height: 42vh;
+    }
+
+    @include respond-to(sm) {
+      top: 30%;
+      width: 88vw;
+      height: 34vh;
+    }
+  }
+
+  &__frame {
+    @include corner-svg(5.55px);
+    position: relative;
+    width: 100%;
+    flex: 1 1 auto; // fill the padded stage, so the artwork scales up with it
+    min-height: 0;
+    overflow: hidden; // crops the artwork; the corner marks are a background, so they stay
+  }
+
+  &__img {
+    position: absolute;
+    inset: 0;
+    background-position: center;
+    background-repeat: no-repeat;
+    will-change: clip-path;
+    width: 545px;
+    border-radius: 30px;
+    padding: 20px;
+  }
+
+  // Video layer (e.g. AI Cinematic) — fit like a `contain` background image.
+  &__img--video {
+    width: 100%;
+    object-fit: contain;
+    border-radius: 30px;
+    padding: 20px;
+  }
+
+  // On tablet & phone the frame is smaller than the 545px artwork. Scale the
+  // image to fit with breathing room (padding insets the contain area, so the
+  // character sits at a comfortable ~75% of the frame, centred — not oversized).
+  @include respond-to(md) {
+    &__img {
+      width: 100%;
+      background-size: contain;
+      background-origin: content-box;
+      padding: 9% 11%;
+    }
+    &__img--video {
+      height: 100%;
+      padding: 9% 11%;
+    }
+  }
+
+  /* ---------- RIGHT · text column (sits ~120px right of the frame) ---------- */
+  &__texts {
+    position: absolute;
+    left: calc(#{$stage-left} + #{$stage-width} + #{$text-gap});
+    top: 0;
+    height: 100%;
+    width: min(420px, 28vw);
+    z-index: 3;
+    overflow: hidden;
+
+    // Lower band, beneath the image (tablet & phone stacked layout).
+    @include respond-to(md) {
+      left: 8vw;
+      width: 84vw;
+      top: 50%;
+      height: 48%;
+    }
+
+    @include respond-to(sm) {
+      left: 7vw;
+      width: 86vw;
+      top: 52%;
+      height: 46%;
+    }
+  }
+
+  &__text {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    will-change: transform;
+
+    @include respond-to(md) {
+      justify-content: flex-start;
+    }
+  }
+
+  &__title {
+    font-family: var(--font-mono); // Doto (dotted)
+    font-weight: var(--fw-bold);
+    font-size: clamp(32px, 3.4vw, 50px);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #fff;
+    font-style: normal;
+    font-weight: 200;
+    line-height: 110%;
+    overflow-wrap: normal; // wrap only at spaces — never mid-word
+
+    // Stacked layout has the full column width, so the title can stay large.
+    @include respond-to(md) {
+      font-size: clamp(30px, 5vw, 46px);
+      letter-spacing: 0.06em;
+    }
+    @include respond-to(sm) {
+      font-size: clamp(28px, 8vw, 40px);
+    }
+  }
+
+  &__desc {
+    @include type-body;
+    margin-top: 22px;
+    max-width: 330px;
+
+    color: var(--color-grey-9464, rgba(224, 246, 255, 0.64));
+
+    font-family: var(--font-family-Font-1, Inter);
+    font-size: 13.6px;
+    font-style: normal;
+    font-weight: var(--font-weight-400, 400);
+    line-height: var(--line-height-24, 24px);
+
+    @include respond-to(md) {
+      margin-top: 16px;
+      font-size: 14px;
+    }
+    @include respond-to(sm) {
+      margin-top: 14px;
+      font-size: 14px;
+      max-width: none;
+    }
+  }
+
+  &__checklist {
+    margin-top: 38px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+
+    @include respond-to(md) {
+      margin-top: 24px;
+      gap: 10px;
+    }
+    @include respond-to(sm) {
+      margin-top: 20px;
+      gap: 10px;
+    }
+  }
+
+  &__check {
+    @include corner-svg(5.55px);
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 16px;
+    border: 1px solid rgba(27, 37, 64, 0.32);
+    background-color: rgba(255, 255, 255, 0);
+    font-family: var(--font-body);
+    color: var(--color-grey-9464, rgba(224, 246, 255, 0.64));
+    font-size: 12.2px;
+    font-style: normal;
+    font-weight: var(--font-weight-400, 400);
+    line-height: var(--line-height-20, 20px); /* 163.934% */
+
+    @include respond-to(md) {
+      padding: 12px 14px;
+      font-size: 13px;
+    }
+    @include respond-to(sm) {
+      padding: 11px 13px;
+      font-size: 13px;
+      gap: 10px;
+    }
+  }
+
+  &__check-icon {
+    flex: 0 0 auto;
+    width: 18px;
+    height: 18px;
+    display: grid;
+    place-items: center;
+
+    svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: #7b5cff;
+      stroke-width: 1.6;
+      stroke-linecap: round;
+    }
+  }
+
+  &__supported {
+    @include corner-svg(5.55px);
+    margin-top: 26px;
+    padding: 22px 18px;
+    border: 1px solid rgba(27, 37, 64, 0.32);
+    background-color: rgba(255, 255, 255, 0);
+
+    @include respond-to(md) {
+      margin-top: 18px;
+      padding: 16px 16px;
+    }
+    // Drop the "supported by" panel on phones to keep the slide compact.
+    @include respond-to(sm) {
+      display: none;
+    }
+  }
+
+  &__supported-label {
+    font-family: var(--font-body);
+    letter-spacing: 0.12em;
+    margin-bottom: 12px;
+    color: var(--color-grey-9464, rgba(224, 246, 255, 0.64));
+    font-size: 12.2px;
+    font-style: normal;
+    font-weight: var(--font-weight-400, 400);
+    line-height: var(--line-height-20, 20px); /* 163.934% */
+  }
+
+  &__supported-logos {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  &__supported-img {
+    display: block;
+    height: 20px;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+  }
+}

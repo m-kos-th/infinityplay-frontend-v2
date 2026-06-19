@@ -1,0 +1,224 @@
+// ============================================================
+// sections/_hero.scss
+// ============================================================
+
+.hero {
+  position: relative;
+  z-index: 2;
+  isolation: isolate;
+  min-height: calc(100svh);
+  overflow: hidden;
+  background: #010216;
+
+  &:after{
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(0deg, #010216 0%, rgba(1, 2, 22, 0.00) 100%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  &__media {
+    @include fill;
+  }
+
+  &__nav-echo {
+    position: absolute;
+    top: 28px;
+    left: 28px;
+    z-index: 4;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    color: var(--color-white);
+    pointer-events: none;
+    filter: drop-shadow(0 18px 34px rgba(0, 0, 0, 0.18));
+
+    .site-nav__toggle,
+    .site-nav__brand,
+    .site-nav__emblem {
+      background: transparent;
+      box-shadow: none;
+    }
+  }
+
+  &__nav-row {
+    display: flex;
+    align-items: stretch;
+  }
+
+  &__video {
+    @include fill;
+    --hero-video-flip: 1;
+    --hero-video-scale: 1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    transform: scaleX(var(--hero-video-flip)) scale(var(--hero-video-scale));
+    transform-origin: center;
+  }
+
+  &__video--shadow {
+    --hero-video-flip: -1;
+    z-index: 1;
+    mix-blend-mode: screen;
+  }
+
+  &__backdrop,
+  &__vignette,
+  &__glow {
+    @include fill;
+    pointer-events: none;
+  }
+
+  &__vignette {
+    z-index: 3;
+    background:
+      radial-gradient(
+        circle at 52% 48%,
+        rgba(126, 204, 255, 0.09),
+        transparent 16%
+      ),
+      radial-gradient(circle at 50% 90%, rgba(0, 0, 0, 0.58), transparent 38%),
+      radial-gradient(circle at 100% 50%, rgba(2, 4, 9, 0.62), transparent 22%);
+  }
+
+  &__glow--top {
+    z-index: 3;
+    background: radial-gradient(
+      circle at 23% 9%,
+      rgba(189, 232, 255, 0.22),
+      transparent 36%
+    );
+  }
+
+  &__glow--focus {
+    z-index: 3;
+    background: radial-gradient(
+      circle at 58% 48%,
+      rgba(74, 168, 255, 0.12),
+      transparent 12%
+    );
+  }
+
+  &__inner {
+    position: relative;
+    min-height: calc(100svh - 20px);
+    display: flex;
+    align-items: flex-end;
+    padding: clamp(132px, 16vw, 160px) clamp(24px, 5vw, 72px)
+      clamp(42px, 7vw, 72px);
+    mix-blend-mode: difference;
+    z-index: 2;
+  }
+
+  &__copy {
+    display: flex;
+    width: min(100%, 500px);
+    flex-direction: column;
+    align-items: flex-start;
+    mix-blend-mode: difference;
+  }
+
+  &__title {
+    font-family: var(--font-display);
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: #fff;
+    leading-trim: both;
+    text-edge: cap;
+    mix-blend-mode: difference;
+  }
+
+  &__rule {
+    display: none;
+  }
+
+  &__description {
+    width: 100%;
+    padding-top: 40px;
+    margin-top: 40px;
+    border-top: 1px solid rgba(209, 209, 209, 0.2);
+    font-family: var(--font-body);
+    font-size: 14.6px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    color: var(--color-white-70);
+  }
+
+  @include respond-to(md) {
+    min-height: calc(100svh - 16px);
+    &__nav-echo {
+      top: 20px;
+      left: 20px;
+    }
+
+    &__inner {
+      min-height: calc(100svh - 16px);
+      padding-top: 128px;
+      padding-left: 28px;
+      padding-right: 28px;
+      padding-bottom: 42px;
+    }
+
+    &__video {
+      object-position: 60% center;
+    }
+
+    &__title {
+      font-size: 38px;
+    }
+
+    &__description {
+      font-size: 14.6px;
+    }
+  }
+
+  @include respond-to(sm) {
+    min-height: calc(100svh - 12px);
+    border-radius: 22px;
+    margin: 6px;
+
+    &__nav-echo {
+      top: 16px;
+      left: 16px;
+    }
+
+    &__inner {
+      min-height: calc(100svh - 12px);
+      align-items: flex-end;
+      padding: 118px 20px 28px;
+    }
+
+    &__video {
+      object-position: 64% center;
+      --hero-video-scale: 1.12;
+    }
+
+    &__title {
+      @include fluid-type(32px, 40px, 320px, 680px);
+    }
+
+    &__description {
+      font-size: 15px;
+      line-height: 1.7;
+      padding-top: 28px;
+    }
+  }
+
+  @include no-motion {
+    &__video {
+      display: none;
+    }
+  }
+}

@@ -1,0 +1,362 @@
+@mixin font-face($fonts, $path: null) {
+    @if ($path) {
+        $path: $path;
+    }
+
+    @else {
+        $path: '../../fonts/';
+    }
+
+    @each $key,
+    $font in $fonts {
+        @font-face {
+            font-family: '#{ $font }';
+            src: url($path + $font + '.eot');
+            src: url($path + $font + '.eot') format('embedded-opentype'),
+                url($path + $font + '.woff') format('woff'),
+                url($path + $font + '.woff2') format('woff2'),
+                url($path + $font + '.ttf') format('truetype'),
+                url($path + $font + '.svg#' + $font) format('svg');
+            font-weight: normal;
+            font-style: normal;
+        }
+    }
+}
+
+
+@mixin extend-fonts($fonts-en, $fonts-th, $lang: 'th') {
+    @if ($fonts-en) {
+
+        @each $key,
+        $font in $fonts-en {
+            %#{$key} {
+                font-family: map-get($fonts-en, $key), ' Arial, sans-serif';
+                font-weight: normal;
+                font-style: normal;
+
+                @if ($fonts-th) {
+                    :lang(#{$lang}) & {
+                        @if ($fonts-th) {
+                            font-family: map-get($fonts-th, $key), ' Arial, sans-serif';
+                        }
+
+                        @else {
+                            font-family: 'Arial, sans-serif';
+                        }
+
+                        font-weight: normal;
+                        font-style: normal;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@mixin font-family($name: 'Helvetica, Arial, sans-serif') {
+    font-family: $name, 'Helvetica, Arial, sans-serif';
+    font-weight: normal;
+    font-style: normal;
+}
+
+@mixin flex($display: null, $justify: null, $align: null, $wrap: null, $direction: null) {
+    @if ($display ==flex) {
+        display: $display;
+        display: -webkit- + $display;
+    }
+
+    @else {
+        display: $display;
+        justify-content: inherit;
+        -webkit-justify-content: inherit;
+        align-items: inherit;
+        -webkit-align-items: inherit;
+        flex-wrap: $wrap;
+        -webkit-flex-wrap: inherit;
+        flex-direction: inherit;
+        -webkit-flex-direction: inherit;
+    }
+
+    @if ($justify) {
+        justify-content: $justify;
+        -webkit-justify-content: $justify;
+    }
+
+    @if ($align) {
+        align-items: $align;
+        -webkit-align-items: $align;
+    }
+
+    @if ($wrap) {
+        flex-wrap: $wrap;
+        -webkit-flex-wrap: $wrap;
+    }
+
+    @if ($direction) {
+        flex-direction: $direction;
+        -webkit-flex-direction: $direction;
+    }
+}
+
+@mixin container-padding ($width: 1270px, $side: null) {
+    @if $side ==left {
+        padding-left: calc((100vw - #{$width})/2);
+    }
+
+    @if $side ==right {
+        padding-right: calc((100vw - #{$width})/2);
+    }
+}
+
+@mixin header {
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        @content;
+    }
+}
+
+@mixin font-icomoon($content: null) {
+    content: $content;
+    display: inline-block;
+    font-family: "icomoon" !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+}
+
+@mixin font-awesome($content: null) {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    content: $content;
+}
+
+@mixin filter($percent) {
+    -webkit-filter: grayscale($percent);
+    filter: grayscale($percent);
+}
+
+@mixin transform($property) {
+    -webkit-transform: $property;
+    -moz-transform: $property;
+    -ms-transform: $property;
+    -o-transform: $property;
+    transform: $property;
+}
+
+@mixin transition($property...) {
+    -webkit-transition: $property;
+    -moz-transition: $property;
+    -ms-transition: $property;
+    -o-transition: $property;
+    transition: $property;
+}
+
+@mixin transition-delay($property: 0s) {
+    -webkit-transition-delay: $property;
+    -moz-transition-delay: $property;
+    -ms-transition-delay: $property;
+    -o-transition-delay: $property;
+    transition-delay: $property;
+}
+
+@mixin transform-origin($property: center) {
+    -webkit-transform-origin: $property;
+    -moz-transform-origin: $property;
+    -ms-transform-origin: $property;
+    -o-transform-origin: $property;
+    transform-origin: $property;
+}
+
+@mixin keyframes($name) {
+    @-webkit-keyframes #{$name} {
+        @content;
+    }
+
+    @keyframes #{$name} {
+        @content;
+    }
+}
+
+@mixin animation($property) {
+    -webkit-animation: $property;
+    animation: $property;
+}
+
+@mixin placeholder {
+    &::-webkit-input-placeholder {
+        @content;
+    }
+
+    &:-moz-placeholder {
+        @content;
+    }
+
+    &::-moz-placeholder {
+        @content;
+    }
+
+    &:-ms-input-placeholder {
+        @content;
+    }
+}
+
+@mixin class-transition-delay($amout: 1, $delay: .1, $name: 'transition-delay') {
+    @for $i from 1 through $amout {
+        .#{$name}-#{$i} {
+            @include transition-delay(#{$delay*$i}s);
+        }
+    }
+}
+
+@mixin line-clamp ($line: 1) {
+    display: -webkit-box;
+    -webkit-line-clamp: $line;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+@mixin filter($style) {
+    filter: $style;
+    -webkit-filter: $style;
+}
+
+@mixin animation($property) {
+    -webkit-animation: $property;
+    animation: $property;
+}
+
+@mixin animation-delay($property) {
+    -webkit-animation-delay: $property;
+    animation-delay: $property;
+}
+
+@mixin type-title {
+    font-family: var(--font-display);
+    font-size: var(--fs-title);
+    font-weight: var(--fw-bold);
+    line-height: var(--lh-title);
+    letter-spacing: var(--ls-title);
+    text-transform: uppercase;
+    color: var(--color-white);
+}
+
+@mixin type-body {
+    font-family: var(--font-body);
+    font-size: var(--fs-body);
+    font-weight: var(--fw-regular);
+    line-height: var(--lh-body);
+    color: var(--color-white-70);
+}
+
+@mixin type-label {
+    font-family: var(--font-body);
+    font-size: var(--fs-label);
+    font-weight: var(--fw-regular);
+    line-height: var(--lh-label);
+    color: var(--color-grey-9464);
+}
+
+@mixin fluid-type($min-size, $max-size, $min-vw: 360px, $max-vw: 1440px) {
+    font-size: clamp(#{$min-size}, #{$min-size} + (#{$max-size} - #{$min-size}) * ((100vw - #{$min-vw}) / (#{$max-vw} - #{$min-vw})), #{$max-size});
+}
+
+@mixin corner-brackets($color: rgba(255, 255, 255, 0.5), $size: 10px, $border: 1px) {
+    position: relative;
+
+    &::before,
+    &::after {
+        content: '';
+        position: absolute;
+        width: $size;
+        height: $size;
+        border: $border solid $color;
+    }
+
+    &::before {
+        top: -1px;
+        left: -1px;
+        border-right: none;
+        border-bottom: none;
+    }
+
+    &::after {
+        right: -1px;
+        bottom: -1px;
+        border-top: none;
+        border-left: none;
+    }
+}
+
+@mixin corner-frame($color: rgba(255, 255, 255, 0.4), $len: 14px, $thick: 1px) {
+    background-image:
+        linear-gradient($color, $color), linear-gradient($color, $color),
+        linear-gradient($color, $color), linear-gradient($color, $color),
+        linear-gradient($color, $color), linear-gradient($color, $color),
+        linear-gradient($color, $color), linear-gradient($color, $color);
+    background-repeat: no-repeat;
+    background-size:
+        $len $thick, $thick $len,
+        $len $thick, $thick $len,
+        $len $thick, $thick $len,
+        $len $thick, $thick $len;
+    background-position:
+        top left, top left,
+        top right, top right,
+        bottom left, bottom left,
+        bottom right, bottom right;
+}
+
+@mixin corner-svg($size: 14px) {
+    background-image:
+        url("../svg/service-border/service-border-3.svg"),
+        url("../svg/service-border/service-border-2.svg"),
+        url("../svg/service-border/service-border-1.svg"),
+        url("../svg/service-border/service-border.svg");
+    background-repeat: no-repeat;
+    background-size: $size $size;
+    background-position: top left, top right, bottom left, bottom right;
+}
+
+@mixin fill {
+    position: absolute;
+    inset: 0;
+}
+
+@mixin glass($alpha: 0.55) {
+    background: rgba(10, 16, 46, $alpha);
+    border: 1px dashed rgba(255, 255, 255, 0.22);
+}
+
+@mixin respond-to($bp) {
+    @if $bp == md {
+        @media (max-width: $bp-md) {
+            @content;
+        }
+    } @else if $bp == sm {
+        @media (max-width: $bp-sm) {
+            @content;
+        }
+    } @else {
+        @media (max-width: $bp) {
+            @content;
+        }
+    }
+}
+
+@mixin no-motion {
+    @media (prefers-reduced-motion: reduce) {
+        @content;
+    }
+}

@@ -1,0 +1,266 @@
+// ============================================================
+// sections/_work.scss — Stacked work cards
+// GSAP ScrollTrigger pins each project card when it reaches
+// the top of the viewport, then releases it as the next card arrives.
+// ============================================================
+
+.work {
+  position: relative;
+  background: #fff;
+  z-index: 2;
+  margin-top: -33%;
+  overflow: hidden;
+
+  // Fade-in gradient over the about section below
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 15%;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0) 0%,
+      #fff 60%,
+      #fff 100%
+    );
+    top: -15%;
+  }
+
+  &__pin {
+    position: relative;
+  }
+
+  &__grid-wrapper {
+    position: relative;
+  }
+
+  &__grid {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    height: auto;
+    min-height: 100vh;
+    background: #fff;
+    border-bottom: 1px solid $line;
+    isolation: isolate;
+    overflow: clip;
+
+    &:first-child {
+      border-top: 1px solid $line;
+    }
+
+    &[data-index="0"] {
+      z-index: 1;
+    }
+
+    &[data-index="1"] {
+      z-index: 2;
+    }
+
+    &[data-index="2"] {
+      z-index: 3;
+    }
+
+    &[data-index="3"] {
+      z-index: 4;
+    }
+  }
+
+  // ── Game screenshot image ──────────────────────────────────
+  &__image {
+    width: min(28.1875vw, 451px);
+    height: 100%;
+    min-height: 100vh;
+    flex-shrink: 0;
+    background-size: cover;
+    background-position: center top;
+    position: relative;
+    overflow: hidden;
+
+    &--dawn {
+      background-image: url("../../images/work-dawn.webp");
+    }
+    &--trick {
+      background-image: url("../../images/work-trick.webp");
+    }
+    &--outlanders {
+      .work__video {
+        object-position: 80% 0;
+      }
+    }
+    &--umt {
+      .work__video {
+        object-position: 0 0;
+        scale: 1.5;
+      }
+    }
+    // --outlanders and --umt use <video> — no background-image needed
+  }
+
+  // ── In-grid video (Outlanders, UMT) ───────────────────────
+  &__video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  // ── Content column — always vertically centred ─────────────
+  &__content {
+    display: flex;
+    position: relative;
+    flex: 1;
+    width: auto;
+    min-width: 0;
+    height: 100%;
+    min-height: 100vh;
+    padding: 0;
+    justify-content: stretch;
+    align-items: stretch;
+    flex-shrink: 0;
+    text-align: center;
+    border-left: 1px solid $line;
+    border-right: 1px solid $line;
+    background: #fff;
+
+    &-inner {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      height: 100%;
+      width: 100%;
+      padding: clamp(72px, 7vw, 96px) clamp(32px, 4vw, 74px) 64px;
+      background: #fff;
+    }
+
+    @include respond-to(sm) {
+      width: 100%;
+      height: auto;
+      min-height: 0;
+      border: none;
+    }
+  }
+
+  // ── Dot-pattern decorative column ─────────────────────────
+  &__bg-pattern {
+    width: min(28.125vw, 450px);
+    height: 640px;
+    flex-shrink: 0;
+    background-color: #fff;
+    background-image: radial-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+    background-size: 6px 6px;
+
+    @include respond-to(sm) {
+      display: none;
+    }
+  }
+
+  // ── Scroll counter (bottom-right) ──────────────────────────
+  &__counter {
+    position: absolute;
+    bottom: clamp(24px, 4vh, 40px);
+    right: clamp(20px, 3vw, 48px);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: var(--fw-light);
+    letter-spacing: 0.18em;
+    color: rgba(0, 0, 0, 0.28);
+    pointer-events: none;
+    user-select: none;
+    opacity: 0; // initially hidden, shown when JS initializes
+  }
+
+  &__counter-sep {
+    opacity: 0.45;
+  }
+
+  // ── Project logo ───────────────────────────────────────────
+  &__logo {
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 36px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: min(300px, 80%);
+
+    &--dawn {
+      background-image: url("../../images/logo-dawn.webp");
+    }
+    &--trick {
+      background-image: url("../../images/logo-trick.webp");
+    }
+    &--outlanders {
+      background-image: url("../../images/logo-outlanders.webp");
+    }
+    &--umt {
+      background-image: url("../../images/logo-umt.webp");
+    }
+  }
+
+  // Fallback text logos (shown when image fails or for screen readers)
+  &__logo-fallback {
+    font-weight: 900;
+    letter-spacing: 0.04em;
+    font-size: 54px;
+    line-height: 0.95;
+    text-transform: uppercase;
+    font-family: var(--font-body);
+    opacity: 0; // hidden — logo image is the primary display
+
+    &--dawn {
+      color: #e02020;
+    }
+    &--trick {
+      color: #d2491d;
+      -webkit-text-stroke: 2px #221408;
+      text-shadow: 0 4px 0 #c9b896;
+    }
+    &--outlanders {
+      color: #9aa3ad;
+      font-weight: 600;
+      letter-spacing: 0.35em;
+    }
+    &--umt {
+      color: #aab4c4;
+      font-style: italic;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+    }
+  }
+
+  // ── Description & CTA ─────────────────────────────────────
+  &__slide-description {
+    color: #5d626d;
+    font-size: 15px;
+    line-height: 1.65;
+    margin-bottom: 36px;
+  }
+
+  @include respond-to(sm) {
+    &__grid {
+      flex-direction: column;
+      height: auto;
+      min-height: 100svh;
+    }
+
+    &__image {
+      width: 100%;
+      height: min(52svh, 420px);
+    }
+
+    &__content-inner {
+      padding: 36px 28px 44px;
+    }
+  }
+}

@@ -1,0 +1,185 @@
+@import "base";
+@import "abstracts";
+
+@import "components/button";
+@import "components/form";
+@import "components/card";
+
+@import "layout/header";
+@import "layout/footer";
+@import "layout/article";
+
+html {
+    min-height: 100%;
+}
+
+body {
+    background-color: transparent;
+    // background-color: $color-black-1;
+    color: $color-black-1;
+    @extend %font-main-roman, %font-size-normal;
+
+    &.menu-active {
+        overflow: hidden;
+    }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+strong,
+label {
+    @extend %font-main-black;
+}
+
+a,
+button,
+.btn {
+
+    &:link,
+    &:active,
+    &:visited,
+    &:focus,
+    &:hover {
+        outline: none;
+        text-decoration: none;
+        box-shadow: none;
+    }
+}
+
+a,
+button,
+.btn {
+    @extend %transition;
+
+    &:link,
+    &:active,
+    &:visited,
+    &:focus,
+    &:hover {
+        @extend %transition;
+    }
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+
+    &[data-src] {
+        opacity: 0;
+    }
+}
+
+.lazy {
+    background-color: transparent;
+}
+
+.background {
+    &-cover {
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+
+        .mode-edit & {
+            background-image: none !important;
+        }
+
+        img {
+            opacity: 0;
+
+            .mode-edit & {
+                opacity: 1;
+            }
+        }
+
+        &.fixed {
+            background-attachment: fixed;
+
+            .mode-edit & {
+                background-attachment: inherit;
+            }
+
+            @media (max-width: 1100px) {
+                background-attachment: inherit;
+            }
+        }
+    }
+}
+
+.main {
+    &-header {
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 9;
+
+        .mode-login & {
+            top: 48px;
+        }
+
+        .mode-edit & {
+            position: inherit;
+            top: auto;
+            left: auto;
+            z-index: auto;
+        }
+    }
+
+    &-footer {}
+
+    &-article {
+        padding-top: 72px;
+        min-height: 100vh;
+
+        .mode-edit & {
+            padding-top: 0;
+        }
+    }
+
+    &-section {}
+}
+
+
+@include keyframes (swig) {
+
+    0%,
+    100% {
+        animation-timing-function: cubic-bezier(0.5, 0, 1, 0.5);
+    }
+
+    0% {
+        @include transform(translateY(-3px));
+    }
+
+    // 50% { @include transform(rotateY(1800deg)); animation-timing-function: cubic-bezier(0, 0.5, 0.5, 1); }
+    100% {
+        @include transform(translateY(3px));
+    }
+}
+
+.animate {
+    &-swig {
+        @include animation(swig 2s linear infinite alternate);
+    }
+
+    &-delay {
+        &__1 {
+            @include animation-delay(1s);
+        }
+
+        &__2 {
+            @include animation-delay(2s);
+        }
+
+        &__3 {
+            @include animation-delay(3s);
+        }
+
+        &__4 {
+            @include animation-delay(4s);
+        }
+    }
+}

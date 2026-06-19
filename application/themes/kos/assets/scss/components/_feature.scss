@@ -1,0 +1,58 @@
+// ============================================================
+// components/_feature.scss — Feature row (glass card)
+// ============================================================
+
+.feature {
+  @include glass(0.55);
+  @include corner-brackets(rgba(255,255,255,.5), 8px, 1px);
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 18px;
+  @include type-body;
+  color: #dfe5f5;
+
+  &__icon {
+    width: 16px;
+    height: 16px;
+    flex: none;
+
+    stroke: var(--color-azure);
+    fill: none;
+  }
+
+  & + & {
+    margin-top: 8px;
+  }
+}
+
+// Feature list wrapper
+.feature-list {
+  margin-top: 26px;
+}
+
+// Supported-by box
+.supported {
+  @include glass(0.55);
+  margin-top: 26px;
+  padding: 18px;
+  border: 1px dashed rgba(255,255,255,.22);
+
+  &__label {
+    @include type-label;
+    color: #aeb6cc;
+    margin-bottom: 12px;
+  }
+
+  &__logos {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    font-family: var(--font-body);
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    font-size: 14px;
+    color: #e8edf8;
+  }
+}

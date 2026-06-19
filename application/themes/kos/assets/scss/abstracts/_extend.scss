@@ -1,0 +1,204 @@
+$width-container: 1440px;
+$width-container-1500: 1114px;
+$width-container-767: 100%;
+
+$padding-container: calc((100vw - #{$width-container}) / 2);
+$padding-container-1500: calc((100vw - #{$width-container-1500}) / 2);
+$padding-container-1370: 12px;
+$padding-container-767: 30px;
+
+%font-default {
+  font-style: normal;
+
+  &-main {
+    font-family: $font-family-main;
+  }
+}
+
+
+%font {
+  &-main {
+    &-thin {
+      font-weight: 100;
+      @extend %font-default, %font-default-main;
+    }
+
+    &-extralight {
+      font-weight: 200;
+      @extend %font-default, %font-default-main;
+    }
+
+    &-light {
+      font-weight: 300;
+      @extend %font-default, %font-default-main;
+    }
+
+    &-regular {
+      font-weight: 400;
+      @extend %font-default, %font-default-main;
+    }
+
+    &-medium {
+      font-weight: 500;
+      @extend %font-default, %font-default-main;
+    }
+
+    &-semibold {
+      font-weight: 600;
+      @extend %font-default, %font-default-main;
+    }
+
+    &-bold {
+      font-weight: 700;
+      @extend %font-default, %font-default-main;
+    }
+
+    &-extrabold {
+      font-weight: 800;
+      @extend %font-default, %font-default-main;
+    }
+
+    &-black {
+      font-weight: 900;
+      @extend %font-default, %font-default-main;
+    }
+  }
+
+  &-size {
+    &-hero {
+      font-size: 96px;
+      line-height: 96px;
+    }
+
+    &-h1 {
+      font-size: 64px;
+      line-height: 64px;
+    }
+
+    &-h2 {
+      font-size: 48px;
+      line-height: 56px;
+    }
+
+    &-h3 {
+      font-size: 40px;
+      line-height: 48px;
+    }
+
+    &-h4 {
+      font-size: 32px;
+      line-height: 40px;
+    }
+
+    &-h5 {
+      font-size: 24px;
+      line-height: 32px;
+    }
+
+    &-body {
+      &-1 {
+        font-size: 24px;
+        line-height: 32px;
+      }
+
+      &-2 {
+        font-size: 16px;
+        line-height: 24px;
+      }
+    }
+
+    &-caption {
+      &-1 {
+        font-size: 14px;
+        line-height: 24px;
+      }
+
+      &-2 {
+        font-size: 12px;
+        line-height: 20px;
+      }
+    }
+
+    &-line {
+      &-1 {
+        font-size: 16px;
+        line-height: 1;
+      }
+
+      &-2 {
+        font-size: 12px;
+        line-height: 1;
+      }
+    }
+
+    &-button {
+      &-1 {
+        font-size: 14px;
+        line-height: 16px;
+      }
+
+      &-2 {
+        font-size: 12px;
+        line-height: 16px;
+      }
+    }
+  }
+}
+
+%header-size {
+  h1 {
+    @extend %font-size-h1;
+  }
+
+  h2 {
+    @extend %font-size-h2;
+  }
+
+  h3 {
+    @extend %font-size-h3;
+  }
+
+  h4 {
+    @extend %font-size-h4;
+  }
+
+  h5 {
+    @extend %font-size-h5;
+  }
+}
+
+%transition {
+  @include transition(all 0.3s);
+
+  &-style-1 {
+    @include transition(all 0.45s cubic-bezier(0.76, 0, 0.24, 1));
+  }
+
+  &-style-2 {
+    @include transition(all 0.45s cubic-bezier(0.68, -0.6, 0.32, 1.6));
+  }
+}
+
+%padding-container-left {
+  padding-left: $padding-container;
+
+  @media (max-width: 1699px) {
+    padding-left: $padding-container-1500;
+  }
+
+  @media (max-width: 1370px) {
+    padding-left: $padding-container-1370;
+  }
+}
+
+%padding-container-right {
+  padding-right: $padding-container;
+
+  @media (max-width: 1699px) {
+    padding-right: $padding-container-1500;
+  }
+
+  @media (max-width: 1370px) {
+    padding-right: $padding-container-1370;
+  }
+}

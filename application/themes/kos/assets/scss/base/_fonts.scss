@@ -1,0 +1,160 @@
+@font-face {
+  font-family: 'Prompt';
+  src: url('../fonts/prompt/Prompt-Thin.eot');
+  src: url('../fonts/prompt/Prompt-Thin.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/prompt/Prompt-Thin.woff2') format('woff2'),
+    url('../fonts/prompt/Prompt-Thin.woff') format('woff'),
+    url('../fonts/prompt/Prompt-Thin.ttf') format('truetype'),
+    url('../fonts/prompt/Prompt-Thin.svg#Prompt-Thin') format('svg');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Prompt';
+  src: url('../fonts/prompt/Prompt-ExtraLight.eot');
+  src: url('../fonts/prompt/Prompt-ExtraLight.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/prompt/Prompt-ExtraLight.woff2') format('woff2'),
+    url('../fonts/prompt/Prompt-ExtraLight.woff') format('woff'),
+    url('../fonts/prompt/Prompt-ExtraLight.ttf') format('truetype'),
+    url('../fonts/prompt/Prompt-ExtraLight.svg#Prompt-ExtraLight') format('svg');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Prompt';
+  src: url('../fonts/prompt/Prompt-Light.eot');
+  src: url('../fonts/prompt/Prompt-Light.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/prompt/Prompt-Light.woff2') format('woff2'),
+    url('../fonts/prompt/Prompt-Light.woff') format('woff'),
+    url('../fonts/prompt/Prompt-Light.ttf') format('truetype'),
+    url('../fonts/prompt/Prompt-Light.svg#Prompt-Light') format('svg');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Prompt';
+  src: url('../fonts/prompt/Prompt-Regular.eot');
+  src: url('../fonts/prompt/Prompt-Regular.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/prompt/Prompt-Regular.woff2') format('woff2'),
+    url('../fonts/prompt/Prompt-Regular.woff') format('woff'),
+    url('../fonts/prompt/Prompt-Regular.ttf') format('truetype'),
+    url('../fonts/prompt/Prompt-Regular.svg#Prompt-Regular') format('svg');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Prompt';
+  src: url('../fonts/prompt/Prompt-Medium.eot');
+  src: url('../fonts/prompt/Prompt-Medium.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/prompt/Prompt-Medium.woff2') format('woff2'),
+    url('../fonts/prompt/Prompt-Medium.woff') format('woff'),
+    url('../fonts/prompt/Prompt-Medium.ttf') format('truetype'),
+    url('../fonts/prompt/Prompt-Medium.svg#Prompt-Medium') format('svg');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Prompt';
+  src: url('../fonts/prompt/Prompt-SemiBold.eot');
+  src: url('../fonts/prompt/Prompt-SemiBold.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/prompt/Prompt-SemiBold.woff2') format('woff2'),
+    url('../fonts/prompt/Prompt-SemiBold.woff') format('woff'),
+    url('../fonts/prompt/Prompt-SemiBold.ttf') format('truetype'),
+    url('../fonts/prompt/Prompt-SemiBold.svg#Prompt-SemiBold') format('svg');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Prompt';
+  src: url('../fonts/prompt/Prompt-Bold.eot');
+  src: url('../fonts/prompt/Prompt-Bold.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/prompt/Prompt-Bold.woff2') format('woff2'),
+    url('../fonts/prompt/Prompt-Bold.woff') format('woff'),
+    url('../fonts/prompt/Prompt-Bold.ttf') format('truetype'),
+    url('../fonts/prompt/Prompt-Bold.svg#Prompt-Bold') format('svg');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Prompt';
+  src: url('../fonts/prompt/Prompt-ExtraBold.eot');
+  src: url('../fonts/prompt/Prompt-ExtraBold.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/prompt/Prompt-ExtraBold.woff2') format('woff2'),
+    url('../fonts/prompt/Prompt-ExtraBold.woff') format('woff'),
+    url('../fonts/prompt/Prompt-ExtraBold.ttf') format('truetype'),
+    url('../fonts/prompt/Prompt-ExtraBold.svg#Prompt-ExtraBold') format('svg');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Prompt';
+  src: url('../fonts/prompt/Prompt-Black.eot');
+  src: url('../fonts/prompt/Prompt-Black.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/prompt/Prompt-Black.woff2') format('woff2'),
+    url('../fonts/prompt/Prompt-Black.woff') format('woff'),
+    url('../fonts/prompt/Prompt-Black.ttf') format('truetype'),
+    url('../fonts/prompt/Prompt-Black.svg#Prompt-Black') format('svg');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'altervim';
+  src: url('../fonts/icons/altervim.eot?8j6c4b');
+  src: url('../fonts/icons/altervim.eot?8j6c4b#iefix') format('embedded-opentype'),
+    url('../fonts/icons/altervim.ttf?8j6c4b') format('truetype'),
+    url('../fonts/icons/altervim.woff?8j6c4b') format('woff'),
+    url('../fonts/icons/altervim.svg?8j6c4b#altervim') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"],
+[class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'altervim' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-altervim-arrow-down:before {
+  content: "\e900";
+}
+
+.icon-altervim-arrow-left:before {
+  content: "\e901";
+}
+
+.icon-altervim-arrow-right:before {
+  content: "\e902";
+}
+
+.icon-altervim-plus:before {
+  content: "\e903";
+}
