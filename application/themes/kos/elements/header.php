@@ -1,13 +1,11 @@
 <?php defined('C5_EXECUTE') or die("Access Denied.");
 $this->inc('elements/header_top.php');
 ?>
-<!-- Skip to main content (accessibility) -->
-<a class="sr-only" href="#main-content">Skip to main content</a>
 
 <!-- ══════════════════════════════════════════════════════════════
      NAVIGATION — Fixed top-left
 ══════════════════════════════════════════════════════════════ -->
-<header class="site-nav" role="banner">
+<div class="site-nav" role="banner" style="display: none;">
   <div class="site-nav__stack">
     <div class="site-nav__row">
       <button
@@ -37,6 +35,6 @@ $this->inc('elements/header_top.php');
     <a class="site-nav__link" href="#about">About</a>
     <a class="site-nav__link" href="#work">Work</a>
     <a class="site-nav__link" href="#services">Services</a>
-    <a class="site-nav__link" href="/contact">Contact</a>
+    <a class="site-nav__link" href="contact">Contact</a>
   </nav>
-</header>
+</div>

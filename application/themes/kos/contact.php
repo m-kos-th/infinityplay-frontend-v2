@@ -1,13 +1,5 @@
 <?php
 defined('C5_EXECUTE') or die('Access Denied.');
-require_once __DIR__ . '/elements/function.php';
-
-$pageTitle = 'Contact | Infinity Play';
-$pageDescription = 'Get in touch with Infinity Play about game development, 3D art, animation, VFX, Roblox, and AI cinematic production.';
-$shareTitle = $pageTitle;
-$shareDescription = 'Start a conversation with Infinity Play about your next game, art, animation, or technical production project.';
-$canonicalUrl = kos_absolute_url(kos_contact_url());
-$includeGsap = true;
 $this->inc('elements/header.php');
 ?>
 
@@ -20,45 +12,10 @@ $this->inc('elements/header.php');
     </div>
 
     <div class="contact__inner">
-      <div class="contact__info">
-        <h1 class="contact__title" id="contact-title">
-          Get In Touch<br>With Us
-        </h1>
-        <p class="contact__intro">
-          Send us an enquiry using the form here, or via email. Please note, our
-          phone lines are often busy and our team is working hard to answer all
-          calls.
-        </p>
-
-        <dl class="contact__details">
-          <div class="contact__row">
-            <dt class="contact__term">Email us</dt>
-            <dd class="contact__value">
-              <a href="mailto:info@infinityplay.com">info@infinityplay.com</a>
-            </dd>
-          </div>
-          <div class="contact__row">
-            <dt class="contact__term">Call us</dt>
-            <dd class="contact__value">
-              <a href="tel:+6620416049">+66 2 041 6049</a>
-            </dd>
-          </div>
-          <div class="contact__row">
-            <dt class="contact__term">Line @</dt>
-            <dd class="contact__value">
-              <a href="https://line.me/R/ti/p/@infinityplay" target="_blank" rel="noreferrer">@infinityplay</a>
-            </dd>
-          </div>
-          <div class="contact__row">
-            <dt class="contact__term">Address</dt>
-            <dd class="contact__value contact__value--address">
-              11/3 United Tower, 11th Fl., Soi 17 Thonglor<br>
-              Sukhumvit 55 Rd., Klongton Nua, Wattana,<br>
-              Bangkok 10110
-            </dd>
-          </div>
-        </dl>
-      </div>
+      <?php
+      $contactInfoArea = new Area('Contact Info');
+      $contactInfoArea->display($c);
+      ?>
 
       <form class="contact__form" aria-labelledby="contact-form-title" method="post">
         <h2 class="contact__form-title" id="contact-form-title">Let's Talk</h2>
