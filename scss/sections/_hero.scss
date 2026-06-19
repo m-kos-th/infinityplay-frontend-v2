@@ -19,6 +19,7 @@
     height: 100%;
     background: linear-gradient(0deg, #010216 0%, rgba(1, 2, 22, 0.00) 100%);
     pointer-events: none;
+    z-index: 1;
   }
 
   &__media {
@@ -113,7 +114,7 @@
     padding: clamp(132px, 16vw, 160px) clamp(24px, 5vw, 72px)
       clamp(42px, 7vw, 72px);
     mix-blend-mode: difference;
-    z-index: 1;
+    z-index: 2;
   }
 
   &__copy {
