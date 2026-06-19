@@ -1,6 +1,6 @@
 /**
  * main.js — InfinityPlay site interactions
- * Homepage requires: GSAP 3 + ScrollTrigger (loaded via CDN before this script)
+ * Marquee loops require GSAP 3. Homepage scroll scenes also require ScrollTrigger.
  */
 
 window.addEventListener('load', () => {
@@ -184,7 +184,27 @@ window.addEventListener('load', () => {
     });
   }
 
-  if (!window.gsap || !window.ScrollTrigger || !heroSection) {
+  if (!window.gsap) {
+    return;
+  }
+
+  /* ----------------------------------------------------------------
+   * MARQUEE — continuous loops
+   * dir: -1 = RTL scroll (element moves left), 1 = LTR
+   * ---------------------------------------------------------------- */
+  function loopMarquee(sel, seconds, dir = 1) {
+    const el = document.querySelector(sel);
+    if (!el || reduced) return;
+    gsap.set(el, { xPercent: dir === 1 ? -50 : 0 });
+    gsap.to(el, { xPercent: dir === 1 ? 0 : -50, duration: seconds, ease: 'none', repeat: -1 });
+  }
+
+  loopMarquee('#marquee-about', 38, -1);
+  loopMarquee('#marquee-work', 34, -1);
+  loopMarquee('#stats-track', 45, -1);
+  loopMarquee('#marquee-contact', 40, -1);
+
+  if (!window.ScrollTrigger || !heroSection) {
     return;
   }
 
@@ -204,21 +224,6 @@ window.addEventListener('load', () => {
       y: 24, opacity: 0, duration: 1, ease: 'power3.out', delay: 0.8,
     });
   }
-
-  /* ----------------------------------------------------------------
-   * MARQUEE — continuous loops
-   * dir: -1 = RTL scroll (element moves left), 1 = LTR
-   * ---------------------------------------------------------------- */
-  function loopMarquee(sel, seconds, dir = 1) {
-    const el = document.querySelector(sel);
-    if (!el || reduced) return;
-    gsap.set(el, { xPercent: dir === 1 ? -50 : 0 });
-    gsap.to(el, { xPercent: dir === 1 ? 0 : -50, duration: seconds, ease: 'none', repeat: -1 });
-  }
-
-  loopMarquee('#marquee-about', 38, -1);
-  loopMarquee('#marquee-work', 34, -1);
-  loopMarquee('#stats-track', 45, -1);
 
   /* ----------------------------------------------------------------
    * ABOUT — characters + content reveal
