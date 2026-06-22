@@ -1,9 +1,6 @@
 @import '../abstracts/variables';
 @import '../abstracts/mixin';
 
-@import 'sections/nav';
-@import 'sections/footer';
-
 // ============================================================
 // sections/_contact.scss
 // ============================================================
@@ -368,10 +365,6 @@ body.contact-page {
   select.contact__input {
     height: 46px;
     padding: 0 16px;
-  }
-
-  select.contact__input {
-    padding-left: 40px;
   }
 
   &__textarea {
