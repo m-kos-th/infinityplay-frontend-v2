@@ -12,7 +12,14 @@ body.contact-page {
   background: #010215;
 }
 
-h1, h2 {
+.contact {
+  position: relative;
+  z-index: 6;
+  overflow: hidden;
+  min-height: clamp(1160px, 82vw, 1360px);
+  background: #010215;
+
+  h1, h2 {
     font-family: var(--font-display);
     font-size: 21px;
     font-weight: 700;
@@ -20,13 +27,6 @@ h1, h2 {
     text-transform: uppercase;
     color: var(--color-white);
   }
-
-.contact {
-  position: relative;
-  z-index: 6;
-  overflow: hidden;
-  min-height: clamp(1160px, 82vw, 1360px);
-  background: #010215;
 
   &:before {
     content: "";
