@@ -173,6 +173,10 @@ body.contact-page {
     align-items: flex-start;
     gap: var(--measurements-gap-16, 16px);
     align-self: stretch;
+
+    p {
+      color: var(--text-base-static-white-secondary, rgba(255, 255, 255, 0.60));
+    }
   }
 
   &__form-copy {
