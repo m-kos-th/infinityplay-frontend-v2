@@ -5,7 +5,7 @@ $this->inc('elements/header_top.php');
 <!-- ══════════════════════════════════════════════════════════════
      NAVIGATION — Fixed top-left
 ══════════════════════════════════════════════════════════════ -->
-<div class="site-nav" role="banner" style="display: none;">
+<div class="site-nav" role="banner">
   <div class="site-nav__stack">
     <div class="site-nav__row">
       <button
@@ -31,10 +31,10 @@ $this->inc('elements/header_top.php');
     </a>
   </div>
   <nav class="site-nav__menu" id="main-menu" aria-label="Primary">
-    <a class="site-nav__link" href="#home">Home</a>
-    <a class="site-nav__link" href="#about">About</a>
-    <a class="site-nav__link" href="#work">Work</a>
-    <a class="site-nav__link" href="#services">Services</a>
-    <a class="site-nav__link" href="contact">Contact</a>
+    <a class="site-nav__link" href="/#home">Home</a>
+    <a class="site-nav__link" href="/#about">About</a>
+    <a class="site-nav__link" href="/#work">Work</a>
+    <a class="site-nav__link" href="/#services">Services</a>
+    <a class="site-nav__link" href="/contact">Contact</a>
   </nav>
 </div>
