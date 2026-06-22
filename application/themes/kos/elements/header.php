@@ -33,7 +33,7 @@ $this->inc('elements/header_top.php');
   <nav class="site-nav__menu" id="main-menu" aria-label="Primary">
     <a class="site-nav__link" href="/#home">Home</a>
     <a class="site-nav__link" href="/#about">About</a>
-    <a class="site-nav__link" href="/#work">Work</a>
+    <a class="site-nav__link" href="/working">Work</a>
     <a class="site-nav__link" href="/#services">Services</a>
     <a class="site-nav__link" href="/contact">Contact</a>
   </nav>
