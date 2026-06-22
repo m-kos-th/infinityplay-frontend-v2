@@ -1,0 +1,271 @@
+// ============================================================
+// sections/_work-detail.scss — Single project detail page
+// Hero key art + sticky title bar · sticky meta column +
+// scrolling gallery · story panel · project pager.
+// ============================================================
+
+.work-detail {
+  --wd-aside: 300px;
+  --wd-gap: clamp(32px, 4.5vw, 72px);
+  --wd-pad: clamp(20px, 5vw, 64px);
+  --wd-max: 1180px;
+
+  background: #fff;
+  color: $ink;
+  font-family: var(--font-body);
+
+  // ── Shared body / pager layout grid ────────────────────────
+  &__layout {
+    display: grid;
+    grid-template-columns: var(--wd-aside) minmax(0, 1fr);
+    gap: var(--wd-gap);
+    max-width: var(--wd-max);
+    margin: 0 auto;
+    padding: 0 var(--wd-pad);
+  }
+
+  &__body {
+    padding: clamp(36px, 5vw, 64px) 0;
+  }
+
+  // ── Sticky info column ─────────────────────────────────────
+  &__aside {
+    position: sticky;
+    top: 88px;
+    align-self: start;
+  }
+
+  &__aside-heading {
+    p {
+      margin: 0 0 16px;
+      color: #14151a;
+      font-family: "TT Norms Pro";
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 140%; /* 22.4px */
+      text-transform: uppercase;
+    }
+  }
+
+  &__aside-desc {
+    p {
+      margin: 0; 
+      font-family: "Inter";
+      font-size: 12.6px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 20px; /* 158.73% */
+      min-height: 400px;
+      color: #14151a;
+      opacity: 0.7;
+    }
+  }
+
+  &__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 26px 32px;
+    margin: 40px 0 0;
+    padding: 26px 0 0;
+    border-top: 1px solid $line;
+  }
+
+  &__meta-item {
+    dt {
+      font-size: 10px;
+      font-weight: var(--fw-semibold);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-grey, #8a8f9c);
+      margin-bottom: 6px;
+    }
+
+    dd {
+      margin: 0;
+      font-size: 14px;
+      font-weight: var(--fw-semibold);
+    }
+  }
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 22px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__tag {
+    padding: 7px 14px;
+    border: 1px solid $line;
+    border-radius: var(--radius-pill, 999px);
+    font-size: 11px;
+    font-weight: var(--fw-medium);
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: #4a4f5a;
+  }
+
+  // ── Gallery ────────────────────────────────────────────────
+  &__gallery {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(14px, 1.6vw, 22px);
+  }
+
+  &__shot-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(14px, 1.6vw, 22px);
+  }
+
+  &__shot {
+    margin: 0;
+    border-radius: 10px;
+    aspect-ratio: 16 / 9;
+    background: #e9ecf1 center / cover no-repeat;
+    box-shadow: 0 8px 24px rgba(16, 19, 26, 0.06);
+
+    &--logo {
+      background-color: #0c0d10;
+    }
+  }
+
+  // ── Story panel ────────────────────────────────────────────
+  &__story {
+    background: #f4f5f6;
+    padding: clamp(48px, 7vw, 96px) 0;
+  }
+
+  &__story-spacer {
+    display: block;
+  }
+
+  &__story-heading {
+    margin: 0 0 18px;
+    font-size: 15px;
+    font-weight: var(--fw-bold);
+    line-height: 1.5;
+    text-transform: uppercase;
+  }
+
+  &__story-desc {
+    margin: 0;
+    max-width: 640px;
+    font-size: 13px;
+    line-height: 1.8;
+    color: #5d626d;
+  }
+
+  // ── Pager ──────────────────────────────────────────────────
+  &__pager {
+    display: grid;
+    grid-template-columns: var(--wd-aside) minmax(0, 1fr);
+    align-items: stretch;
+    min-height: 64px;
+    border-top: 1px solid $line;
+  }
+
+  &__pager-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 var(--wd-pad);
+    font-size: 12px;
+    font-weight: var(--fw-semibold);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: $ink;
+
+    &:hover {
+      color: $azure;
+    }
+  }
+
+  &__pager-plus {
+    font-size: 18px;
+    line-height: 1;
+  }
+
+  &__pager-next {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 0 clamp(20px, 4vw, 56px);
+    overflow: hidden;
+    background: $azure;
+    color: #fff;
+
+    &:hover .work-detail__pager-name {
+      color: #fff;
+    }
+  }
+
+  &__pager-name {
+    font-family: var(--font-mono);
+    font-size: clamp(18px, 2.6vw, 28px);
+    font-weight: var(--fw-bold);
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  &__pager-cue {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+    font-size: 12px;
+    font-weight: var(--fw-semibold);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  &__pager-art {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: clamp(80px, 14vw, 180px);
+    background: var(--next-art) center / cover no-repeat;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 60%);
+    mask-image: linear-gradient(90deg, transparent, #000 60%);
+    opacity: 0.85;
+  }
+
+  // ── Responsive ─────────────────────────────────────────────
+  @include respond-to(860px) {
+    &__layout,
+    &__pager {
+      grid-template-columns: 1fr;
+    }
+
+    &__aside {
+      position: static;
+    }
+
+    &__story-spacer {
+      display: none;
+    }
+
+    &__pager {
+      gap: 0;
+    }
+
+    &__pager-all {
+      padding: 18px var(--wd-pad);
+    }
+
+    &__pager-next {
+      padding: 18px var(--wd-pad);
+      min-height: 72px;
+    }
+
+    &__bar {
+      margin-top: -64px;
+    }
+  }
+}
