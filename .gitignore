@@ -15,7 +15,6 @@
 .idea/
 
 # Operating system files
-.DS_Store
 Thumbs.db
 
 # Logs
@@ -31,3 +30,9 @@ pnpm-debug.log*
 # Temporary editor files
 *.swp
 *.swo
+
+
+application/config
+application/files
+application/bootstrap
+.DS_Store

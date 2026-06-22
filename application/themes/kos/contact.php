@@ -17,12 +17,7 @@ $this->inc('elements/header.php');
       $contactInfoArea->display($c);
       ?>
 
-      <div class="contact__form">
-        <?php
-        $contactFormArea = new Area('Contact Form');
-        $contactFormArea->display($c);
-        ?>
-      <form aria-labelledby="contact-form-title" method="post">
+      <form class="contact__form" aria-labelledby="contact-form-title" method="post">
         <h2 class="contact__form-title" id="contact-form-title">Let's Talk</h2>
         <p class="contact__form-copy">
           Share your project details with us and let's create something amazing
@@ -178,7 +173,6 @@ $this->inc('elements/header.php');
         </button>
         <p class="contact__status" role="status" aria-live="polite"></p>
       </form>
-      </div>
     </div>
 
     <div class="contact__marquee" aria-hidden="true" id="marquee-contact">
