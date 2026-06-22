@@ -5,7 +5,7 @@ $this->inc('elements/header_top.php');
 <!-- ══════════════════════════════════════════════════════════════
      NAVIGATION — Fixed top-left
 ══════════════════════════════════════════════════════════════ -->
-<div class="site-nav" role="banner" style="display: none;">
+<div class="site-nav" role="banner">
   <div class="site-nav__stack">
     <div class="site-nav__row">
       <button
