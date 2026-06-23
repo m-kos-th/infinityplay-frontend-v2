@@ -179,7 +179,7 @@ window.addEventListener('load', () => {
   }
 
   if (reduced) {
-    document.querySelectorAll('.hero__video, .contact__video').forEach((video) => {
+    document.querySelectorAll('.hero__video, .contact__video, .error-page__video').forEach((video) => {
       video.pause();
       video.removeAttribute('autoplay');
     });

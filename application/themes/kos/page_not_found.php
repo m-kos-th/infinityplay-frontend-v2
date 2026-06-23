@@ -3,6 +3,11 @@ defined('C5_EXECUTE') or die('Access Denied.');
 $this->inc('elements/header.php');
 ?>
 <main class="error-page" id="main-content" aria-labelledby="error-page-title">
+  <div class="error-page__media" aria-hidden="true">
+    <video class="error-page__video" autoplay muted loop playsinline preload="metadata">
+      <source src="/application/themes/kos/assets/video/shadow.mp4" type="video/mp4">
+    </video>
+  </div>
   <div class="error-page__content">
     <h1 class="error-page__title" id="error-page-title"><?= t('404') ?></h1>
     <p class="error-page__text"><?= t('This page may have moved, been removed, or is still loading in another dimension.') ?></p>
