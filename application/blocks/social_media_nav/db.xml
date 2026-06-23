@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<schema version="0.3">
+    <table name="btSocialMediaNav">
+        <field name="bID" type="I">
+            <key/>
+            <unsigned/>
+        </field>
+        <field name="title" type="C" size="255"></field>
+    </table>
+    <table name="btSocialMediaNavSocialLinksEntries">
+        <field name="id" type="I">
+            <key/>
+            <unsigned/>
+            <autoincrement/>
+        </field>
+        <field name="bID" type="I">
+            <unsigned/>
+        </field>
+        <field name="sortOrder" type="I"></field>
+        <field name="socialLink" type="C" size="12"></field>
+        <field name="socialLink_Title" type="C"></field>
+        <field name="socialLink_Page" type="I">
+            <default value="0"/>
+            <unsigned/>
+        </field>
+        <field name="socialLink_File" type="I">
+            <default value="0"/>
+            <unsigned/>
+        </field>
+        <field name="socialLink_Image" type="I">
+            <default value="0"/>
+            <unsigned/>
+        </field>
+        <field name="socialLink_URL" type="C"></field>
+        <field name="socialLink_Relative_URL" type="C"></field>
+    </table>
+</schema>
