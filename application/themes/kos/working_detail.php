@@ -113,6 +113,22 @@ $project = [
                 $content = new Area('Work detail Page: gallery');
                 $content->display($c);
                 ?>
+
+
+                <div class="work-detail__story">
+                    <div class="work-detail__story-heading">
+                        <?php
+                        $content = new Area('Work detail Page: story title');
+                        $content->display($c);
+                        ?>
+                    </div>
+                    <div class="work-detail__story-desc">
+                        <?php
+                        $content = new Area('Work detail Page: story detail');
+                        $content->display($c);
+                        ?>
+                    </div>
+                </div>
             </div>
 
             <!-- <figure class="work-detail__shot work-detail__shot--wide" style="background-image:url('<?php echo $img; ?>/gallery-1.jpg')" role="img" aria-label="Gameplay screenshot"></figure> -->
@@ -128,29 +144,32 @@ $project = [
                     <figure class="work-detail__shot" style="background-image:url('<?php echo $img; ?>/gallery-4.jpg')" role="img" aria-label="Inventory UI"></figure>
                     <figure class="work-detail__shot" style="background-image:url('<?php echo $img; ?>/gallery-5.jpg')" role="img" aria-label="Lobby UI"></figure>
                 </div> -->
+
+
+
         </div>
     </section>
 
     <!-- ════════════════════════════════════════════════════════════════
        STORY — light panel, copy aligned to the gallery column
   ═════════════════════════════════════════════════════════════════ -->
-    <section class="work-detail__story">
+    <!-- <section class="work-detail__story">
 
         <div class="work-detail__story-content">
             <?php
             $content = new Area('Work detail Page: story');
             $content->display($c);
             ?>
-        </div>
+        </div> -->
 
-        <!-- <div class="work-detail__layout">
+    <!-- <div class="work-detail__layout">
             <div class="work-detail__story-spacer" aria-hidden="true"></div>
             <div class="work-detail__story-content">
                 <h2 class="work-detail__story-heading">The story begins when the player (the Outlander) loses a duel against a legendary online player named Ralf the Craftmaster.</h2>
                 <p class="work-detail__story-desc">Defeated, the player is warped from the real world into a mysterious realm known as Farworld, forced to begin an extraordinary adventure entirely from scratch. The primary objective is to track down Ralf to exact revenge and reclaim lost honor. Along the journey, players will experience survival challenges, character development, and undertake missions to protect Farworld from invading Orcs, Goblins, and the evil schemes of demon followers.</p>
             </div>
         </div> -->
-    </section>
+    <!-- </section> -->
 
     <!-- ════════════════════════════════════════════════════════════════
        PAGER — back to catalogue (left) · next project (right)
