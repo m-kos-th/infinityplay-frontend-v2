@@ -276,4 +276,10 @@
   }
 
   onWindowLoad(initSiteInteractions);
+
+  // Lenis
+  const lenis = new Lenis({
+    autoRaf: true,
+  });
+
 })(window, document);
