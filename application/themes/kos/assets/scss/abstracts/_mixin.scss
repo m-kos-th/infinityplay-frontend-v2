@@ -320,10 +320,10 @@
 
 @mixin corner-svg($size: 14px) {
     background-image:
-        url("../svg/service-border/service-border-3.svg"),
-        url("../svg/service-border/service-border-2.svg"),
-        url("../svg/service-border/service-border-1.svg"),
-        url("../svg/service-border/service-border.svg");
+        url("../../svg/service-border/service-border-3.svg"),
+        url("../../svg/service-border/service-border-2.svg"),
+        url("../../svg/service-border/service-border-1.svg"),
+        url("../../svg/service-border/service-border.svg");
     background-repeat: no-repeat;
     background-size: $size $size;
     background-position: top left, top right, bottom left, bottom right;
