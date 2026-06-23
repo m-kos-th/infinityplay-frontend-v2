@@ -56,33 +56,68 @@ $project = [
                 </div>
 
 
+                <?php
+                // Pull meta from the page's "Working Detail" attributes.
+                $year     = (string) $c->getAttribute('year');
+                $client   = (string) $c->getAttribute('client');
+                $industry = (string) $c->getAttribute('industry');
+
+                // "Game tags" is a Topics attribute → array of tree node objects.
+                $gameTags = $c->getAttribute('game_tags');
+                $tags = [];
+                if ($gameTags) {
+                    foreach ($gameTags as $tag) {
+                        if (is_object($tag) && method_exists($tag, 'getTreeNodeDisplayName')) {
+                            $tags[] = $tag->getTreeNodeDisplayName();
+                        } else {
+                            $tags[] = (string) $tag;
+                        }
+                    }
+                }
+                ?>
+
                 <dl class="work-detail__meta">
-                    <div class="work-detail__meta-item">
-                        <dt>Year</dt>
-                        <dd><?php echo htmlspecialchars($project['year']); ?></dd>
-                    </div>
-                    <div class="work-detail__meta-item">
-                        <dt>Client</dt>
-                        <dd><?php echo htmlspecialchars($project['client']); ?></dd>
-                    </div>
-                    <div class="work-detail__meta-item">
-                        <dt>Industry</dt>
-                        <dd><?php echo htmlspecialchars($project['industry']); ?></dd>
-                    </div>
+                    <?php if ($year !== ''): ?>
+                        <div class="work-detail__meta-item">
+                            <p class="dt">Year</p>
+                            <p class="dd"><?php echo htmlspecialchars($year); ?></p>
+                        </div>
+                    <?php endif; ?>
+                    <?php if ($client !== ''): ?>
+                        <div class="work-detail__meta-item">
+                            <p class="dt">Client</p>
+                            <p class="dd"><?php echo htmlspecialchars($client); ?></p>
+                        </div>
+                    <?php endif; ?>
+                    <?php if ($industry !== ''): ?>
+                        <div class="work-detail__meta-item">
+                            <p class="dt">Industry</p>
+                            <p class="dd"><?php echo htmlspecialchars($industry); ?></p>
+                        </div>
+                    <?php endif; ?>
                 </dl>
 
-                <ul class="work-detail__tags">
-                    <?php foreach ($project['tags'] as $tag): ?>
-                        <li class="work-detail__tag"><?php echo htmlspecialchars($tag); ?></li>
-                    <?php endforeach; ?>
-                </ul>
+                <?php if (!empty($tags)): ?>
+                    <ul class="work-detail__tags">
+                        <?php foreach ($tags as $tag): ?>
+                            <li class="work-detail__tag"><?php echo htmlspecialchars($tag); ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                <?php endif; ?>
             </aside>
 
             <!-- ── Gallery ────────────────────────────────────────────── -->
             <div class="work-detail__gallery">
-                <figure class="work-detail__shot work-detail__shot--wide" style="background-image:url('<?php echo $img; ?>/gallery-1.jpg')" role="img" aria-label="Gameplay screenshot"></figure>
 
-                <div class="work-detail__shot-row">
+                <?php
+                $content = new Area('Work detail Page: gallery');
+                $content->display($c);
+                ?>
+            </div>
+
+            <!-- <figure class="work-detail__shot work-detail__shot--wide" style="background-image:url('<?php echo $img; ?>/gallery-1.jpg')" role="img" aria-label="Gameplay screenshot"></figure> -->
+
+            <!-- <div class="work-detail__shot-row">
                     <figure class="work-detail__shot work-detail__shot--logo" style="background-image:url('<?php echo $img; ?>/gallery-logo.jpg')" role="img" aria-label="Outlanders logo"></figure>
                     <figure class="work-detail__shot" style="background-image:url('<?php echo $img; ?>/gallery-2.jpg')" role="img" aria-label="Gameplay UI screenshot"></figure>
                 </div>
@@ -92,24 +127,51 @@ $project = [
                 <div class="work-detail__shot-row">
                     <figure class="work-detail__shot" style="background-image:url('<?php echo $img; ?>/gallery-4.jpg')" role="img" aria-label="Inventory UI"></figure>
                     <figure class="work-detail__shot" style="background-image:url('<?php echo $img; ?>/gallery-5.jpg')" role="img" aria-label="Lobby UI"></figure>
-                </div>
-            </div>
+                </div> -->
+
+
 
         </div>
     </section>
 
     <!-- ════════════════════════════════════════════════════════════════
-       STORY — light panel, copy aligned to the gallery column
+       STORY — full-width light panel, offset to start at the aside divider
   ═════════════════════════════════════════════════════════════════ -->
     <section class="work-detail__story">
-        <div class="work-detail__layout">
+        <div class="work-detail__story-heading">
+            <?php
+            $content = new Area('Work detail Page: story title');
+            $content->display($c);
+            ?>
+        </div>
+        <div class="work-detail__story-desc">
+            <?php
+            $content = new Area('Work detail Page: story detail');
+            $content->display($c);
+            ?>
+        </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════════════════
+       STORY (old) — light panel, copy aligned to the gallery column
+  ═════════════════════════════════════════════════════════════════ -->
+    <!-- <section class="work-detail__story">
+
+        <div class="work-detail__story-content">
+            <?php
+            $content = new Area('Work detail Page: story');
+            $content->display($c);
+            ?>
+        </div> -->
+
+    <!-- <div class="work-detail__layout">
             <div class="work-detail__story-spacer" aria-hidden="true"></div>
             <div class="work-detail__story-content">
                 <h2 class="work-detail__story-heading">The story begins when the player (the Outlander) loses a duel against a legendary online player named Ralf the Craftmaster.</h2>
                 <p class="work-detail__story-desc">Defeated, the player is warped from the real world into a mysterious realm known as Farworld, forced to begin an extraordinary adventure entirely from scratch. The primary objective is to track down Ralf to exact revenge and reclaim lost honor. Along the journey, players will experience survival challenges, character development, and undertake missions to protect Farworld from invading Orcs, Goblins, and the evil schemes of demon followers.</p>
             </div>
-        </div>
-    </section>
+        </div> -->
+    <!-- </section> -->
 
     <!-- ════════════════════════════════════════════════════════════════
        PAGER — back to catalogue (left) · next project (right)
