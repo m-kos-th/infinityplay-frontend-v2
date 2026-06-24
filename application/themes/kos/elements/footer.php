@@ -16,22 +16,16 @@
 
   <div class="footer__cols">
     <nav class="footer__col" aria-label="Site pages">
-      <p class="footer__col-label">Pages</p>
-      <ul class="footer__col-list">
-        <li class="footer__col-item"><a class="footer__col-link" href="#home">Home</a></li>
-        <li class="footer__col-item"><a class="footer__col-link" href="#work">Work</a></li>
-        <li class="footer__col-item"><a class="footer__col-link" href="#services">Services</a></li>
-        <li class="footer__col-item"><a class="footer__col-link" href="contact.html">Contact</a></li>
-      </ul>
+      <?php
+      $footer = new GlobalArea('Footer Menu');
+      $footer->display();
+      ?>
     </nav>
-    <nav class="footer__col footer__col--soon" aria-label="Social media — coming soon">
-      <p class="footer__col-label">Coming Soon</p>
-      <ul class="footer__col-list">
-        <li class="footer__col-item"><a class="footer__col-link" href="#" aria-disabled="true">TikTok</a></li>
-        <li class="footer__col-item"><a class="footer__col-link" href="#" aria-disabled="true">Discord</a></li>
-        <li class="footer__col-item"><a class="footer__col-link" href="#" aria-disabled="true">YouTube</a></li>
-        <li class="footer__col-item"><a class="footer__col-link" href="#" aria-disabled="true">Instagram</a></li>
-      </ul>
+    <nav class="footer__col" aria-label="Social media — coming soon">
+      <?php
+      $footer = new GlobalArea('Footer Social Media');
+      $footer->display();
+      ?>
     </nav>
   </div>
 

@@ -1,0 +1,237 @@
+// ============================================================
+// sections/_footer.scss
+// ============================================================
+
+%button {
+  font-family: var(--font-body);
+  text-transform: uppercase;
+  transition: opacity 0.25s;
+  color: var(--color--white, #f4f4ed);
+  text-align: center;
+  font-size: 21.9px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: var(--line-height-28, 28px); /* 127.854% */
+  letter-spacing: var(--letter-spacing--0_24, -0.24px);
+  text-transform: uppercase;
+  background: none;
+}
+
+.footer {
+  position: relative; 
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(
+    180deg,
+    #5e0a0a 0%,
+    #b81e07 28%,
+    #e8500a 58%,
+    #ff9b1a 100%
+  );
+
+  // Dark navy tint fading down over the header top
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 40vh;
+    z-index: 0;
+    pointer-events: none;
+    background: linear-gradient(180deg, #000216 0%, rgba(217, 51, 12, 0) 100%);
+  }
+
+  // Decorative background vector
+  &__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image: url("/application/themes/kos/assets/svg/footer-bg.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.08;
+  }
+
+  &__head {
+    text-align: center;
+    padding-top: 311px;
+    position: relative; 
+
+    @include respond-to(md) {
+      padding-top: 140px;
+    }
+
+    @include respond-to(sm) {
+      padding-top: 80px;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  }
+
+  &__headline {
+    text-align: center;
+    font-family: "TT Norms Pro", var(--font-display);
+    font-size: clamp(34px, 4.2vw, 63.75px);
+    font-weight: 700;
+    line-height: 120%;
+    text-transform: uppercase;
+    background: linear-gradient(180deg, #faa933 0%, #f76403 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  &__headline-highlight {
+    display: block;
+  }
+
+  &__cols {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    gap: 35vw;
+    margin-top: 89px;
+    margin-bottom: 136px;
+    @include respond-to(md) {
+      gap: 18vw;
+      margin-top: 56px;
+      margin-bottom: 80px;
+    }
+
+    @include respond-to(sm) {
+      flex-direction: column;
+      gap: 36px;
+      align-items: center;
+      margin-top: 40px;
+      margin-bottom: 56px;
+    }
+  }
+
+  &__col-label {
+    font-family: var(--font-body);
+    font-size: 12.2px;
+    color: var(--color-grey-9440, rgba(224, 246, 255, 0.4));
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 21px;
+    text-align: center;
+  }
+
+  &__col-list {
+    text-align: center;
+  }
+
+  &__col-item {
+    margin-bottom: 2px;
+  }
+
+  &__col-link {
+    @extend %button;
+
+    .btn__label {
+      @extend %button;
+    }
+
+
+    &:hover {
+      opacity: 0.7;
+    }
+
+    .footer__col--soon & {
+      color: rgba(255, 255, 255, 0.5);
+      pointer-events: none;
+    }
+  }
+
+  // Samurai character
+  &__character {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: clamp(320px, 38vw, 574px);
+    aspect-ratio: 3 / 4;
+    background-image: url("/application/themes/kos/assets/images/footer-samurai.png");
+    background-size: contain;
+    background-position: bottom center;
+    background-repeat: no-repeat;
+    z-index: 1;
+
+    // Hide on tablet/mobile so it never overlaps the nav links
+    @include respond-to(md) {
+      display: none;
+    }
+  }
+
+  // Bottom block — sized to the giant text so the bar aligns to its edges
+  &__bottom { 
+    align-self: center;
+    width: fit-content;
+    max-width: 100%;
+  }
+
+  // Large watermark text
+  &__giant-text {
+    position: relative;
+    text-align: center;
+    font-family: var(--font-display);
+    font-size: clamp(34px, 11.5vw, 209.455px);
+    white-space: nowrap;
+    user-select: none;
+    color: #b62b0e;
+    font-style: normal;
+    font-weight: 700;
+    padding-top: 70px;
+    padding-bottom: 54px;
+    letter-spacing: 0.02em;
+
+    @include respond-to(sm) {
+      padding-top: 40px;
+      padding-bottom: 32px;
+    }
+  }
+
+  // Bottom bar — spans the giant text width, edges aligned to INFINITYPLAY
+  &__bar {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-bottom: 27px;
+    margin-top: 27px;
+    font-family: var(--font-body);
+    letter-spacing: 0.08em;
+    color: #b62b0e;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+
+    @include respond-to(sm) {
+      flex-direction: column;
+      gap: 8px;
+      justify-content: center;
+      text-align: center;
+    }
+  }
+
+  &__links {
+    display: flex;
+    gap: 26px;
+    font-weight: 600;
+    line-height: var(--line-height-20, 20px); /* 200% */
+    text-transform: uppercase;
+
+    a:hover {
+      opacity: 0.9;
+    }
+  }
+}
