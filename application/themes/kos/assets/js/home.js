@@ -28,7 +28,7 @@
     }
 
     loopMarquee('#marquee-about', 38, -1);
-    // loopMarquee('#marquee-work', 34, -1);
+    loopMarquee('#marquee-work', 34, -1);
     loopMarquee('#stats-track', 45, -1);
     loopMarquee('#marquee-contact', 40, -1);
 

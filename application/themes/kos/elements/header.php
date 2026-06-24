@@ -5,7 +5,7 @@ $this->inc('elements/header_top.php');
 <!-- ══════════════════════════════════════════════════════════════
      NAVIGATION — Fixed top-left
 ══════════════════════════════════════════════════════════════ -->
-<div class="site-nav" role="banner">
+<div class="site-nav site-nav--invert" role="banner">
   <div class="site-nav__stack">
     <div class="site-nav__row">
       <button
@@ -30,11 +30,40 @@ $this->inc('elements/header_top.php');
       </svg>
     </a>
   </div>
-  <nav class="site-nav__menu" id="main-menu" aria-label="Primary">
-    <a class="site-nav__link" href="/#home">Home</a>
-    <a class="site-nav__link" href="/#about">About</a>
-    <a class="site-nav__link" href="/working">Work</a>
-    <a class="site-nav__link" href="/#services">Services</a>
-    <a class="site-nav__link" href="/contact">Contact</a>
-  </nav>
+
+  <div class="site-nav__menu" id="main-menu" aria-label="Primary">
+    <div class="site-nav__menu-inner">
+      <button
+        class="site-nav__toggle site-nav__toggle--panel"
+        type="button"
+        aria-label="Close navigation menu"
+        aria-expanded="false"
+        aria-controls="main-menu"
+      >
+        <span class="site-nav__toggle-line" aria-hidden="true"></span>
+        <span class="site-nav__toggle-line" aria-hidden="true"></span>
+      </button>
+
+      <div class="site-nav__menu-list">
+        <?php
+        $header = new GlobalArea('Header Menu');
+        $header->display();
+        ?>
+      </div>
+
+      <hr class="site-nav__menu-divider" aria-hidden="true">
+
+      <div class="site-nav__menu-footer">
+        <div class="site-nav__menu-legal">
+          <?php
+          $footer = new GlobalArea('Header Menu Footer');
+          $footer->display();
+          ?>
+        </div>
+        <p class="site-nav__copyright">
+          © Infinity Play 2026. All rights reserved Designed by KOS Design
+        </p>
+      </div>
+    </div>
+  </div>
 </div>

@@ -12,6 +12,7 @@
     height: 271px;
     background: #010215;
     position: relative;
+    z-index: 3;
   }
 
   &__marquee-band {
@@ -75,6 +76,7 @@
     padding-inline: 24px;
     text-align: center;
     box-sizing: border-box;
+    overflow: hidden;
   }
 
   &__title {

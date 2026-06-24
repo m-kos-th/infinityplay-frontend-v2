@@ -26,7 +26,7 @@
   function initSiteInteractions() {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const siteNav = document.querySelector('.site-nav');
-    const navToggle = document.querySelector('.site-nav__toggle');
+    const navToggles = Array.from(document.querySelectorAll('.site-nav__toggle'));
     const navMenu = document.querySelector('.site-nav__menu');
     const heroSection = document.querySelector('.hero');
     const heroNavToggle = document.querySelector('.hero__nav-toggle');
@@ -104,16 +104,20 @@
       observer.observe(document.body, { childList: true, subtree: true });
     }
 
-    if (siteNav && navToggle && navMenu) {
+    if (siteNav && navToggles.length && navMenu) {
       const setNavState = (isOpen) => {
         siteNav.classList.toggle('site-nav--open', isOpen);
-        navToggle.setAttribute('aria-expanded', String(isOpen));
-        navToggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+        navToggles.forEach((toggle) => {
+          toggle.setAttribute('aria-expanded', String(isOpen));
+          toggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+        });
         updateNavVisualState();
       };
 
-      navToggle.addEventListener('click', () => {
-        setNavState(!siteNav.classList.contains('site-nav--open'));
+      navToggles.forEach((toggle) => {
+        toggle.addEventListener('click', () => {
+          setNavState(!siteNav.classList.contains('site-nav--open'));
+        });
       });
 
       if (heroNavToggle) {
@@ -151,15 +155,15 @@
 
       if (!heroSection) {
         siteNav.classList.add('site-nav--active');
-        siteNav.classList.remove('site-nav--hidden');
+        // siteNav.classList.remove('site-nav--hidden');
         return;
       }
 
-      const heroBottom = heroSection.offsetTop + (heroSection.offsetHeight / 2);
+      const heroBottom = heroSection.offsetTop + (heroSection.offsetHeight - 100);
       const hasScrolledPastHero = window.scrollY >= heroBottom;
 
       siteNav.classList.toggle('site-nav--active', hasScrolledPastHero || isNavOpen);
-      siteNav.classList.toggle('site-nav--hidden', !hasScrolledPastHero && !isNavOpen);
+      // siteNav.classList.toggle('site-nav--hidden', !hasScrolledPastHero && !isNavOpen);
     }
 
     updateNavVisualState();
