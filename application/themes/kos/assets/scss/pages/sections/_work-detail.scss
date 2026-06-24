@@ -8,7 +8,8 @@
   --wd-aside: 436px;
   --wd-gap: clamp(32px, 4.5vw, 72px);
   --wd-max: 1180px;
-  --wd-pad: 0px background: #fff;
+  --wd-pad: 0px;
+  background: #fff;
   color: $ink;
   font-family: var(--font-body);
 
@@ -36,7 +37,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-     border-right: 1px solid #e6e6e6;
+    border-right: 1px solid #e6e6e6;
   }
 
   &__aside-heading {
@@ -132,8 +133,10 @@
     display: flex;
     flex-direction: column;
     padding-top: 152px;
+    padding-bottom: 152px;
     padding-left: 32px;
-    width: 804px;
+    width: 100%;
+    max-width: 804px;
     justify-self: center;
 
     picture {
@@ -163,11 +166,11 @@
 
   // ── Story panel ────────────────────────────────────────────
   &__story {
+    // Full-width panel offset by the aside column (+ layout padding) so the
+    // grey background starts at the aside / gallery divider and reaches the
+    // right edge, matching the design.
+    margin-left: calc(var(--wd-aside) + 32px);
     padding: 96px 150px;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 40px;
     border-top: 1px solid rgba(12, 38, 77, 0.16);
     border-bottom: 1px solid rgba(12, 38, 77, 0.16);
     background: rgba(12, 38, 77, 0.04);
@@ -208,21 +211,57 @@
   &__pager {
     display: grid;
     grid-template-columns: var(--wd-aside) minmax(0, 1fr);
+    // Match &__layout's left padding so the column split lines up
+    // with the aside / gallery divider in the body above.
+    padding-left: 32px;
     align-items: stretch;
     min-height: 64px;
     border-top: 1px solid $line;
   }
 
   &__pager-all {
-    display: inline-flex;
+    display: flex;
+    justify-content: center;
     align-items: center;
-    gap: 12px;
-    padding: 0 var(--wd-pad);
-    font-size: 12px;
-    font-weight: var(--fw-semibold);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: $ink;
+    min-height: 112px;
+
+    a,
+    .ccm-block-feature-link {
+      display: inline-flex;
+      justify-content: center;
+      width: 100%;
+      color: #001033;
+      font-family: "TT Norms Pro";
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      letter-spacing: 0.72px;
+      text-transform: uppercase;
+
+      .ccm-block-feature-link-text {
+        a {
+          span {
+            padding-right: 16px;
+          }
+        }
+      }
+    }
+
+    p {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 var(--wd-pad);
+      color: #001033;
+      font-family: "TT Norms Pro";
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      letter-spacing: 0.72px;
+      text-transform: uppercase;
+    }
 
     &:hover {
       color: $azure;
@@ -232,7 +271,7 @@
   &__pager-plus {
     font-size: 18px;
     line-height: 1;
-  }
+  } 
 
   &__pager-next {
     position: relative;
@@ -240,33 +279,98 @@
     align-items: center;
     gap: 18px;
     padding: 0 clamp(20px, 4vw, 56px);
+    padding-right: calc(clamp(80px, 14vw, 180px) + 24px);
     overflow: hidden;
     background: $azure;
     color: #fff;
+    text-decoration: none;
 
     &:hover .work-detail__pager-name {
       color: #fff;
     }
+
+    &:hover .work-detail__pager-art {
+      opacity: 1;
+    }
   }
 
   &__pager-name {
+    min-width: 0; // allow the name to shrink + ellipsis as a flex child
     font-family: var(--font-mono);
     font-size: clamp(18px, 2.6vw, 28px);
     font-weight: var(--fw-bold);
     letter-spacing: 0.28em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.85);
+    color: rgba(255, 255, 255, 0.95);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    > svg {
+      flex-shrink: 0;
+      width: 16px;
+      height: 16px;
+      margin-left: auto;
+      color: currentColor;
+    }
+
+    .ccm-block-next-previous {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
+      color: inherit;
+    }
+
+    .ccm-block-next-previous-header {
+      h5 {
+        margin: 0;
+        font-family: "TT Norms Pro";
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.7);
+      }
+    }
+
+    .ccm-block-next-previous-next-link {
+      margin: 0;
+
+      a {
+        display: inline-flex;
+        align-items: center;
+        color: #fff;
+        text-decoration: none;
+        font-family: var(--font-mono);
+        font-size: clamp(18px, 2.6vw, 28px);
+        font-weight: var(--fw-bold);
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+    }
   }
 
   &__pager-cue {
+    flex-shrink: 0;
     display: inline-flex;
     align-items: center;
     gap: 8px;
     margin-left: auto;
+    font-family: "TT Norms Pro";
     font-size: 12px;
     font-weight: var(--fw-semibold);
     letter-spacing: 0.14em;
     text-transform: uppercase;
+    color: #fff;
+    white-space: nowrap;
+
+    svg {
+      flex-shrink: 0;
+      width: 16px;
+      height: 16px;
+      color: currentColor;
+    }
   }
 
   &__pager-art {
@@ -275,10 +379,7 @@
     top: 0;
     bottom: 0;
     width: clamp(80px, 14vw, 180px);
-    background: var(--next-art) center / cover no-repeat;
-    -webkit-mask-image: linear-gradient(90deg, transparent, #000 60%);
-    mask-image: linear-gradient(90deg, transparent, #000 60%);
-    opacity: 0.85;
+    background: var(--next-art) center / cover no-repeat; 
   }
 
   // ── Responsive ─────────────────────────────────────────────
@@ -288,8 +389,17 @@
       grid-template-columns: 1fr;
     }
 
+    // reduce large left padding on narrow screens
+    &__layout { padding-left: 16px; padding-right: 16px; }
+    &__pager { padding-left: 16px; padding-right: 16px; }
+
     &__aside {
       position: static;
+    }
+
+    &__story {
+      margin-left: 0;
+      padding: 48px 24px;
     }
 
     &__story-spacer {
@@ -302,14 +412,14 @@
 
     &__pager-all {
       padding: 18px var(--wd-pad);
-      padding-left: 32px;
-      padding-right: 151px;
+      padding-left: 16px;
+      padding-right: 16px;
     }
 
     &__pager-next {
       padding: 18px var(--wd-pad);
-      padding-left: 32px;
-      padding-right: 151px;
+      padding-left: 16px;
+      padding-right: 16px;
       min-height: 72px;
     }
 
@@ -317,4 +427,68 @@
       margin-top: -64px;
     }
   }
+  // Additional responsive breakpoints (md, sm)
+  @include respond-to(md) {
+    &__layout { padding-left: 12px; padding-right: 12px; }
+
+    &__gallery {
+      padding-top: 96px;
+      padding-bottom: 96px;
+      padding-left: 0;
+      width: 100%;
+      max-width: 804px;
+    }
+
+    &__shot-row {
+      grid-template-columns: 1fr;
+    }
+
+    &__aside {
+      position: static;
+      border-right: none;
+      padding-top: 24px;
+      max-height: none;
+    }
+
+    &__aside-desc {
+      p { min-height: auto; font-size: 13px; }
+    }
+
+    &__story { padding: 64px 32px; margin-left: 0; }
+
+    &__pager-art { display: none; }
+  }
+
+  @include respond-to(sm) {
+    &__layout { padding-left: 8px; padding-right: 8px; }
+
+    &__gallery {
+      padding-top: 56px;
+      padding-bottom: 56px;
+      padding-left: 8px;
+    }
+
+    &__shot {
+      border-radius: 6px;
+    }
+
+    &__pager-next {
+      padding: 12px 8px;
+      padding-right: 8px;
+      min-height: 56px;
+    }
+
+    &__pager-all {
+      padding: 12px 8px;
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+
+    &__tags { gap: 6px; }
+
+    &__meta { gap: 12px 16px; padding-top: 16px; margin-top: 20px; }
+
+    &__aside-desc { p { min-height: auto; } }
+  }
 }
+
