@@ -1,0 +1,18 @@
+// ============================================================
+// pages/working.scss — "Works" landing page (theme: working.php)
+// Compiles to css/pages/working.css (auto-loaded via PAGETEMPLATE).
+//
+// sections/_working.scss bundles the page chrome (fixed nav + footer) and the
+// work-landing hero/shell. The featured banner + catalogue grid are styled
+// by the page_list "working" block template (blocks/page_list/templates/working).
+//
+// Compile:
+//   sass application/themes/kos/assets/scss/pages/working.scss \
+//        application/themes/kos/assets/css/pages/working.css \
+//        --style=compressed
+// ============================================================
+
+@import '../abstracts/variables';
+@import '../abstracts/mixin';
+
+@import 'sections/working';
