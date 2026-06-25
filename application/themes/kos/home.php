@@ -90,13 +90,6 @@ $this->inc('elements/header.php');
       <div class="marquee marquee--work" id="marquee-work" aria-hidden="true">
         FEATURED WORK&nbsp;&nbsp;&nbsp;FEATURED WORK&nbsp;&nbsp;&nbsp;FEATURED WORK&nbsp;&nbsp;&nbsp;FEATURED WORK&nbsp;&nbsp;&nbsp;FEATURED WORK&nbsp;&nbsp;&nbsp;FEATURED WORK&nbsp;&nbsp;&nbsp;
       </div>
-      
-      <!-- Scroll progress counter -->
-      <!-- <div class="work__counter" aria-hidden="true">
-        <span class="work__counter-current">01</span>
-        <span class="work__counter-sep">/</span>
-        <span class="work__counter-total">04</span>
-      </div> -->
 
       <?php
         $content = new Area('Work Content');
@@ -140,10 +133,10 @@ $this->inc('elements/header.php');
       <div class="stats__float stats__float--5" aria-hidden="true"></div>
       <div class="stats__float stats__float--6" aria-hidden="true"></div>
 
-      <h2 class="stats__headline" id="stats-headline">
-        Fueling Infinite Possibilities<br>With Our Passion For Gaming
-      </h2>
-      <a class="btn" href="#work"><svg class="btn__cap btn__cap--left" width="17" height="38" viewBox="0 0 17 38" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M0 9.65686C0 8.59599 0.421427 7.57857 1.17157 6.82843L6.82843 1.17157C7.57857 0.421426 8.59599 0 9.65685 0L17 0V38H9.65685C8.59599 38 7.57857 37.5786 6.82843 36.8284L1.17157 31.1716C0.421426 30.4214 0 29.404 0 28.3431V9.65686Z" fill="#ECEAE5"/></svg><span class="btn__label">See All Works</span><svg class="btn__cap btn__cap--right" xmlns="http://www.w3.org/2000/svg" width="17" height="38" viewBox="0 0 17 38" fill="none" aria-hidden="true"><path d="M17 9.65686C17 8.59599 16.5786 7.57857 15.8284 6.82843L10.1716 1.17157C9.42143 0.421426 8.40401 0 7.34315 0L0 0V38H7.34315C8.40401 38 9.42143 37.5786 10.1716 36.8284L15.8284 31.1716C16.5786 30.4214 17 29.404 17 28.3431V9.65686Z" fill="#ECEAE5"/></svg></a>
+      <?php
+        $content = new Area('Stats Content');
+        $content->display($c);
+      ?>
     </div>
 
     <div class="stats__marquee">
@@ -260,185 +253,8 @@ $this->inc('elements/header.php');
       <!-- Section header — pinned at the top, stays put through the deck -->
       <?php
         $content = new Area('Services Content');
-        $content->setBlockLimit(1);
         $content->display($c);
       ?>
-
-      <!-- Deck of 3 columns — sits low under the header, rises to centre as it leaves -->
-      <div class="services__deck">
-
-      <!-- Sidebar nav — fixed rail + marker; the list scrolls past it -->
-      <nav class="services__nav" aria-label="Services navigation">
-        <span class="services__nav-marker" aria-hidden="true"></span>
-        <div class="services__nav-track">
-          <a href="#" class="services__nav-link services__nav-link--active active" data-slide="0">3D Animation</a>
-          <a href="#" class="services__nav-link" data-slide="1">3D Art</a>
-          <a href="#" class="services__nav-link" data-slide="2">VFX &amp; Shaders</a>
-          <a href="#" class="services__nav-link" data-slide="3">2D Art</a>
-          <a href="#" class="services__nav-link" data-slide="4">Roblox</a>
-          <a href="#" class="services__nav-link" data-slide="5">Development</a>
-          <a href="#" class="services__nav-link" data-slide="6">AI Cinematic</a>
-        </div>
-      </nav>
-
-      <!-- CENTER — image stage; images slice/wipe between each other on scroll -->
-      <figure class="services__stage" aria-hidden="true">
-        <div class="services__frame">
-          <div class="services__img" data-img="0" style="background-image:url('/application/themes/kos/assets/images/Services/3D_ANIMATION.gif')"></div>
-          <div class="services__img" data-img="1" style="background-image:url('/application/themes/kos/assets/images/Services/3D_ART.png')"></div>
-          <div class="services__img" data-img="2" style="background-image:url('/application/themes/kos/assets/images/Services/VFX%26SHADERS.png')"></div>
-          <div class="services__img" data-img="3" style="background-image:url('/application/themes/kos/assets/images/Services/2D_ART.png')"></div>
-          <div class="services__img" data-img="4" style="background-image:url('/application/themes/kos/assets/images/Services/Roblox.png')"></div>
-          <div class="services__img" data-img="5" style="background-image:url('/application/themes/kos/assets/images/Services/Development.png')"></div>
-          <video class="services__img services__img--video" data-img="6" autoplay loop muted playsinline>
-            <source src="/application/themes/kos/assets/images/Services/AI_Cinematic.mp4" type="video/mp4">
-          </video>
-        </div>
-      </figure>
-
-      <!-- RIGHT — title + description + checklist; scrolls per service -->
-      <div class="services__texts">
-
-        <article class="services__text" data-text="0">
-          <h3 class="services__title">3D Animation</h3>
-          <p class="services__desc">Breathing life into characters with fluid mechanics and emotional depth.</p>
-          <ul class="services__checklist">
-            <li class="services__check">
-              <span class="services__check-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><rect x="1.5" y="1.5" width="13" height="13" rx="2.5"/><path d="M5 5l6 6M11 5l-6 6"/></svg></span>
-              Advanced Rigging
-            </li>
-            <li class="services__check">
-              <span class="services__check-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><rect x="1.5" y="1.5" width="13" height="13" rx="2.5"/><path d="M5 5l6 6M11 5l-6 6"/></svg></span>
-              Gameplay Animation
-            </li>
-            <li class="services__check">
-              <span class="services__check-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><rect x="1.5" y="1.5" width="13" height="13" rx="2.5"/><path d="M5 5l6 6M11 5l-6 6"/></svg></span>
-              Cinematic &amp; Acting
-            </li>
-          </ul>
-        </article>
-
-        <article class="services__text" data-text="1">
-          <h3 class="services__title">3D Art</h3>
-          <p class="services__desc">High-fidelity assets optimised for real-time rendering engines.</p>
-          <ul class="services__checklist">
-            <li class="services__check">
-              <span class="services__check-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><rect x="1.5" y="1.5" width="13" height="13" rx="2.5"/><path d="M5 5l6 6M11 5l-6 6"/></svg></span>
-              Characters &amp; Creatures
-            </li>
-            <li class="services__check">
-              <span class="services__check-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><rect x="1.5" y="1.5" width="13" height="13" rx="2.5"/><path d="M5 5l6 6M11 5l-6 6"/></svg></span>
-              Props &amp; Accessories
-            </li>
-            <li class="services__check">
-              <span class="services__check-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><rect x="1.5" y="1.5" width="13" height="13" rx="2.5"/><path d="M5 5l6 6M11 5l-6 6"/></svg></span>
-              Vehicles &amp; Environments
-            </li>
-          </ul>
-        </article>
-
-        <article class="services__text" data-text="2">
-          <h3 class="services__title">VFX &amp; Shaders</h3>
-          <p class="services__desc">Visual magic that enhances immersion without sacrificing performance.</p>
-          <ul class="services__checklist">
-            <li class="services__check">
-              <span class="services__check-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><rect x="1.5" y="1.5" width="13" height="13" rx="2.5"/><path d="M5 5l6 6M11 5l-6 6"/></svg></span>
-              2D &amp; 3D VFX Animation
-            </li>
-            <li class="services__check">
-              <span class="services__check-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><rect x="1.5" y="1.5" width="13" height="13" rx="2.5"/><path d="M5 5l6 6M11 5l-6 6"/></svg></span>
-              Shader Graph &amp; HLSL
-            </li>
-            <li class="services__check">
-              <span class="services__check-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><rect x="1.5" y="1.5" width="13" height="13" rx="2.5"/><path d="M5 5l6 6M11 5l-6 6"/></svg></span>
-              Particle Systems
-            </li>
-          </ul>
-          <div class="services__supported">
-            <p class="services__supported-label">Supported by</p>
-            <div class="services__supported-logos"><img src="/application/themes/kos/assets/images/Services/service-supported.png" alt="Supported by Unreal Engine and Unity" class="services__supported-img"></div>
-          </div>
-        </article>
-
-        <article class="services__text" data-text="3">
-          <h3 class="services__title">2D Art</h3>
-          <p class="services__desc">Laying the visual foundation and storytelling elements.</p>
-          <ul class="services__checklist">
-            <li class="services__check">
-              <span class="services__check-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><rect x="1.5" y="1.5" width="13" height="13" rx="2.5"/><path d="M5 5l6 6M11 5l-6 6"/></svg></span>
-              Spine / Frame Animation
-            </li>
-            <li class="services__check">
-              <span class="services__check-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><rect x="1.5" y="1.5" width="13" height="13" rx="2.5"/><path d="M5 5l6 6M11 5l-6 6"/></svg></span>
-              Storyboarding
-            </li>
-            <li class="services__check">
-              <span class="services__check-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><rect x="1.5" y="1.5" width="13" height="13" rx="2.5"/><path d="M5 5l6 6M11 5l-6 6"/></svg></span>
-              Concept Art
-            </li>
-          </ul>
-        </article>
-
-        <article class="services__text" data-text="4">
-          <h3 class="services__title">Roblox</h3>
-          <p class="services__desc">Immersive Roblox experiences built for engagement and retention.</p>
-          <ul class="services__checklist">
-            <li class="services__check">
-              <span class="services__check-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><rect x="1.5" y="1.5" width="13" height="13" rx="2.5"/><path d="M5 5l6 6M11 5l-6 6"/></svg></span>
-              Lua Scripting
-            </li>
-            <li class="services__check">
-              <span class="services__check-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><rect x="1.5" y="1.5" width="13" height="13" rx="2.5"/><path d="M5 5l6 6M11 5l-6 6"/></svg></span>
-              World Building
-            </li>
-            <li class="services__check">
-              <span class="services__check-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><rect x="1.5" y="1.5" width="13" height="13" rx="2.5"/><path d="M5 5l6 6M11 5l-6 6"/></svg></span>
-              UGC Item Design
-            </li>
-          </ul>
-        </article>
-
-        <article class="services__text" data-text="5">
-          <h3 class="services__title">Development</h3>
-          <p class="services__desc">Clean, scalable architecture for seamless gameplay experiences.</p>
-          <ul class="services__checklist">
-            <li class="services__check">
-              <span class="services__check-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><rect x="1.5" y="1.5" width="13" height="13" rx="2.5"/><path d="M5 5l6 6M11 5l-6 6"/></svg></span>
-              Unity &amp; Unreal Engine
-            </li>
-            <li class="services__check">
-              <span class="services__check-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><rect x="1.5" y="1.5" width="13" height="13" rx="2.5"/><path d="M5 5l6 6M11 5l-6 6"/></svg></span>
-              Engineering Support
-            </li>
-            <li class="services__check">
-              <span class="services__check-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><rect x="1.5" y="1.5" width="13" height="13" rx="2.5"/><path d="M5 5l6 6M11 5l-6 6"/></svg></span>
-              Systems Architecture
-            </li>
-          </ul>
-          <div class="services__supported">
-            <p class="services__supported-label">Supported by</p>
-            <div class="services__supported-logos"><img src="/application/themes/kos/assets/images/Services/service-supported.png" alt="Supported by Unreal Engine and Unity" class="services__supported-img"></div>
-          </div>
-        </article>
-
-        <article class="services__text" data-text="6">
-          <h3 class="services__title">AI Cinematic</h3>
-          <p class="services__desc">AI-driven cinematic pipelines that accelerate storytelling at scale.</p>
-          <ul class="services__checklist">
-            <li class="services__check">
-              <span class="services__check-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><rect x="1.5" y="1.5" width="13" height="13" rx="2.5"/><path d="M5 5l6 6M11 5l-6 6"/></svg></span>
-              Storyboard Generation
-            </li>
-            <li class="services__check">
-              <span class="services__check-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><rect x="1.5" y="1.5" width="13" height="13" rx="2.5"/><path d="M5 5l6 6M11 5l-6 6"/></svg></span>
-              Video Output
-            </li>
-          </ul>
-        </article>
-
-      </div><!-- /.services__texts -->
-
-      </div><!-- /.services__deck -->
 
     </div><!-- /.services__pin -->
   </section>

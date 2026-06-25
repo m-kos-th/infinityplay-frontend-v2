@@ -16,15 +16,17 @@
   }
 
   &__marquee-band {
-    position: absolute;
-    left: 50%;
-    width: min(1600px, calc(100% - 64px));
-    height: 271px;
-    transform: translateX(-50%);
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-    z-index: 1;
+    .mode-view & {
+      position: absolute;
+      left: 50%;
+      width: min(1600px, calc(100% - 64px));
+      height: 271px;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      z-index: 1;
+    }
   }
 
   &__marquee-surface {
@@ -54,21 +56,25 @@
   }
 
   &__characters {
-    position: sticky;
-    top: 0;
-    height: 100svh;
-    margin-bottom: -100svh;
-    pointer-events: none;
-    z-index: 2;
+    .mode-view & {
+      position: sticky;
+      top: 0;
+      height: 100svh;
+      margin-bottom: -100svh;
+      pointer-events: none;
+      z-index: 2;
+    }
   }
 
   // Side characters
   &__character {
-    position: absolute;
-    top: clamp(136px, 16vh, 220px);
-    will-change: left, right;
-    pointer-events: none;
-    overflow: hidden;
+    .mode-view & {
+      position: absolute;
+      top: clamp(136px, 16vh, 220px);
+      will-change: left, right;
+      pointer-events: none;
+      overflow: hidden;
+    }
 
     &--left {
       left: -100%;
@@ -104,18 +110,20 @@
 
   // Decorative clouds
   &__cloud {
-    position: absolute;
-    z-index: 0;
-    width: 477px;
-    max-width: 100%;
-    height: 192px;
-    background-image: url("../../images/cloud-small.webp");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 100% 100%;
-    filter: blur(4px);
-    opacity: 0;
-    pointer-events: none;
+    .mode-view & {
+      position: absolute;
+      z-index: 0;
+      width: 477px;
+      max-width: 100%;
+      height: 192px;
+      background-image: url("../../images/cloud-small.webp");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 100% 100%;
+      filter: blur(4px);
+      opacity: 0;
+      pointer-events: none;
+    }
 
     &--1 {
       left: -100%;

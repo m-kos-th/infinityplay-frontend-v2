@@ -4,7 +4,7 @@
 // the top of the viewport, then releases it as the next card arrives.
 // ============================================================
 
-.work {
+.mode-view .work {
   position: relative;
   z-index: 2;
   margin-top: -33%;
@@ -78,7 +78,8 @@
     position: relative;
     overflow: hidden;
 
-    img, video {
+    img,
+    video {
       display: block;
       width: 100%;
       height: 100%;
@@ -146,24 +147,6 @@
     @include respond-to(sm) {
       display: none;
     }
-  }
-
-  // ── Scroll counter (bottom-right) ──────────────────────────
-  &__counter {
-    position: absolute;
-    bottom: clamp(24px, 4vh, 40px);
-    right: clamp(20px, 3vw, 48px);
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    font-weight: var(--fw-light);
-    letter-spacing: 0.18em;
-    color: rgba(0, 0, 0, 0.28);
-    pointer-events: none;
-    user-select: none;
-    opacity: 0; // initially hidden, shown when JS initializes
   }
 
   &__counter-sep {

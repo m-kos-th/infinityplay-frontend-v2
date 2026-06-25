@@ -4,8 +4,8 @@
     <span class="pill"><?php echo h($title); ?></span>
     <?php } ?>
     <?php if (isset($mainTitle) && trim($mainTitle) != "") { ?>
-        <h3 class="services__head-title">
+        <div class="services__head-title">
             <?php echo $mainTitle; ?>
-        </h3>
+        </div>
     <?php } ?>
 </header>
