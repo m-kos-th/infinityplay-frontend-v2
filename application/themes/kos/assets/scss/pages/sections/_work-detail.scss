@@ -12,10 +12,10 @@
   background: #fff;
   color: $ink;
   font-family: var(--font-body);
- 
+
   // ── Hero ───────────────────────────────────────────────────
   &__hero {
-    position: relative; 
+    position: relative;
   }
 
   &__hero-media {
@@ -31,7 +31,11 @@
     inset: auto var(--wd-pad) 0;
     height: 45%;
     border-radius: 0 0 14px 14px;
-    background: linear-gradient(180deg, rgba(7, 13, 24, 0) 0%, rgba(7, 13, 24, 0.55) 100%);
+    background: linear-gradient(
+      180deg,
+      rgba(7, 13, 24, 0) 0%,
+      rgba(7, 13, 24, 0.55) 100%
+    );
     pointer-events: none;
   }
 
@@ -131,15 +135,20 @@
     justify-content: flex-start;
     align-items: flex-start;
     border-right: 1px solid #e6e6e6;
+    padding-right: 32px;
   }
 
   &__aside-heading {
-    margin: 0 0 16px;
-    font-size: 15px;
-    font-weight: var(--fw-bold);
-    line-height: 1.45;
-    text-transform: uppercase;
-    letter-spacing: 0.01em;
+    p {
+      margin: 0 0 16px;
+      color: #14151a;
+      font-family: "TT Norms Pro";
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 140%; /* 22.4px */
+      text-transform: uppercase;
+    }
   }
 
   &__aside-desc {
@@ -232,6 +241,104 @@
       img {
         width: 100%;
       }
+    }
+
+    // Hint that gallery images open a zoomed view.
+    picture img,
+    > img,
+    a img {
+      cursor: zoom-in;
+    }
+  }
+
+  // ── Gallery lightbox ───────────────────────────────────────
+  &__lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(16px, 4vw, 56px);
+    background: rgba(4, 8, 28, 0.9);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+
+    &.is-open {
+      display: flex;
+    }
+  }
+
+  // Wraps the image so the close button can sit on the image's own corner.
+  &__lightbox-figure {
+    position: relative;
+    margin: 0;
+    display: inline-block;
+    line-height: 0;
+    max-width: min(1100px, 92vw);
+    max-height: 88vh;
+  }
+
+  &__lightbox-img {
+    display: block;
+    max-width: 100%;
+    max-height: 88vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
+  }
+
+  &__lightbox-close,
+  &__lightbox-nav {
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.12);
+    border: 0;
+    border-radius: 50%;
+    cursor: pointer;
+    line-height: 1;
+    transition: background 0.2s ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.24);
+    }
+
+    &[hidden] {
+      display: none;
+    }
+  }
+
+  // Anchored to the top-right corner of the image itself.
+  &__lightbox-close {
+    top: 12px;
+    right: 12px;
+    width: 40px;
+    height: 40px;
+    background: rgba(4, 8, 28, 0.55);
+
+    &:hover {
+      background: rgba(4, 8, 28, 0.8);
+    }
+  }
+
+  &__lightbox-nav {
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    font-size: 32px;
+
+    &--prev {
+      left: clamp(10px, 3vw, 32px);
+    }
+
+    &--next {
+      right: clamp(10px, 3vw, 32px);
     }
   }
 
@@ -360,7 +467,7 @@
   &__pager-plus {
     font-size: 18px;
     line-height: 1;
-  } 
+  }
 
   &__pager-next {
     position: relative;
@@ -468,7 +575,7 @@
     top: 0;
     bottom: 0;
     width: clamp(80px, 14vw, 180px);
-    background: var(--next-art) center / cover no-repeat; 
+    background: var(--next-art) center / cover no-repeat;
   }
 
   // ── Responsive ─────────────────────────────────────────────
@@ -479,8 +586,14 @@
     }
 
     // reduce large left padding on narrow screens
-    &__layout { padding-left: 16px; padding-right: 16px; }
-    &__pager { padding-left: 16px; padding-right: 16px; }
+    &__layout {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+    &__pager {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
 
     &__aside {
       position: static;
@@ -518,7 +631,10 @@
   }
   // Additional responsive breakpoints (md, sm)
   @include respond-to(md) {
-    &__layout { padding-left: 12px; padding-right: 12px; }
+    &__layout {
+      padding-left: 12px;
+      padding-right: 12px;
+    }
 
     &__gallery {
       padding-top: 96px;
@@ -540,16 +656,27 @@
     }
 
     &__aside-desc {
-      p { min-height: auto; font-size: 13px; }
+      p {
+        min-height: auto;
+        font-size: 13px;
+      }
     }
 
-    &__story { padding: 64px 32px; margin-left: 0; }
+    &__story {
+      padding: 64px 32px;
+      margin-left: 0;
+    }
 
-    &__pager-art { display: none; }
+    &__pager-art {
+      display: none;
+    }
   }
 
   @include respond-to(sm) {
-    &__layout { padding-left: 8px; padding-right: 8px; }
+    &__layout {
+      padding-left: 8px;
+      padding-right: 8px;
+    }
 
     &__gallery {
       padding-top: 56px;
@@ -573,11 +700,20 @@
       padding-right: 8px;
     }
 
-    &__tags { gap: 6px; }
+    &__tags {
+      gap: 6px;
+    }
 
-    &__meta { gap: 12px 16px; padding-top: 16px; margin-top: 20px; }
+    &__meta {
+      gap: 12px 16px;
+      padding-top: 16px;
+      margin-top: 20px;
+    }
 
-    &__aside-desc { p { min-height: auto; } }
+    &__aside-desc {
+      p {
+        min-height: auto;
+      }
+    }
   }
 }
-

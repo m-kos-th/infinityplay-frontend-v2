@@ -27,7 +27,7 @@ $project = [
     <!-- ════════════════════════════════════════════════════════════════
        HERO — full-bleed key art with an overlaid (and sticky) title bar
   ═════════════════════════════════════════════════════════════════ -->
-    <section aria-labelledby="working-detail-hero">
+    <section aria-labelledby="working-detail-hero" class="work-detail__hero">
         <?php
         $content = new Area('Work detail Page: hero banner');
         $content->display($c);
@@ -284,6 +284,99 @@ $project = [
             passive: true
         });
         onScroll();
+    })();
+</script>
+
+<!-- ════════════════════════════════════════════════════════════════
+     GALLERY LIGHTBOX — click a gallery image to view it zoomed
+═════════════════════════════════════════════════════════════════ -->
+<div class="work-detail__lightbox" id="wdLightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Image viewer">
+    <button class="work-detail__lightbox-nav work-detail__lightbox-nav--prev" type="button" aria-label="Previous image" hidden>&#8249;</button>
+    <figure class="work-detail__lightbox-figure">
+        <img class="work-detail__lightbox-img" src="" alt="">
+        <button class="work-detail__lightbox-close" type="button" aria-label="Close viewer">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            </svg>
+        </button>
+    </figure>
+    <button class="work-detail__lightbox-nav work-detail__lightbox-nav--next" type="button" aria-label="Next image" hidden>&#8250;</button>
+</div>
+
+<script>
+    (function() {
+        var gallery = document.querySelector('.work-detail__gallery');
+        var box = document.getElementById('wdLightbox');
+        if (!gallery || !box) return;
+
+        var imgEl = box.querySelector('.work-detail__lightbox-img');
+        var btnClose = box.querySelector('.work-detail__lightbox-close');
+        var btnPrev = box.querySelector('.work-detail__lightbox-nav--prev');
+        var btnNext = box.querySelector('.work-detail__lightbox-nav--next');
+        var fileRe = /\.(jpe?g|png|webp|gif|avif)(\?.*)?$/i;
+        var images = [];
+        var current = -1;
+
+        function collect() {
+            images = Array.prototype.slice.call(gallery.querySelectorAll('img'));
+        }
+
+        // Prefer a linked full-size file when the image is wrapped in <a>.
+        function srcOf(img) {
+            var a = img.closest('a');
+            if (a && a.href && fileRe.test(a.href)) return a.href;
+            return img.currentSrc || img.src;
+        }
+
+        function open(i) {
+            if (i < 0 || i >= images.length) return;
+            current = i;
+            imgEl.src = srcOf(images[i]);
+            imgEl.alt = images[i].alt || '';
+            box.classList.add('is-open');
+            box.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+            var multi = images.length > 1;
+            btnPrev.hidden = !multi;
+            btnNext.hidden = !multi;
+        }
+
+        function close() {
+            box.classList.remove('is-open');
+            box.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+            imgEl.removeAttribute('src');
+            current = -1;
+        }
+
+        function step(dir) {
+            if (!images.length) return;
+            open((current + dir + images.length) % images.length);
+        }
+
+        gallery.addEventListener('click', function(e) {
+            var img = e.target.closest('img');
+            if (!img || !gallery.contains(img)) return;
+            // Leave non-file links (e.g. external pages) to behave normally.
+            var a = img.closest('a');
+            if (a && a.href && !fileRe.test(a.href)) return;
+            e.preventDefault();
+            collect();
+            open(images.indexOf(img));
+        });
+
+        btnClose.addEventListener('click', close);
+        btnPrev.addEventListener('click', function(e) { e.stopPropagation(); step(-1); });
+        btnNext.addEventListener('click', function(e) { e.stopPropagation(); step(1); });
+        box.addEventListener('click', function(e) {
+            if (e.target === box) close(); // click on the backdrop
+        });
+        document.addEventListener('keydown', function(e) {
+            if (!box.classList.contains('is-open')) return;
+            if (e.key === 'Escape') close();
+            else if (e.key === 'ArrowLeft') step(-1);
+            else if (e.key === 'ArrowRight') step(1);
+        });
     })();
 </script>
 
