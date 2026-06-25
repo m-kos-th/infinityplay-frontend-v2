@@ -14,7 +14,7 @@ $back-chamfer: 10px; // 45° corner cut on the back button
 .ccm-block-hero-image--working-detail {
   position: relative;
   display: block;
-  min-height: 70vh;
+  min-height: 900px !important;
   overflow: hidden;
 
   // Key art
@@ -24,6 +24,7 @@ $back-chamfer: 10px; // 45° corner cut on the back button
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    height: 100% !important;
   }
 
   // Hidden — scrim handled by the overlay band below
