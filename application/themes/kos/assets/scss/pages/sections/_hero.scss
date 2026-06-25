@@ -12,6 +12,10 @@
     visibility: visible;
     z-index: 3;
   }
+
+  &--open {
+    z-index: 10;
+  }
 }
 
 .hero {
@@ -137,7 +141,8 @@
     mix-blend-mode: difference;
   }
 
-  &__title {
+  &__title,
+  h1, h2 {
     font-family: var(--font-display);
     font-size: 40px;
     font-style: normal;
@@ -155,7 +160,8 @@
     display: none;
   }
 
-  &__description {
+  &__description,
+  p {
     width: 100%;
     padding-top: 40px;
     margin-top: 40px;

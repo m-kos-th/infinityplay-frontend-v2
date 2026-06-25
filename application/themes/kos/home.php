@@ -36,16 +36,11 @@ $this->inc('elements/header.php');
       </div>
     </div>
     <div class="hero__inner">
-      <div class="hero__copy">
-        <h1 class="hero__title" id="hero-title">
-          Crafting Legendary<br>Gaming Experiences
-        </h1>
-        <hr class="hero__rule" aria-hidden="true">
-        <p class="hero__description">
-          We bring your wildest gaming visions to life. From concept to launch,
-          Infinity Play delivers immersive worlds and unforgettable adventures.
-        </p>
-      </div>
+      <?php
+        $content = new Area('Hero Content');
+        $content->setBlockLimit(1);
+        $content->display($c);
+      ?>
     </div>
   </section>
 

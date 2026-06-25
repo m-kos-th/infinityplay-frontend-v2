@@ -185,14 +185,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    opacity: 0;
+    opacity: 1;
     visibility: hidden;
-    transform: translateY(-10px);
+    clip-path: circle(0px at 48px 48px);
+    -webkit-clip-path: circle(0px at 48px 48px);
     pointer-events: none;
+    will-change: clip-path;
     transition:
-      opacity 0.25s ease,
+      clip-path 0.45s cubic-bezier(.2,.9,.2,1),
       visibility 0.25s ease,
-      transform 0.25s ease,
       background 0.25s ease,
       border-color 0.25s ease,
       box-shadow 0.25s ease;
@@ -365,9 +366,9 @@
     z-index: 3;
 
     .site-nav__menu {
-      opacity: 1;
       visibility: visible;
-      transform: translateY(0);
+      clip-path: circle(1400px at 48px 48px);
+      -webkit-clip-path: circle(1400px at 48px 48px);
       pointer-events: auto;
     }
 
