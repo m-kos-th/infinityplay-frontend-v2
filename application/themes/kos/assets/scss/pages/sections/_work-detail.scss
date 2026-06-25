@@ -5,11 +5,10 @@
 // ============================================================
 
 .work-detail {
-  --wd-aside: 300px;
+  --wd-aside: 436px;
   --wd-gap: clamp(32px, 4.5vw, 72px);
-  --wd-pad: clamp(20px, 5vw, 64px);
   --wd-max: 1180px;
-
+  --wd-pad: 0px;
   background: #fff;
   color: $ink;
   font-family: var(--font-body);
@@ -111,14 +110,12 @@
   &__layout {
     display: grid;
     grid-template-columns: var(--wd-aside) minmax(0, 1fr);
-    gap: var(--wd-gap);
-    max-width: var(--wd-max);
     margin: 0 auto;
     padding: 0 var(--wd-pad);
+    padding-left: 32px;
   }
 
   &__body {
-    padding: clamp(36px, 5vw, 64px) 0;
   }
 
   // ── Sticky info column ─────────────────────────────────────
@@ -126,6 +123,14 @@
     position: sticky;
     top: 88px;
     align-self: start;
+    padding-top: 64px;
+    height: 100%;
+    max-height: calc(100vh - 88px);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    border-right: 1px solid #e6e6e6;
   }
 
   &__aside-heading {
@@ -138,10 +143,17 @@
   }
 
   &__aside-desc {
-    margin: 0;
-    font-size: 13px;
-    line-height: 1.7;
-    color: #5d626d;
+    p {
+      margin: 0;
+      font-family: "Inter";
+      font-size: 12.6px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 20px; /* 158.73% */
+      min-height: 400px;
+      color: #14151a;
+      opacity: 0.7;
+    }
   }
 
   &__meta {
@@ -154,19 +166,26 @@
   }
 
   &__meta-item {
-    dt {
-      font-size: 10px;
-      font-weight: var(--fw-semibold);
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--color-grey, #8a8f9c);
+    .dt {
       margin-bottom: 6px;
+      color: rgba(27, 37, 64, 0.52);
+      font-family: "TT Norms Pro";
+      font-size: 10px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
     }
 
-    dd {
+    .dd {
       margin: 0;
-      font-size: 14px;
-      font-weight: var(--fw-semibold);
+      color: #14151a;
+      font-family: "TT Norms Pro";
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 20px;
     }
   }
 
@@ -180,21 +199,40 @@
   }
 
   &__tag {
-    padding: 7px 14px;
+    padding: 8px;
     border: 1px solid $line;
-    border-radius: var(--radius-pill, 999px);
-    font-size: 11px;
-    font-weight: var(--fw-medium);
-    letter-spacing: 0.03em;
+    border-radius: 999px;
+    background: #e9eaec;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-transform: uppercase;
-    color: #4a4f5a;
+    color: rgba(27, 37, 64, 0.52);
+    font-family: "TT Norms Pro";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 0.72px;
+    text-transform: uppercase;
   }
 
   // ── Gallery ────────────────────────────────────────────────
   &__gallery {
     display: flex;
     flex-direction: column;
-    gap: clamp(14px, 1.6vw, 22px);
+    padding-top: 152px;
+    padding-bottom: 152px;
+    padding-left: 32px;
+    width: 100%;
+    max-width: 804px;
+    justify-self: center;
+
+    picture {
+      img {
+        width: 100%;
+      }
+    }
   }
 
   &__shot-row {
@@ -217,8 +255,14 @@
 
   // ── Story panel ────────────────────────────────────────────
   &__story {
-    background: #f4f5f6;
-    padding: clamp(48px, 7vw, 96px) 0;
+    // Full-width panel offset by the aside column (+ layout padding) so the
+    // grey background starts at the aside / gallery divider and reaches the
+    // right edge, matching the design.
+    margin-left: calc(var(--wd-aside) + 32px);
+    padding: 96px 150px;
+    border-top: 1px solid rgba(12, 38, 77, 0.16);
+    border-bottom: 1px solid rgba(12, 38, 77, 0.16);
+    background: rgba(12, 38, 77, 0.04);
   }
 
   &__story-spacer {
@@ -226,40 +270,87 @@
   }
 
   &__story-heading {
-    margin: 0 0 18px;
-    font-size: 15px;
-    font-weight: var(--fw-bold);
-    line-height: 1.5;
-    text-transform: uppercase;
+    p {
+      margin: 0 0 18px;
+      color: #14151a;
+      font-family: "TT Norms Pro";
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 140%; /* 22.4px */
+      text-transform: uppercase;
+    }
   }
 
   &__story-desc {
-    margin: 0;
-    max-width: 640px;
-    font-size: 13px;
-    line-height: 1.8;
-    color: #5d626d;
+    p {
+      margin: 0;
+      max-width: 640px;
+      color: #14151a;
+      opacity: 0.7;
+      font-family: "Inter";
+      font-size: 12.6px;
+      font-style: normal;
+      font-weight: var(--font-weight-400, 400);
+      line-height: var(--line-height-20, 20px); /* 158.73% */
+    }
   }
 
   // ── Pager ──────────────────────────────────────────────────
   &__pager {
     display: grid;
     grid-template-columns: var(--wd-aside) minmax(0, 1fr);
+    // Match &__layout's left padding so the column split lines up
+    // with the aside / gallery divider in the body above.
+    padding-left: 32px;
     align-items: stretch;
     min-height: 64px;
     border-top: 1px solid $line;
   }
 
   &__pager-all {
-    display: inline-flex;
+    display: flex;
+    justify-content: center;
     align-items: center;
-    gap: 12px;
-    padding: 0 var(--wd-pad);
-    font-size: 12px;
-    font-weight: var(--fw-semibold);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: $ink;
+    min-height: 112px;
+
+    a,
+    .ccm-block-feature-link {
+      display: inline-flex;
+      justify-content: center;
+      width: 100%;
+      color: #001033;
+      font-family: "TT Norms Pro";
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      letter-spacing: 0.72px;
+      text-transform: uppercase;
+
+      .ccm-block-feature-link-text {
+        a {
+          span {
+            padding-right: 16px;
+          }
+        }
+      }
+    }
+
+    p {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 var(--wd-pad);
+      color: #001033;
+      font-family: "TT Norms Pro";
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      letter-spacing: 0.72px;
+      text-transform: uppercase;
+    }
 
     &:hover {
       color: $azure;
@@ -269,7 +360,7 @@
   &__pager-plus {
     font-size: 18px;
     line-height: 1;
-  }
+  } 
 
   &__pager-next {
     position: relative;
@@ -277,33 +368,98 @@
     align-items: center;
     gap: 18px;
     padding: 0 clamp(20px, 4vw, 56px);
+    padding-right: calc(clamp(80px, 14vw, 180px) + 24px);
     overflow: hidden;
     background: $azure;
     color: #fff;
+    text-decoration: none;
 
     &:hover .work-detail__pager-name {
       color: #fff;
     }
+
+    &:hover .work-detail__pager-art {
+      opacity: 1;
+    }
   }
 
   &__pager-name {
+    min-width: 0; // allow the name to shrink + ellipsis as a flex child
     font-family: var(--font-mono);
     font-size: clamp(18px, 2.6vw, 28px);
     font-weight: var(--fw-bold);
     letter-spacing: 0.28em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.85);
+    color: rgba(255, 255, 255, 0.95);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    > svg {
+      flex-shrink: 0;
+      width: 16px;
+      height: 16px;
+      margin-left: auto;
+      color: currentColor;
+    }
+
+    .ccm-block-next-previous {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
+      color: inherit;
+    }
+
+    .ccm-block-next-previous-header {
+      h5 {
+        margin: 0;
+        font-family: "TT Norms Pro";
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.7);
+      }
+    }
+
+    .ccm-block-next-previous-next-link {
+      margin: 0;
+
+      a {
+        display: inline-flex;
+        align-items: center;
+        color: #fff;
+        text-decoration: none;
+        font-family: var(--font-mono);
+        font-size: clamp(18px, 2.6vw, 28px);
+        font-weight: var(--fw-bold);
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+    }
   }
 
   &__pager-cue {
+    flex-shrink: 0;
     display: inline-flex;
     align-items: center;
     gap: 8px;
     margin-left: auto;
+    font-family: "TT Norms Pro";
     font-size: 12px;
     font-weight: var(--fw-semibold);
     letter-spacing: 0.14em;
     text-transform: uppercase;
+    color: #fff;
+    white-space: nowrap;
+
+    svg {
+      flex-shrink: 0;
+      width: 16px;
+      height: 16px;
+      color: currentColor;
+    }
   }
 
   &__pager-art {
@@ -312,10 +468,7 @@
     top: 0;
     bottom: 0;
     width: clamp(80px, 14vw, 180px);
-    background: var(--next-art) center / cover no-repeat;
-    -webkit-mask-image: linear-gradient(90deg, transparent, #000 60%);
-    mask-image: linear-gradient(90deg, transparent, #000 60%);
-    opacity: 0.85;
+    background: var(--next-art) center / cover no-repeat; 
   }
 
   // ── Responsive ─────────────────────────────────────────────
@@ -325,8 +478,17 @@
       grid-template-columns: 1fr;
     }
 
+    // reduce large left padding on narrow screens
+    &__layout { padding-left: 16px; padding-right: 16px; }
+    &__pager { padding-left: 16px; padding-right: 16px; }
+
     &__aside {
       position: static;
+    }
+
+    &__story {
+      margin-left: 0;
+      padding: 48px 24px;
     }
 
     &__story-spacer {
@@ -339,10 +501,14 @@
 
     &__pager-all {
       padding: 18px var(--wd-pad);
+      padding-left: 16px;
+      padding-right: 16px;
     }
 
     &__pager-next {
       padding: 18px var(--wd-pad);
+      padding-left: 16px;
+      padding-right: 16px;
       min-height: 72px;
     }
 
@@ -350,4 +516,68 @@
       margin-top: -64px;
     }
   }
+  // Additional responsive breakpoints (md, sm)
+  @include respond-to(md) {
+    &__layout { padding-left: 12px; padding-right: 12px; }
+
+    &__gallery {
+      padding-top: 96px;
+      padding-bottom: 96px;
+      padding-left: 0;
+      width: 100%;
+      max-width: 804px;
+    }
+
+    &__shot-row {
+      grid-template-columns: 1fr;
+    }
+
+    &__aside {
+      position: static;
+      border-right: none;
+      padding-top: 24px;
+      max-height: none;
+    }
+
+    &__aside-desc {
+      p { min-height: auto; font-size: 13px; }
+    }
+
+    &__story { padding: 64px 32px; margin-left: 0; }
+
+    &__pager-art { display: none; }
+  }
+
+  @include respond-to(sm) {
+    &__layout { padding-left: 8px; padding-right: 8px; }
+
+    &__gallery {
+      padding-top: 56px;
+      padding-bottom: 56px;
+      padding-left: 8px;
+    }
+
+    &__shot {
+      border-radius: 6px;
+    }
+
+    &__pager-next {
+      padding: 12px 8px;
+      padding-right: 8px;
+      min-height: 56px;
+    }
+
+    &__pager-all {
+      padding: 12px 8px;
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+
+    &__tags { gap: 6px; }
+
+    &__meta { gap: 12px 16px; padding-top: 16px; margin-top: 20px; }
+
+    &__aside-desc { p { min-height: auto; } }
+  }
 }
+

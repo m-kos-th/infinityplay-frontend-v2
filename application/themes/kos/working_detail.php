@@ -177,20 +177,93 @@ $project = [
        PAGER — back to catalogue (left) · next project (right)
   ═════════════════════════════════════════════════════════════════ -->
     <nav class="work-detail__pager" aria-label="Project navigation">
-        <a class="work-detail__pager-all" href="working.html">
+
+
+        <div class="work-detail__pager-all">
+            <?php
+            $content = new Area('Work detail Page: pager all');
+            $content->display($c);
+            ?>
+        </div>
+
+        <!-- <a class="work-detail__pager-all" href="working.html">
             <span class="work-detail__pager-plus" aria-hidden="true">+</span>
             <span>See all games</span>
-        </a>
-        <a class="work-detail__pager-next" href="#"
-            style="--next-art:url('<?php echo $img; ?>/pager-next.jpg')">
-            <span class="work-detail__pager-name">Dawn of Damned</span>
-            <span class="work-detail__pager-cue">Next
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path d="M7 17L17 7M17 7H9M17 7v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-            </span>
-            <span class="work-detail__pager-art" aria-hidden="true"></span>
-        </a>
+        </a> -->
+
+
+
+        <?php
+        // ── Resolve the "next" game page to drive the pager below ────────────
+        // Reuse the editor's "Next & Previous Nav" block so its settings
+        // (order, Loop Navigation, exclude_nav, permissions) are honoured, then
+        // pull the key-art straight from that page's "thumbnail" attribute.
+        $nextPage = null;
+        $nextLabel = 'Next';
+        try {
+            $area = \Concrete\Core\Area\Area::get($c, 'Work detail Page: pager name');
+            if (is_object($area)) {
+                foreach ($area->getAreaBlocksArray($c) as $b) {
+                    if ($b->getBlockTypeHandle() !== 'next_previous') {
+                        continue;
+                    }
+                    $bc = $b->getController();
+                    if (!empty($bc->nextLabel)) {
+                        $nextLabel = (string) $bc->nextLabel;
+                    }
+                    if (method_exists($bc, 'getNextCollection')) {
+                        $np = $bc->getNextCollection();
+                        if (is_object($np) && !$np->isError()) {
+                            $nextPage = $np;
+                        }
+                    }
+                    break;
+                }
+            }
+        } catch (\Throwable $e) {
+            $nextPage = null;
+        }
+
+        $nextName = $nextLink = $nextArt = '';
+        if (is_object($nextPage)) {
+            $nextName  = (string) $nextPage->getCollectionName();
+            $nextLink  = (string) $nextPage->getCollectionLink();
+            // The "thumbnail" File entity proxies getURL() to its approved
+            // version via __call, so method_exists() is unreliable here — call
+            // it directly (same pattern as elements/function.php).
+            $nextThumb = $nextPage->getAttribute('thumbnail');
+            if (is_object($nextThumb)) {
+                $nextArt = (string) $nextThumb->getURL();
+            }
+        }
+        ?>
+
+        <?php if (is_object($nextPage) && !$c->isEditMode()): ?>
+            <a class="work-detail__pager-next" href="<?php echo htmlspecialchars($nextLink); ?>"
+                <?php if ($nextArt !== ''): ?>style="--next-art:url('<?php echo htmlspecialchars($nextArt); ?>')"<?php endif; ?>>
+                <span class="work-detail__pager-name"><?php echo htmlspecialchars($nextName); ?></span>
+                <span class="work-detail__pager-cue">
+                    <?php echo htmlspecialchars($nextLabel); ?>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M7 17L17 7M17 7H9M17 7v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </span>
+                <span class="work-detail__pager-art" aria-hidden="true"></span>
+            </a>
+        <?php else: ?>
+            <div class="work-detail__pager-next">
+                <div class="work-detail__pager-name">
+                    <?php
+                    $content = new Area('Work detail Page: pager name');
+                    $content->display($c);
+                    ?>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M7 17L17 7M17 7H9M17 7v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <div class="work-detail__pager-art" aria-hidden="true"></div>
+            </div>
+        <?php endif; ?>
     </nav>
 
 </main>
