@@ -3,21 +3,27 @@
 // ============================================================
 
 .stats {
-  position: relative;
   background: #fff;
   overflow: hidden;
-  z-index: 5;
   border-top: 1px solid $line;
+
+  .mode-view & {
+    position: relative;
+    z-index: 5;
+  }
 
   &:before {
     background: linear-gradient(180deg, #fff 0%, rgba(255, 255, 255, 0) 100%);
     content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 250px;
-    width: 100%;
-    z-index: 1;
+
+    .mode-view & {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 250px;
+      width: 100%;
+      z-index: 1;
+    }
   }
 
   &__hero {
@@ -33,55 +39,61 @@
   }
 
   &__circuit {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    --orb-shift-y: -74px;
-    width: min(1200px, calc(100% - 48px));
-    aspect-ratio: 1200 / 550;
-    transform: translate(-50%, -52%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: rgba(12, 28, 64, 0.08);
-    opacity: 0.95;
-    pointer-events: none;
-    z-index: 1;
-    overflow: hidden;
-    background: #eaeaea;
+    .mode-view & {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      --orb-shift-y: -74px;
+      width: min(1200px, calc(100% - 48px));
+      aspect-ratio: 1200 / 550;
+      transform: translate(-50%, -52%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(12, 28, 64, 0.08);
+      opacity: 0.95;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+      background: #eaeaea;
+    }
 
     &-art {
       transform: scale(1.01);
     }
 
     &::before {
-      content: "";
-      position: absolute;
-      left: 50%;
-      top: calc(50% + var(--orb-shift-y));
-      width: clamp(34px, 5.2vw, 74px);
-      height: clamp(34px, 5.2vw, 74px);
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      background: rgba(0, 96, 255, 0.9);
-      filter: blur(14px);
-      opacity: 0.8;
-      // Figma sequence: Default -> Variant2 -> Variant3 -> Default
-      animation: stats-blue-orb-loop 3.8s linear infinite;
-      z-index: -1;
+      .mode-view & {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: calc(50% + var(--orb-shift-y));
+        width: clamp(34px, 5.2vw, 74px);
+        height: clamp(34px, 5.2vw, 74px);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(0, 96, 255, 0.9);
+        filter: blur(14px);
+        opacity: 0.8;
+        // Figma sequence: Default -> Variant2 -> Variant3 -> Default
+        animation: stats-blue-orb-loop 3.8s linear infinite;
+        z-index: -1;
+      }
     }
 
     &::after {
-      content: "";
-      position: absolute;
-      inset: 16% 18%;
-      background: radial-gradient(
-        circle,
-        rgba(0, 96, 255, 0.12) 0%,
-        rgba(0, 96, 255, 0) 72%
-      );
-      filter: blur(44px);
-      z-index: -1;
+      .mode-view & {
+        content: "";
+        position: absolute;
+        inset: 16% 18%;
+        background: radial-gradient(
+          circle,
+          rgba(0, 96, 255, 0.12) 0%,
+          rgba(0, 96, 255, 0) 72%
+        );
+        filter: blur(44px);
+        z-index: -1;
+      }
     }
   }
 
@@ -170,50 +182,52 @@
     letter-spacing: var(--Static-Headline-Large-Tracking, 0);
     text-transform: uppercase;
     margin-top: 225px;
-    max-width: 760px;
+    max-width: 530px;
   }
 
   // Floating decorative items
   &__float {
-    position: absolute;
-    width: clamp(70px, 8.5vw, 130px);
-    aspect-ratio: 1;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    filter: drop-shadow(0 18px 30px rgba(0, 0, 0, 0.18));
-    will-change: transform;
-    z-index: 2;
+    .mode-view & {
+      position: absolute;
+      width: clamp(70px, 8.5vw, 130px);
+      aspect-ratio: 1;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      filter: drop-shadow(0 18px 30px rgba(0, 0, 0, 0.18));
+      will-change: transform;
+      z-index: 2;
 
-    &--1 {
-      top: 14%;
-      left: 14%;
-      background-image: url("../../images/float-headphones.webp");
-    }
-    &--2 {
-      top: 13%;
-      right: 13%;
-      background-image: url("../../images/float-controller.webp");
-    }
-    &--3 {
-      top: 42%;
-      left: 21%;
-      background-image: url("../../images/float-coffee.webp");
-    }
-    &--4 {
-      top: 44%;
-      right: 21%;
-      background-image: url("../../images/float-folder.webp");
-    }
-    &--5 {
-      bottom: 18%;
-      left: 11%;
-      background-image: url("../../images/float-tablet.webp");
-    }
-    &--6 {
-      bottom: 16%;
-      right: 9%;
-      background-image: url("../../images/float-laptop.webp");
+      &--1 {
+        top: 14%;
+        left: 14%;
+        background-image: url("../../images/float-headphones.webp");
+      }
+      &--2 {
+        top: 13%;
+        right: 13%;
+        background-image: url("../../images/float-controller.webp");
+      }
+      &--3 {
+        top: 42%;
+        left: 21%;
+        background-image: url("../../images/float-coffee.webp");
+      }
+      &--4 {
+        top: 44%;
+        right: 21%;
+        background-image: url("../../images/float-folder.webp");
+      }
+      &--5 {
+        bottom: 18%;
+        left: 11%;
+        background-image: url("../../images/float-tablet.webp");
+      }
+      &--6 {
+        bottom: 16%;
+        right: 9%;
+        background-image: url("../../images/float-laptop.webp");
+      }
     }
   }
 
@@ -316,19 +330,21 @@
 
   // Blue glow overlay at bottom of stats section
   &__glow {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 55vh;
-    pointer-events: none;
-    background: linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(116, 185, 255, 0.55) 55%,
-      #1273ff 100%
-    );
-    filter: blur(2px);
+    .mode-view & {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 55vh;
+      pointer-events: none;
+      background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(116, 185, 255, 0.55) 55%,
+        #1273ff 100%
+      );
+      filter: blur(2px);
+    }
   }
 
   .btn {
@@ -339,19 +355,31 @@
 
   // ── Tablet — compact the scrolling marquee ───────────────
   @include respond-to(md) {
-    &__col { min-width: clamp(210px, 32vw, 300px); }
+    &__col {
+      min-width: clamp(210px, 32vw, 300px);
+    }
 
     &__cell {
       flex-basis: 24vh;
       padding: 0 3.6vw;
 
-      &--top    { padding-top: 24px; }
-      &--bottom { padding-bottom: 24px; }
+      &--top {
+        padding-top: 24px;
+      }
+      &--bottom {
+        padding-bottom: 24px;
+      }
     }
 
-    &__value   { font-size: clamp(44px, 8vw, 76px); }
-    &__sub     { max-width: 220px; }
-    &__marquee { padding-bottom: 14vh; }
+    &__value {
+      font-size: clamp(44px, 8vw, 76px);
+    }
+    &__sub {
+      max-width: 220px;
+    }
+    &__marquee {
+      padding-bottom: 14vh;
+    }
   }
 
   // ── Mobile ───────────────────────────────────────────────
@@ -360,7 +388,9 @@
       padding: 10vh 16px 9vh;
     }
 
-    &__float { display: none; } // keep the headline / button area clean
+    &__float {
+      display: none;
+    } // keep the headline / button area clean
 
     &__circuit {
       --orb-shift-y: -52px;
@@ -375,23 +405,37 @@
     }
 
     // Compact the marquee so a stat sits nicely on a narrow screen.
-    &__col { min-width: 62vw; }
+    &__col {
+      min-width: 62vw;
+    }
 
     &__cell {
       flex-basis: 19vh;
       padding: 0 7vw;
 
-      &--top    { padding-top: 20px; }
-      &--bottom { padding-bottom: 20px; }
+      &--top {
+        padding-top: 20px;
+      }
+      &--bottom {
+        padding-bottom: 20px;
+      }
     }
 
     &__value {
       font-size: clamp(40px, 14vw, 62px);
       margin-top: 10px;
     }
-    &__label   { font-size: 10px; }
-    &__sub     { font-size: 10px; letter-spacing: 0.14em; max-width: 70vw; }
-    &__marquee { padding-bottom: 8vh; }
+    &__label {
+      font-size: 10px;
+    }
+    &__sub {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      max-width: 70vw;
+    }
+    &__marquee {
+      padding-bottom: 8vh;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {

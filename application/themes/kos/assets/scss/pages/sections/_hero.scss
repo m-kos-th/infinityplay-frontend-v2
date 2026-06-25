@@ -2,22 +2,38 @@
 // sections/_hero.scss
 // ============================================================
 
+.site-nav {
+  display: none;
+  visibility: hidden;
+  z-index: -1;
+
+  &--active {
+    display: block;
+    visibility: visible;
+    z-index: 3;
+  }
+
+  &--open {
+    z-index: 10;
+  }
+}
+
 .hero {
   position: relative;
-  z-index: 2;
   isolation: isolate;
   min-height: calc(100svh);
   overflow: hidden;
   background: #010216;
+  z-index: 3;
 
-  &:after{
+  &:after {
     content: "";
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(0deg, #010216 0%, rgba(1, 2, 22, 0.00) 100%);
+    background: linear-gradient(0deg, #010216 0%, rgba(1, 2, 22, 0) 100%);
     pointer-events: none;
     z-index: 1;
   }
@@ -30,12 +46,11 @@
     position: absolute;
     top: 28px;
     left: 28px;
-    z-index: 4;
+    z-index: 10;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     color: var(--color-white);
-    pointer-events: none;
     filter: drop-shadow(0 18px 34px rgba(0, 0, 0, 0.18));
 
     .site-nav__toggle,
@@ -125,7 +140,9 @@
     mix-blend-mode: difference;
   }
 
-  &__title {
+  &__title,
+  h1,
+  h2 {
     font-family: var(--font-display);
     font-size: 40px;
     font-style: normal;
@@ -143,7 +160,8 @@
     display: none;
   }
 
-  &__description {
+  &__description,
+  p {
     width: 100%;
     padding-top: 40px;
     margin-top: 40px;

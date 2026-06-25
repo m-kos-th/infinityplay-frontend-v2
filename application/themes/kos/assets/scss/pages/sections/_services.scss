@@ -16,7 +16,7 @@
   }
 }
 
-.services {
+.mode-view .services {
   position: relative;
 
   &__pin {
@@ -114,23 +114,25 @@
   }
 
   &__head-title {
-    margin-top: 28px;
-    font-family: var(--font-display);
-    font-weight: var(--fw-bold);
-    font-size: clamp(30px, 3.9vw, 40px);
-    text-transform: uppercase;
-    color: #fff;
-    text-align: center;
-    leading-trim: both;
-    text-edge: cap;
-    font-style: normal;
-    line-height: 120%; /* 48px */
-    letter-spacing: 0.8px;
+    p {
+      margin-top: 28px;
+      font-family: var(--font-display);
+      font-weight: var(--fw-bold);
+      font-size: clamp(30px, 3.9vw, 40px);
+      text-transform: uppercase;
+      color: #fff;
+      text-align: center;
+      leading-trim: both;
+      text-edge: cap;
+      font-style: normal;
+      line-height: 120%; /* 48px */
+      letter-spacing: 0.8px;
 
-    @include respond-to(sm) {
-      margin-top: 18px;
-      font-size: clamp(24px, 7vw, 34px);
-      padding: 0 6vw;
+      @include respond-to(sm) {
+        margin-top: 18px;
+        font-size: clamp(24px, 7vw, 34px);
+        padding: 0 6vw;
+      }
     }
   }
 
@@ -397,7 +399,12 @@
     }
   }
 
-  &__title {
+  &__title,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: var(--font-mono); // Doto (dotted)
     font-weight: var(--fw-bold);
     font-size: clamp(32px, 3.4vw, 50px);
@@ -416,6 +423,12 @@
     }
     @include respond-to(sm) {
       font-size: clamp(28px, 8vw, 40px);
+    }
+  }
+
+  &__desc {
+    br {
+      display: none;
     }
   }
 
@@ -443,7 +456,8 @@
     }
   }
 
-  &__checklist {
+  &__checklist,
+  ul {
     margin-top: 38px;
     display: flex;
     flex-direction: column;
@@ -459,7 +473,8 @@
     }
   }
 
-  &__check {
+  &__check,
+  li {
     @include corner-svg(5.55px);
     position: relative;
     display: flex;
@@ -483,6 +498,17 @@
       padding: 11px 13px;
       font-size: 13px;
       gap: 10px;
+    }
+
+    &:before {
+      content: "";
+      background: url("/application/themes/kos/assets/images/check-icon.svg")
+        no-repeat center;
+      flex: 0 0 auto;
+      width: 18px;
+      height: 18px;
+      display: grid;
+      place-items: center;
     }
   }
 
