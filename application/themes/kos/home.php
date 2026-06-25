@@ -70,22 +70,11 @@ $this->inc('elements/header.php');
           <div class="about__cloud about__cloud--2" aria-hidden="true"></div>
         </figure>
       </div>
-
-      <div class="about__content">
-        <div class="btn__badge-wrap">
-          <span class="btn__badge">
-            <span class="btn__badge-text">About Us</span>
-          </span>
-          <span class="btn__sparkles" aria-hidden="true"></span>
-        </div>
-        <h2 class="about__title" id="about-title">
-          Infinite Artistry<br>Expert Engineering
-        </h2>
-        <p class="about__description">
-          We are a full-cycle game development studio and production house dedicated to
-          pushing the boundaries of digital storytelling.
-        </p>
-      </div>
+      <?php
+        $content = new Area('About Content');
+        $content->setBlockLimit(1);
+        $content->display($c);
+      ?>
     </div>
   </section>
 
@@ -101,85 +90,18 @@ $this->inc('elements/header.php');
       <div class="marquee marquee--work" id="marquee-work" aria-hidden="true">
         FEATURED WORK&nbsp;&nbsp;&nbsp;FEATURED WORK&nbsp;&nbsp;&nbsp;FEATURED WORK&nbsp;&nbsp;&nbsp;FEATURED WORK&nbsp;&nbsp;&nbsp;FEATURED WORK&nbsp;&nbsp;&nbsp;FEATURED WORK&nbsp;&nbsp;&nbsp;
       </div>
-
+      
       <!-- Scroll progress counter -->
-      <div class="work__counter" aria-hidden="true">
+      <!-- <div class="work__counter" aria-hidden="true">
         <span class="work__counter-current">01</span>
         <span class="work__counter-sep">/</span>
         <span class="work__counter-total">04</span>
-      </div>
+      </div> -->
 
-      <div class="work__grid-wrapper">
-        <!-- Project 1: Dawn of the Damned -->
-        <article class="work__grid" data-index="0" aria-label="Project: Dawn of the Damned">
-          <div class="work__image work__image--dawn"></div>
-          <div class="work__content">
-            <div class="work__content-inner">
-              <div class="work__logo work__logo--dawn">
-                <span class="work__logo-fallback work__logo-fallback--dawn" aria-hidden="true">
-                  Dawn<br>of the<br>Damned
-                </span>
-              </div>
-              <p class="work__slide-description">Post-apocalyptic zombie survival shooter on Unreal Engine 5.</p>
-              <a class="btn" href="#" aria-label="Discover Dawn of the Damned"><svg class="btn__cap btn__cap--left" width="17" height="38" viewBox="0 0 17 38" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M0 9.65686C0 8.59599 0.421427 7.57857 1.17157 6.82843L6.82843 1.17157C7.57857 0.421426 8.59599 0 9.65685 0L17 0V38H9.65685C8.59599 38 7.57857 37.5786 6.82843 36.8284L1.17157 31.1716C0.421426 30.4214 0 29.404 0 28.3431V9.65686Z" fill="#ECEAE5"/></svg><span class="btn__label">Discover</span><svg class="btn__cap btn__cap--right" xmlns="http://www.w3.org/2000/svg" width="17" height="38" viewBox="0 0 17 38" fill="none" aria-hidden="true"><path d="M17 9.65686C17 8.59599 16.5786 7.57857 15.8284 6.82843L10.1716 1.17157C9.42143 0.421426 8.40401 0 7.34315 0L0 0V38H7.34315C8.40401 38 9.42143 37.5786 10.1716 36.8284L15.8284 31.1716C16.5786 30.4214 17 29.404 17 28.3431V9.65686Z" fill="#ECEAE5"/></svg></a>
-            </div>
-          </div>
-          <div class="work__bg-pattern"></div>
-        </article>
-
-        <!-- Project 2: Trick or Seek -->
-        <article class="work__grid work__grid--reverse" data-index="1" aria-label="Project: Trick or Seek">
-          <div class="work__bg-pattern"></div>
-          <div class="work__content">
-            <div class="work__content-inner">
-              <div class="work__logo work__logo--trick">
-                <span class="work__logo-fallback work__logo-fallback--trick" aria-hidden="true">
-                  Trick<br>or Seek
-                </span>
-              </div>
-              <p class="work__slide-description">Charming multiplayer hide-and-seek party game.</p>
-              <a class="btn" href="#" aria-label="Discover Trick or Seek"><svg class="btn__cap btn__cap--left" width="17" height="38" viewBox="0 0 17 38" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M0 9.65686C0 8.59599 0.421427 7.57857 1.17157 6.82843L6.82843 1.17157C7.57857 0.421426 8.59599 0 9.65685 0L17 0V38H9.65685C8.59599 38 7.57857 37.5786 6.82843 36.8284L1.17157 31.1716C0.421426 30.4214 0 29.404 0 28.3431V9.65686Z" fill="#ECEAE5"/></svg><span class="btn__label">Discover</span><svg class="btn__cap btn__cap--right" xmlns="http://www.w3.org/2000/svg" width="17" height="38" viewBox="0 0 17 38" fill="none" aria-hidden="true"><path d="M17 9.65686C17 8.59599 16.5786 7.57857 15.8284 6.82843L10.1716 1.17157C9.42143 0.421426 8.40401 0 7.34315 0L0 0V38H7.34315C8.40401 38 9.42143 37.5786 10.1716 36.8284L15.8284 31.1716C16.5786 30.4214 17 29.404 17 28.3431V9.65686Z" fill="#ECEAE5"/></svg></a>
-            </div>
-          </div>
-          <div class="work__image work__image--trick"></div>
-        </article>
-
-        <!-- Project 3: Outlanders -->
-        <article class="work__grid" data-index="2" aria-label="Project: Outlanders">
-          <div class="work__image work__image--outlanders">
-            <video class="work__video" src="/application/themes/kos/assets/video/work-outlanders.mp4" autoplay loop muted playsinline></video>
-          </div>
-          <div class="work__content">
-            <div class="work__content-inner">
-              <div class="work__logo work__logo--outlanders">
-                <span class="work__logo-fallback work__logo-fallback--outlanders" aria-hidden="true">
-                  Outlanders
-                </span>
-              </div>
-              <p class="work__slide-description">Blockchain-integrated MMORPG set in an open fantasy world.</p>
-              <a class="btn" href="#" aria-label="Discover Outlanders"><svg class="btn__cap btn__cap--left" width="17" height="38" viewBox="0 0 17 38" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M0 9.65686C0 8.59599 0.421427 7.57857 1.17157 6.82843L6.82843 1.17157C7.57857 0.421426 8.59599 0 9.65685 0L17 0V38H9.65685C8.59599 38 7.57857 37.5786 6.82843 36.8284L1.17157 31.1716C0.421426 30.4214 0 29.404 0 28.3431V9.65686Z" fill="#ECEAE5"/></svg><span class="btn__label">Discover</span><svg class="btn__cap btn__cap--right" xmlns="http://www.w3.org/2000/svg" width="17" height="38" viewBox="0 0 17 38" fill="none" aria-hidden="true"><path d="M17 9.65686C17 8.59599 16.5786 7.57857 15.8284 6.82843L10.1716 1.17157C9.42143 0.421426 8.40401 0 7.34315 0L0 0V38H7.34315C8.40401 38 9.42143 37.5786 10.1716 36.8284L15.8284 31.1716C16.5786 30.4214 17 29.404 17 28.3431V9.65686Z" fill="#ECEAE5"/></svg></a>
-            </div>
-          </div>
-          <div class="work__bg-pattern"></div>
-        </article>
-
-        <!-- Project 4: UMT -->
-        <article class="work__grid" data-index="3" aria-label="Project: Ultimate Muay Thai">
-          <div class="work__bg-pattern"></div>
-          <div class="work__content">
-            <div class="work__content-inner">
-              <div class="work__logo work__logo--umt">
-                <span class="work__logo-fallback work__logo-fallback--umt" aria-hidden="true">UMT</span>
-              </div>
-              <p class="work__slide-description">Ultimate Muay Thai — competitive fighting experience.</p>
-              <a class="btn" href="#" aria-label="Discover Ultimate Muay Thai"><svg class="btn__cap btn__cap--left" width="17" height="38" viewBox="0 0 17 38" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M0 9.65686C0 8.59599 0.421427 7.57857 1.17157 6.82843L6.82843 1.17157C7.57857 0.421426 8.59599 0 9.65685 0L17 0V38H9.65685C8.59599 38 7.57857 37.5786 6.82843 36.8284L1.17157 31.1716C0.421426 30.4214 0 29.404 0 28.3431V9.65686Z" fill="#ECEAE5"/></svg><span class="btn__label">Discover</span><svg class="btn__cap btn__cap--right" xmlns="http://www.w3.org/2000/svg" width="17" height="38" viewBox="0 0 17 38" fill="none" aria-hidden="true"><path d="M17 9.65686C17 8.59599 16.5786 7.57857 15.8284 6.82843L10.1716 1.17157C9.42143 0.421426 8.40401 0 7.34315 0L0 0V38H7.34315C8.40401 38 9.42143 37.5786 10.1716 36.8284L15.8284 31.1716C16.5786 30.4214 17 29.404 17 28.3431V9.65686Z" fill="#ECEAE5"/></svg></a>
-            </div>
-          </div>
-          <div class="work__image work__image--umt">
-            <video class="work__video" src="/application/themes/kos/assets/video/work-umt.mp4" autoplay loop muted playsinline></video>
-          </div>
-        </article>
-      </div>
+      <?php
+        $content = new Area('Work Content');
+        $content->display($c);
+      ?>
 
     </div><!-- /.work__pin -->
   </section>
@@ -336,10 +258,11 @@ $this->inc('elements/header.php');
       <div class="services__bg-dark" aria-hidden="true"></div>
 
       <!-- Section header — pinned at the top, stays put through the deck -->
-      <header class="services__head">
-        <span class="pill">Services</span>
-        <h3 class="services__head-title">Infinite Artistry<br>Expert Engineering</h3>
-      </header>
+      <?php
+        $content = new Area('Services Content');
+        $content->setBlockLimit(1);
+        $content->display($c);
+      ?>
 
       <!-- Deck of 3 columns — sits low under the header, rises to centre as it leaves -->
       <div class="services__deck">

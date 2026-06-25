@@ -138,25 +138,29 @@
      Centred by default; GSAP drops it down at slide 0 (room for the header)
      and lifts it back to centre as the header scrolls away. */
   &__deck {
-    position: absolute;
-    inset: 0;
-    // Above the dark backdrop (GSAP's transform makes this a stacking context,
-    // so without an explicit z-index the whole deck would hide under the overlay).
-    z-index: 2;
+    .mode-view & {
+      position: absolute;
+      inset: 0;
+      // Above the dark backdrop (GSAP's transform makes this a stacking context,
+      // so without an explicit z-index the whole deck would hide under the overlay).
+      z-index: 2;
+    }
   }
 
   /* ---------- LEFT · navigation (fixed rail + marker, list scrolls) ---------- */
   &__nav {
-    position: absolute;
-    left: 3vw;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 5;
-    width: 210px;
-    height: min(460px, 72vh); // viewport the list scrolls within
-    overflow: hidden;
-    padding-left: 36px; // room for the rail + tick
-    // Fade items in/out as they reach the top/bottom edges.
+    .mode-view & {
+      position: absolute;
+      left: 3vw;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 5;
+      width: 210px;
+      height: min(460px, 72vh); // viewport the list scrolls within
+      overflow: hidden;
+      padding-left: 36px; // room for the rail + tick
+      // Fade items in/out as they reach the top/bottom edges.
+    }
     -webkit-mask-image: linear-gradient(
       180deg,
       transparent 0%,
@@ -360,13 +364,15 @@
 
   /* ---------- RIGHT · text column (sits ~120px right of the frame) ---------- */
   &__texts {
-    position: absolute;
-    left: calc(#{$stage-left} + #{$stage-width} + #{$text-gap});
-    top: 0;
-    height: 100%;
-    width: min(420px, 28vw);
-    z-index: 3;
-    overflow: hidden;
+    .mode-view & {
+      position: absolute;
+      left: calc(#{$stage-left} + #{$stage-width} + #{$text-gap});
+      top: 0;
+      height: 100%;
+      width: min(420px, 28vw);
+      z-index: 3;
+      overflow: hidden;
+    }
 
     // Lower band, beneath the image (tablet & phone stacked layout).
     @include respond-to(md) {
@@ -385,8 +391,10 @@
   }
 
   &__text {
-    position: absolute;
-    inset: 0;
+    .mode-view & {
+      position: absolute;
+      inset: 0;
+    }
     display: flex;
     flex-direction: column;
     justify-content: center;

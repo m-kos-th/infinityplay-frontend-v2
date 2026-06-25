@@ -62,42 +62,6 @@
     z-index: 2;
   }
 
-  &__content {
-    position: sticky;
-    top: clamp(72px, calc(50svh - 419px), 160px);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    align-self: flex-start;
-    width: min(720px, 86vw);
-    min-height: 600px;
-    margin: 0 auto;
-    padding-inline: 24px;
-    text-align: center;
-    box-sizing: border-box;
-    overflow: hidden;
-  }
-
-  &__title {
-    @include type-title;
-    @include fluid-type(30px, 46px);
-    margin-top: 30px;
-    line-height: 1.25;
-    letter-spacing: 0.06em;
-  }
-
-  &__description {
-    @include type-body;
-    margin-top: 26px;
-    color: rgba(255, 255, 255, 0.82);
-    font-size: 15px;
-    line-height: 1.75;
-    max-width: 520px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
   // Side characters
   &__character {
     position: absolute;

@@ -28,6 +28,8 @@ $_body = '';
 $_class = [];
 if ($c->isEditMode()) {
     $_class[] = 'mode-edit';
+} else {
+    $_class[] = 'mode-view';
 }
 if ($ux->checkLogin()) {
     $_class[] = 'mode-login';

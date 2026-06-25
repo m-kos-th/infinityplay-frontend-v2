@@ -78,24 +78,13 @@
     position: relative;
     overflow: hidden;
 
-    &--dawn {
-      background-image: url("../../images/work-dawn.webp");
+    img, video {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
     }
-    &--trick {
-      background-image: url("../../images/work-trick.webp");
-    }
-    &--outlanders {
-      .work__video {
-        object-position: 80% 0;
-      }
-    }
-    &--umt {
-      .work__video {
-        object-position: 0 0;
-        scale: 1.5;
-      }
-    }
-    // --outlanders and --umt use <video> — no background-image needed
   }
 
   // ── In-grid video (Outlanders, UMT) ───────────────────────
@@ -250,6 +239,11 @@
       flex-direction: column;
       height: auto;
       min-height: 100svh;
+
+      &--reverse {
+        display: flex;
+        flex-direction: column-reverse; /* หรือใช้ Order ช่วยจัดโครงสร้างใหม่ */
+      }
     }
 
     &__image {
