@@ -6,13 +6,13 @@
 (function (window, document) {
   "use strict";
 
-  function onWindowLoad(callback) {
-    if (document.readyState === "complete") {
+  function onDocumentReady(callback) {
+    if (document.readyState !== "loading") {
       callback();
       return;
     }
 
-    window.addEventListener("load", callback, { once: true });
+    document.addEventListener("DOMContentLoaded", callback, { once: true });
   }
 
   function getErrorMessage(error, fallbackMessage) {
@@ -28,9 +28,9 @@
       "(prefers-reduced-motion: reduce)",
     ).matches;
     const siteNav = document.querySelector(".site-nav");
-    const navToggles = Array.from(
-      document.querySelectorAll(".site-nav__toggle"),
-    );
+    const navToggles = siteNav
+      ? Array.from(siteNav.querySelectorAll(".site-nav__toggle"))
+      : [];
     const navMenu = document.querySelector(".site-nav__menu");
     const heroSection = document.querySelector(".hero");
     const heroNavToggle = document.querySelector(".hero__nav-toggle");
@@ -141,12 +141,9 @@
         heroNavToggle.style.cursor = "pointer";
 
         heroNavToggle.addEventListener("click", (event) => {
-          toggle.addEventListener("click", () => {
+          event.preventDefault();
+          event.stopPropagation();
           setNavState(!siteNav.classList.contains("site-nav--open"));
-        });
-          // event.preventDefault();
-          // event.stopPropagation();
-          // setNavState(!siteNav.classList.contains("site-nav--open"));
         });
       }
 
@@ -208,7 +205,7 @@
     }
   }
 
-  onWindowLoad(initSiteInteractions);
+  onDocumentReady(initSiteInteractions);
 
   if (
     !document.body.classList.contains("mode-edit") &&
