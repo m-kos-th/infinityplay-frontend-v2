@@ -11,9 +11,8 @@ $this->inc('elements/header.php');
   <section class="work-landing__hero" aria-labelledby="works-title">
     <div class="work-landing__hero-bg" aria-hidden="true"></div>
     <div class="work-landing__hero-cut" aria-hidden="true"></div>
-    <video class="work-landing__hero-character" aria-hidden="true" autoplay muted loop playsinline preload="metadata">
-      <source src="<?php echo $view->getThemePath() ?>/assets/images/hero-inner.webm" type="video/webm">
-    </video>
+    <div class="work-landing__hero-character" aria-hidden="true"></div>
+
 
     <div class="work-landing__hero-inner">
       <span class="pill work-landing__eyebrow">Works</span>

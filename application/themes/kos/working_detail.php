@@ -240,7 +240,7 @@ $project = [
 
         <?php if (is_object($nextPage) && !$c->isEditMode()): ?>
             <a class="work-detail__pager-next" href="<?php echo htmlspecialchars($nextLink); ?>"
-                <?php if ($nextArt !== ''): ?>style="--next-art:url('<?php echo htmlspecialchars($nextArt); ?>')"<?php endif; ?>>
+                <?php if ($nextArt !== ''): ?>style="--next-art:url('<?php echo htmlspecialchars($nextArt); ?>')" <?php endif; ?>>
                 <span class="work-detail__pager-name"><?php echo htmlspecialchars($nextName); ?></span>
                 <span class="work-detail__pager-cue">
                     <?php echo htmlspecialchars($nextLabel); ?>
@@ -366,8 +366,14 @@ $project = [
         });
 
         btnClose.addEventListener('click', close);
-        btnPrev.addEventListener('click', function(e) { e.stopPropagation(); step(-1); });
-        btnNext.addEventListener('click', function(e) { e.stopPropagation(); step(1); });
+        btnPrev.addEventListener('click', function(e) {
+            e.stopPropagation();
+            step(-1);
+        });
+        btnNext.addEventListener('click', function(e) {
+            e.stopPropagation();
+            step(1);
+        });
         box.addEventListener('click', function(e) {
             if (e.target === box) close(); // click on the backdrop
         });

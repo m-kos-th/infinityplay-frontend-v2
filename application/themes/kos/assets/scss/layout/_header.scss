@@ -15,11 +15,13 @@
   .menu__col-list {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    // Tightens with the viewport so the gap shrinks alongside the fluid link
+    // font-size below.
+    gap: clamp(2px, 2px, 24px);  
 
     .btn__label {
-      justify-content: flex-start;
-      height: 73px;
+      justify-content: flex-start; 
+      height: clamp(73px, 50px, 50px);  
       padding: 0;
       background: transparent;
     }
@@ -27,7 +29,9 @@
       color: var(--color-azure-18, #1b2540);
       text-align: center;
       font-family: var(--font-display);
-      font-size: 56px;
+      // Fluid down on smaller viewports so the menu links never overflow the
+      // panel (which shrinks to the viewport width below sm).
+      font-size: clamp(28px, 6vw, 56px) !important;
       font-style: normal;
       font-weight: 700;
       text-transform: uppercase;
@@ -314,7 +318,9 @@
       color: var(--color-azure-18, #1b2540);
       text-align: center;
       font-family: var(--font-display);
-      font-size: 56px;
+      // Fluid down on smaller viewports so the menu links never overflow the
+      // panel (which shrinks to the viewport width below sm).
+      font-size: clamp(28px, 6vw, 56px);
       font-style: normal;
       font-weight: 700;
       line-height: 130%;
@@ -333,8 +339,7 @@
 
     @include respond-to(sm) {
       width: min(calc(100vw - 32px), 600px);
-      height: auto;
-      top: calc(100% + 14px);
+      height: auto; 
 
       .site-nav__menu-inner {
         width: 100%;
@@ -451,7 +456,7 @@
 
     &__menu {
       min-width: min(calc(100vw - 32px), 240px);
-      top: calc(100% + 14px);
+       
     }
   }
 }

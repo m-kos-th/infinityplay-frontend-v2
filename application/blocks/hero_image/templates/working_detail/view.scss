@@ -85,10 +85,16 @@ $back-chamfer: 10px; // 45° corner cut on the back button
     filter: drop-shadow(0 14px 30px rgba(20, 133, 255, 0.4));
     transition: transform 0.2s ease, filter 0.2s ease;
 
-    // Font Awesome glyph (set via $icon in view.php)
+    // Inline SVG glyph (set via $backIcon in view.php)
     i {
       font-size: 18px;
       line-height: 1;
+    }
+
+    .ccm-block-hero-image-back-icon {
+      width: 20px;
+      height: 20px;
+      display: block;
     }
 
     &:hover {

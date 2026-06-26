@@ -34,12 +34,14 @@ if ($image === null) {
 $height = (int) $height;
 
 /**
- * Back-button icon — a Font Awesome class string (font-awesome asset is
- * required by the theme). Override $icon to swap, e.g. 'fas fa-arrow-left'.
- * The blue chamfered button itself is drawn in SCSS; this only supplies
- * the glyph (colour/size come from CSS).
+ * Back-button glyph — inline SVG so it never depends on the Font Awesome
+ * asset (the theme only loads font-awesome in the editor context, so an
+ * <i class="fa…"> glyph would render blank for logged-out visitors).
+ * The blue chamfered button itself is drawn in SCSS; colour/size come from CSS.
  */
-$icon = $icon ?? 'fas fa-arrow-circle-up';
+$backIcon = '<svg class="ccm-block-hero-image-back-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">'
+    . '<path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>'
+    . '</svg>';
 
 /**
  * Building the button — append the globe icon after the label.
@@ -65,7 +67,7 @@ if (isset($button)) {
     <div class="ccm-block-hero-image-overlay">
         <!-- Bottom-left: back button + title -->
         <div class="ccm-block-hero-image-lead">
-            <a class="ccm-block-hero-image-back" href="/working" aria-label="<?= t('Back') ?>"><i class="<?= h($icon) ?>" aria-hidden="true"></i></a>
+            <a class="ccm-block-hero-image-back" href="/working" aria-label="<?= t('Back') ?>"><?= $backIcon ?></a>
             <?php if ($title) { ?>
                 <<?=$titleFormat?> class="ccm-block-hero-image-title"><?=$title?></<?=$titleFormat?>>
             <?php } ?>

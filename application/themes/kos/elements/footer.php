@@ -30,7 +30,10 @@
       </nav>
     </div>
 
-    <div class="footer__character" role="img" aria-label="Decorative samurai character"></div>
+    <video class="footer__character" aria-hidden="true" autoplay muted loop playsinline preload="metadata">
+      <source src="<?php echo $view->getThemePath() ?>/assets/images/hero-inner.webm" type="video/webm">
+    </video>
+
 
     <div class="footer__bottom">
       <p class="footer__giant-text">INFINITYPLAY</p>

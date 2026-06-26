@@ -159,10 +159,7 @@
       transform: translateX(-50%);
       width: clamp(320px, 38vw, 574px);
       aspect-ratio: 3 / 4;
-      background-image: url("/application/themes/kos/assets/images/footer-samurai.png");
-      background-size: contain;
-      background-position: bottom center;
-      background-repeat: no-repeat;
+  
       z-index: 1;
 
       // Hide on tablet/mobile so it never overlaps the nav links
