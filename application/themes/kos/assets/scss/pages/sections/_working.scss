@@ -1,0 +1,832 @@
+// ============================================================
+// sections/_work-landing.scss — "Works" landing page HERO + page shell
+// Blue gradient hero with eyebrow, title, filter tabs and the standing
+// character, plus the --wl-* design tokens shared down to the catalogue.
+//
+// The featured banner, catalogue grid, cards and pagination are emitted
+// (and styled) by the page_list "working" block template instead:
+//   application/blocks/page_list/templates/working/view.scss
+// ============================================================
+
+// Animatable angle for the eyebrow's travelling glow.
+@property --wl-glow-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes wl-glow-spin {
+  to {
+    --wl-glow-angle: 360deg;
+  }
+}
+
+.work-landing {
+  // Design spec: 236px gutters left & right (the standing character is exempt
+  // and is positioned independently against the viewport edge).
+  --wl-container: min(1448px, calc(100% - 472px));
+  --wl-gutter: 12px;
+  // Standing character box — shared so the diagonal cut can always sit at the
+  // character's feet (cut top = char top + char height).
+  --wl-char-top: 146px;
+  // Scales with the viewport — tracks height (svh) but is also bound by width
+  // (vw) so the character shrinks on narrower screens. Capped at the 770px
+  // design size, floored so it never gets too small.
+  --wl-char-height: clamp(440px, min(93svh, 55.8vw), 770px);
+  // How far the white cut is raised above the character's feet.
+  --wl-cut-rise: 17px;
+  position: relative;
+
+  // 1301–1389px: the character holds its full 770px design height.
+  @media (min-width: 1301px) {
+    --wl-char-height: min(93svh, 770px);
+  }
+
+  // Above 1389px it grows again with the viewport, capped at 850px.
+  @media (min-width: 1390px) {
+    --wl-char-height: clamp(770px, min(93svh, 55.44vw), 850px);
+  }
+
+  @include respond-to(md) {
+    --wl-container: calc(100% - 80px);
+  }
+
+  @include respond-to(sm) {
+    --wl-container: calc(100% - 40px);
+  }
+
+  &__title {
+    margin-top: 56px;
+    color: #fff;
+    font-family: var(--font-display);
+    // Scale down on narrow viewports so long words ("ENGINEERING") never
+    // overflow the hero container (which is only calc(100% - 40px) wide on sm).
+    font-size: clamp(28px, 6vw, 40px);
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%; /* 48px */
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    overflow-wrap: break-word;
+
+    @include respond-to(sm) {
+      margin-top: 40px;
+    }
+  }
+
+  // ── Hero ──────────────────────────────────────────────────
+  &__hero {
+    position: relative;
+    padding-top: 247px;
+    overflow: visible;
+    isolation: isolate;
+  }
+
+  // Gradient laid as an absolute layer so its height (and therefore the
+  // blue→white seam) is independent of the flowing content. Overflows the
+  // hero so it reads behind the featured banner emitted below it.
+  &__hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1354px;
+    z-index: 0;
+    pointer-events: none;
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size:
+      100% 181.239px,
+      100% 100%,
+      100% 100%;
+    background-image:
+      linear-gradient(180deg, #010215 0%, rgba(1, 2, 21, 0) 100%),
+      linear-gradient(180deg, #000216 0%, rgba(0, 2, 22, 0) 50%),
+      linear-gradient(
+        180deg,
+        var(--color-blue-4, #000216) 0%,
+        var(--color-blue-8, #00042b) 8%,
+        var(--color-azure-17, #011f58) 17%,
+        var(--color-blue-27, #001d8a) 26%,
+        var(--color-azure-36, #003db7) 30%,
+        var(--color-azure-49, #0080f8) 45%,
+        var(--color-azure-67, #5fbdf7) 52%,
+        var(--color-grey-91, #d3effb) 62%,
+        var(--color-grey-910, rgba(211, 239, 252, 0)) 70%
+      );
+  }
+
+  // Standing character on the right of the hero
+  &__hero-character {
+    position: absolute;
+    top: var(--wl-char-top);
+    right: 159px;
+    // Height tracks the viewport; width follows the 89/119 aspect ratio.
+    height: var(--wl-char-height);
+    width: auto;
+    aspect-ratio: 89/119;
+    z-index: 1;
+    pointer-events: none;
+    // Looping hero character video (replaces the working-asawin.png still).
+    // The element is now a <video>, so use object-* instead of background-*
+    // (a .webm can't render via background-image).
+    object-fit: contain;
+    object-position: right bottom;
+
+    // Below 980px the character is hidden entirely.
+    @include respond-to(980px) {
+      display: none;
+    }
+  }
+
+  // Diagonal white shape under the hero — white sits higher on the right and
+  // slopes down to the left. Sits behind the featured banner so it reads as a
+  // slanted blue→white seam.
+  &__hero-cut {
+    position: absolute;
+    left: 0;
+    right: 0;
+    // Anchored to the character's feet, then raised by --wl-cut-rise.
+    top: calc(var(--wl-char-top) + var(--wl-char-height) - var(--wl-cut-rise));
+    height: calc(0.34 * var(--wl-container));
+    z-index: 2;
+    pointer-events: none;
+    background: #fff;
+    clip-path: polygon(100% 0, 0 119.239px, 0 100%, 100% 100%);
+
+    // Hide the diagonal white cut entirely below 1200px (the standing
+    // character it's anchored to is already hidden under 980px).
+    @media (max-width: 1199px) {
+      display: none;
+    }
+  }
+
+  &__hero-inner {
+    position: relative;
+    z-index: 2;
+    width: var(--wl-container);
+    margin: 0 auto;
+  }
+
+  // ── "WORKS" eyebrow pill — gradient text + light running the border ──
+  &__eyebrow {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    width: 108px;
+    flex-direction: column;
+    align-items: flex-start;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0);
+    background: rgba(255, 255, 255, 0.02);
+    font-family: "TT Norms Pro", var(--font-body);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0.72px;
+    text-transform: uppercase;
+
+    // Inner text gets its own gradient fill, clipped to the glyphs.
+    color: transparent;
+    background-image: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.3) 8.85%,
+      #fff 100%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    // Rotating border ring: faint base all the way round + a bright comet
+    // segment that travels the perimeter. Masked so only the 1px ring shows.
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      border-radius: inherit;
+      padding: 1px;
+      background: conic-gradient(
+        from var(--wl-glow-angle, 0deg),
+        rgba(255, 255, 255, 0.12) 0deg,
+        rgba(255, 255, 255, 0.12) 250deg,
+        rgba(255, 255, 255, 0.55) 312deg,
+        #ffffff 350deg,
+        rgba(255, 255, 255, 0.12) 360deg
+      );
+      -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      animation: wl-glow-spin 4.5s linear infinite;
+    }
+
+    // Soft bloom that follows the same comet, blurred for a glow halo.
+    &::after {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      z-index: -2;
+      border-radius: inherit;
+      padding: 3px;
+      background: conic-gradient(
+        from var(--wl-glow-angle, 0deg),
+        transparent 0deg,
+        transparent 300deg,
+        rgba(120, 190, 255, 0.7) 345deg,
+        transparent 360deg
+      );
+      -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      filter: blur(4px);
+      animation: wl-glow-spin 4.5s linear infinite;
+    }
+
+    @include no-motion {
+      &::before,
+      &::after {
+        animation: none;
+      }
+      &::before {
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.5) 0%,
+          rgba(255, 255, 255, 0.12) 100%
+        );
+      }
+    }
+  }
+
+  // ── Filter tabs ───────────────────────────────────────────
+  &__tabs {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 56px;
+    padding: 8px;
+    border-radius: var(--radius-pill);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    background: rgba(255, 255, 255, 0.04);
+
+    @include respond-to(sm) {
+      flex-wrap: wrap;
+      border-radius: 24px;
+    }
+  }
+
+  &__tab {
+    color: rgba(255, 255, 255, 0.34);
+    font-family: var(--font-display);
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.72px;
+    text-transform: uppercase;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 12px;
+    border: 0;
+    border-radius: var(--radius-pill);
+
+    white-space: nowrap;
+    background: transparent;
+    transition:
+      color 0.22s ease,
+      background 0.22s ease;
+
+    &--active {
+      color: #191314;
+      font-weight: 400;
+      background: #fff;
+    }
+
+    &--soon {
+      cursor: default;
+    }
+
+    &:not(.work-landing__tab--active):not(.work-landing__tab--soon):hover {
+      color: rgba(255, 255, 255, 0.34);
+    }
+  }
+}
+
+// ============================================================
+// Page chrome — fixed navigation + footer (.site-nav / .footer)
+// Kept in this file so the whole Works landing page lives in one place.
+// ============================================================
+
+.site-nav {
+  position: fixed;
+  top: 28px;
+  left: 28px;
+  z-index: 8;
+  transition: transform 0.3s ease;
+
+  &--hidden {
+    visibility: hidden;
+  }
+
+  &--active {
+    z-index: 12;
+  }
+
+  &--hero-hidden {
+    z-index: 8;
+    pointer-events: none;
+  }
+
+  &__stack {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0 10px;
+  }
+
+  &__row {
+    display: flex;
+    align-items: stretch;
+  }
+
+  &__toggle {
+    width: 52px;
+    height: 52px;
+    padding: 0 24px;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 7.787px;
+    border: 0;
+    border-bottom: 1px solid rgba(224, 246, 255, 0.2);
+    color: #E0F6FF;
+    transition:
+      transform 0.25s ease,
+      background 0.25s ease,
+      border-color 0.25s ease;
+
+    &:hover {
+      transform: translateY(-1px);
+      background: rgba(10, 18, 32, 0.28);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+  }
+
+  &__toggle-line {
+    display: block;
+    flex-shrink: 0;
+    background: currentColor;
+    transition:
+      transform 0.25s ease,
+      opacity 0.25s ease,
+      width 0.25s ease;
+
+    &:nth-child(1) {
+      width: 20px;
+      height: 1px;
+      align-self: center;
+      transform: translateX(-3px);
+    }
+    &:nth-child(2) {
+      width: 12px;
+      height: 1px;
+      align-self: center;
+      transform: translateX(-6px);
+    }
+  }
+
+  &__brand {
+    display: flex;
+    height: 52px;
+    padding: 0 24px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 8px;
+    border: 1px solid rgba(224, 246, 255, 0.2);
+    min-width: 164px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    font-size: 15px;
+    color: #E0F6FF;
+    white-space: nowrap;
+    transition:
+      background 0.25s ease,
+      color 0.25s ease,
+      border-color 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+
+  &__brand-mark {
+    display: block;
+    width: 116px;
+    height: auto;
+    flex: none;
+  }
+
+  &__emblem {
+    width: 53px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 0;
+    border-right: 1px solid rgba(224, 246, 255, 0.2);
+    border-bottom: 1px solid rgba(224, 246, 255, 0.2);
+    border-left: 1px solid rgba(224, 246, 255, 0.2);
+    background: transparent;
+    color: #E0F6FF;
+    transition:
+      transform 0.25s ease,
+      background 0.25s ease,
+      border-color 0.25s ease,
+      color 0.25s ease,
+      box-shadow 0.25s ease;
+
+    &:hover {
+      transform: translateY(-1px);
+      background: rgba(10, 18, 32, 0.28);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+  }
+
+  &__emblem-icon {
+    width: 28px;
+    height: 36px;
+    fill: none;
+  }
+
+  &__menu {
+    position: absolute;
+    top: calc(100% + 18px);
+    left: 0;
+    min-width: 250px;
+    padding: 16px;
+    display: grid;
+    gap: 8px;
+    border: 1px solid rgba(224, 246, 255, 0.2);
+    background: rgba(7, 13, 24, 0.82);
+    backdrop-filter: blur(18px);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    pointer-events: none;
+    transition:
+      opacity 0.25s ease,
+      visibility 0.25s ease,
+      transform 0.25s ease,
+      background 0.25s ease,
+      border-color 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+
+  &__link {
+    display: block;
+    padding: 10px 12px;
+    font-family: var(--font-display);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(240, 244, 248, 0.8);
+    border: 1px solid transparent;
+    transition:
+      color 0.25s ease,
+      border-color 0.25s ease,
+      background 0.25s ease;
+
+    &:hover,
+    &:focus-visible {
+      color: var(--color-white);
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.12);
+      outline: none;
+    }
+  }
+
+  &--open {
+    z-index: 14;
+
+    .site-nav__menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .site-nav__toggle-line:nth-child(1) {
+      width: 18px;
+      transform: translateX(5px) rotate(45deg) translateY(6px);
+    }
+
+    .site-nav__toggle-line:nth-child(2) {
+      width: 18px;
+      transform: translateX(5px) rotate(-45deg) translateY(-6px);
+    }
+  }
+
+  &--invert {
+    .site-nav__toggle {
+      background: #090703;
+      border-bottom-color: rgba(255, 255, 255, 0.16);
+    }
+
+    .site-nav__brand,
+    .site-nav__emblem {
+      background: rgba(255, 255, 255, 0.96);
+      border-color: rgba(9, 7, 3, 0.12);
+      color: var(--color-azure);
+    }
+
+    .site-nav__menu {
+      background: rgba(255, 255, 255, 0.96);
+      border-color: rgba(9, 7, 3, 0.12);
+    }
+
+    .site-nav__link {
+      color: var(--color-azure);
+
+      &:hover,
+      &:focus-visible {
+        color: #090703;
+        background: rgba(0, 96, 255, 0.08);
+        border-color: rgba(0, 96, 255, 0.18);
+      }
+    }
+  }
+
+  @include respond-to(md) {
+    top: 20px;
+    left: 20px;
+
+    &__brand {
+      min-width: 156px;
+      padding: 0 24px;
+    }
+  }
+
+  @include respond-to(sm) {
+    top: 16px;
+    left: 16px;
+
+    &__toggle,
+    &__brand,
+    &__emblem {
+      height: 52px;
+    }
+
+    &__toggle,
+    &__emblem {
+      width: 52px;
+    }
+
+    &__brand {
+      min-width: auto;
+      padding: 0 18px;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+    }
+
+    &__brand-mark {
+      width: clamp(88px, 24vw, 116px);
+    }
+
+    &__menu {
+      min-width: min(calc(100vw - 32px), 240px);
+      top: calc(100% + 14px);
+    }
+  }
+}
+
+.footer {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(
+    180deg,
+    #5e0a0a 0%,
+    #b81e07 28%,
+    #e8500a 58%,
+    #ff9b1a 100%
+  );
+
+  // Dark navy tint fading down over the header top
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 40vh;
+    z-index: 0;
+    pointer-events: none;
+    background: linear-gradient(180deg, #000216 0%, rgba(217, 51, 12, 0) 100%);
+  }
+
+  // Decorative background vector
+  &__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image: url("../../svg/footer-bg.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.08;
+  }
+
+  &__head {
+    text-align: center;
+    padding-top: 311px;
+    position: relative;
+
+    @include respond-to(md) {
+      padding-top: 140px;
+    }
+
+    @include respond-to(sm) {
+      padding-top: 80px;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  }
+
+  &__headline {
+    text-align: center;
+    font-family: "TT Norms Pro", var(--font-display);
+    font-size: clamp(34px, 4.2vw, 63.75px);
+    font-weight: 700;
+    line-height: 120%;
+    text-transform: uppercase;
+    background: linear-gradient(180deg, #faa933 0%, #f76403 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  &__headline-highlight {
+    display: block;
+  }
+
+  &__cols {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    gap: 35vw;
+    margin-top: 89px;
+    margin-bottom: 136px;
+    @include respond-to(md) {
+      gap: 18vw;
+      margin-top: 56px;
+      margin-bottom: 80px;
+    }
+
+    @include respond-to(sm) {
+      flex-direction: column;
+      gap: 36px;
+      align-items: center;
+      margin-top: 40px;
+      margin-bottom: 56px;
+    }
+  }
+
+  &__col-label {
+    font-family: var(--font-body);
+    font-size: 12.2px;
+    color: var(--color-grey-9440, rgba(224, 246, 255, 0.4));
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 21px;
+    text-align: center;
+  }
+
+  &__col-list {
+    text-align: center;
+  }
+
+  &__col-item {
+    margin-bottom: 2px;
+  }
+
+  &__col-link {
+    font-family: var(--font-body);
+    text-transform: uppercase;
+    transition: opacity 0.25s;
+    color: var(--color--white, #f4f4ed);
+    text-align: center;
+    font-size: 21.9px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: var(--line-height-28, 28px); /* 127.854% */
+    letter-spacing: var(--letter-spacing--0_24, -0.24px);
+    text-transform: uppercase;
+
+    &:hover {
+      opacity: 0.7;
+    }
+
+    .footer__col--soon & {
+      color: rgba(255, 255, 255, 0.5);
+      pointer-events: none;
+    }
+  }
+
+  // Samurai character
+  &__character {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: clamp(320px, 38vw, 574px);
+    aspect-ratio: 3 / 4;
+    background-image: url("../../images/footer-samurai.png");
+    background-size: contain;
+    background-position: bottom center;
+    background-repeat: no-repeat;
+    z-index: 3;
+
+    // Hide on tablet/mobile so it never overlaps the nav links
+    @include respond-to(md) {
+      display: none;
+    }
+  }
+
+  // Bottom block — sized to the giant text so the bar aligns to its edges
+  &__bottom {
+    align-self: center;
+    width: fit-content;
+    max-width: 100%;
+  }
+
+  // Large watermark text
+  &__giant-text {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    font-family: var(--font-display);
+    font-size: clamp(34px, 11.5vw, 209.455px);
+    white-space: nowrap;
+    user-select: none;
+    color: #b62b0e;
+    font-style: normal;
+    font-weight: 700;
+    padding-top: 70px;
+    padding-bottom: 54px;
+    letter-spacing: 0.02em;
+
+    @include respond-to(sm) {
+      padding-top: 40px;
+      padding-bottom: 32px;
+    }
+  }
+
+  // Bottom bar — spans the giant text width, edges aligned to INFINITYPLAY
+  &__bar {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-bottom: 27px;
+    margin-top: 27px;
+    font-family: var(--font-body);
+    letter-spacing: 0.08em;
+    color: #b62b0e;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+
+    @include respond-to(sm) {
+      flex-direction: column;
+      gap: 8px;
+      justify-content: center;
+      text-align: center;
+    }
+  }
+
+  &__links {
+    display: flex;
+    gap: 26px;
+    font-weight: 600;
+    line-height: var(--line-height-20, 20px); /* 200% */
+    text-transform: uppercase;
+
+    a:hover {
+      opacity: 0.9;
+    }
+  }
+}

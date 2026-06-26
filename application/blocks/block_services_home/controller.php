@@ -41,6 +41,9 @@ class Controller extends BlockController
             if (isset($servicesList_item_v["title"]) && trim($servicesList_item_v["title"]) != "") {
                 $content[] = $servicesList_item_v["title"];
             }
+            if (isset($servicesList_item_v["content"]) && trim($servicesList_item_v["content"]) != "") {
+                $content[] = $servicesList_item_v["content"];
+            }
             if (isset($servicesList_item_v["supportBy"]) && trim($servicesList_item_v["supportBy"]) != "") {
                 $content[] = $servicesList_item_v["supportBy"];
             }
@@ -70,6 +73,7 @@ class Controller extends BlockController
                     $servicesList_item_v["videoPreview"] = $servicesList_item_v["videoPreview_file"];
                 }
             }
+            $servicesList_item_v["content"] = isset($servicesList_item_v["content"]) ? LinkAbstractor::translateFrom($servicesList_item_v["content"]) : null;
             $servicesList_item_v["supportBy"] = isset($servicesList_item_v["supportBy"]) ? LinkAbstractor::translateFrom($servicesList_item_v["supportBy"]) : null;
         }
         $this->set('servicesList_items', $servicesList_items);
@@ -118,6 +122,10 @@ class Controller extends BlockController
             if (!File::getByID($servicesList_item['videoPreview'])) {
                 unset($servicesList_item['videoPreview']);
             }
+        }
+        
+        foreach ($servicesList_items as &$servicesList_item) {
+            $servicesList_item['content'] = isset($servicesList_item['content']) ? LinkAbstractor::translateFromEditMode($servicesList_item['content']) : null;
         }
         
         foreach ($servicesList_items as &$servicesList_item) {
@@ -171,6 +179,7 @@ class Controller extends BlockController
                 } else {
                     $data['videoPreview'] = null;
                 }
+                $data['content'] = isset($servicesList_item['content']) ? LinkAbstractor::translateTo($servicesList_item['content']) : null;
                 $data['supportBy'] = isset($servicesList_item['supportBy']) ? LinkAbstractor::translateTo($servicesList_item['supportBy']) : null;
                 if (isset($rows[$i])) {
                     $queries['update'][$rows[$i]['id']] = $data;
@@ -240,6 +249,9 @@ class Controller extends BlockController
                         }
                         if (in_array("videoPreview", $this->btFieldsRequired['servicesList']) && (!isset($servicesList_v['videoPreview']) || trim($servicesList_v['videoPreview']) == "" || !is_object(File::getByID($servicesList_v['videoPreview'])))) {
                             $e->add(t("The %s field is required (%s, row #%s).", t("Video Preiview"), t("Services List"), $servicesList_k));
+                        }
+                        if (in_array("content", $this->btFieldsRequired['servicesList']) && (!isset($servicesList_v['content']) || trim($servicesList_v['content']) == "")) {
+                            $e->add(t("The %s field is required (%s, row #%s).", t("Content"), t("Services List"), $servicesList_k));
                         }
                         if (in_array("supportBy", $this->btFieldsRequired['servicesList']) && (!isset($servicesList_v['supportBy']) || trim($servicesList_v['supportBy']) == "")) {
                             $e->add(t("The %s field is required (%s, row #%s).", t("Supported by (Optional)"), t("Services List"), $servicesList_k));

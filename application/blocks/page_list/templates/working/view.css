@@ -1,0 +1,225 @@
+.work-landing__feature {
+  position: relative;
+  z-index: 2;
+  width: var(--wl-container);
+  margin: 162px auto 0;
+}
+@media (max-width: 980px) {
+  .work-landing__feature {
+    margin-top: 96px;
+  }
+}
+@media (max-width: 680px) {
+  .work-landing__feature {
+    margin-top: 56px;
+  }
+}
+
+.work-landing__feature-media {
+  width: 100%;
+  aspect-ratio: 1128/634;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 9.641px;
+}
+
+.work-landing__catalog {
+  position: relative;
+  z-index: 2;
+  background: #fff;
+}
+
+.work-landing__catalog-inner {
+  width: var(--wl-container);
+  margin: 0 auto;
+  padding-bottom: 104px;
+}
+
+.work-landing__feature-meta {
+  display: flex;
+  align-items: center;
+  padding: 26px 0 55px;
+  border-bottom: 1px solid var(--color-line);
+}
+@media (max-width: 680px) {
+  .work-landing__feature-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 22px 0 32px;
+  }
+}
+
+.work-landing__feature-title {
+  margin-right: auto;
+  font-family: var(--font-display);
+  color: var(--text-base-primary, #14151a);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 140%; /* 19.6px */
+  text-transform: uppercase;
+}
+
+.work-landing__feature-desc {
+  font-family: var(--font-body);
+  padding-right: 24px;
+  text-align: end;
+  color: #5b606b;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: var(--font-weight-400, 400);
+  line-height: var(--line-height-20, 20px); /* 166.667% */
+}
+@media (max-width: 680px) {
+  .work-landing__feature-desc {
+    padding-right: 0;
+    text-align: start;
+  }
+}
+
+.work-landing__feature-cta {
+  flex: 0 0 auto;
+}
+
+.work-landing__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+@media (max-width: 680px) {
+  .work-landing__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.work-landing__card {
+  display: block;
+  padding: var(--wl-gutter);
+  border-bottom: 1px solid var(--color-line);
+  color: inherit;
+  text-decoration: none;
+}
+.work-landing__card:nth-child(odd) {
+  padding-left: 0;
+  border-right: 1px solid var(--color-line);
+}
+.work-landing__card:nth-child(even) {
+  padding-right: 0;
+}
+@media (max-width: 680px) {
+  .work-landing__card {
+    padding: 28px 0;
+  }
+  .work-landing__card:nth-child(odd) {
+    border-right: 0;
+  }
+}
+
+.work-landing__card-media {
+  width: 100%;
+  aspect-ratio: 16/9;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 8px;
+}
+
+.work-landing__card-info {
+  display: flex;
+  gap: 24px;
+}
+@media (max-width: 680px) {
+  .work-landing__card-info {
+    flex-direction: column;
+    gap: 0;
+  }
+}
+
+.work-landing__card-title {
+  flex: 0 0 38%;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+  padding: 24px;
+}
+@media (max-width: 680px) {
+  .work-landing__card-title {
+    padding: 18px 0 4px;
+  }
+}
+
+.work-landing__card-desc {
+  flex: 1;
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.55;
+  color: #5b606b;
+  padding-top: 24px;
+  padding-right: 32px;
+  padding-bottom: 38px;
+}
+@media (max-width: 680px) {
+  .work-landing__card-desc {
+    padding: 0 0 4px;
+  }
+}
+
+.work-landing__pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 44px 0 64px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.work-landing__page {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 30px;
+  height: 30px;
+  padding: 0 6px;
+  border-radius: 7px;
+  color: #9aa0ab;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+.work-landing__page:hover {
+  color: var(--color-ink);
+}
+.work-landing__page--active {
+  color: #fff;
+  background: #14181f;
+}
+.work-landing__page--active:hover {
+  color: #fff;
+}
+
+.work-landing__page-ellipsis {
+  display: inline-flex;
+  align-items: center;
+  min-width: 24px;
+  justify-content: center;
+  color: #9aa0ab;
+  letter-spacing: 0.05em;
+}
+
+.work-landing__page-step {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 8px;
+  color: #9aa0ab;
+  transition: color 0.2s ease;
+}
+.work-landing__page-step:hover {
+  color: var(--color-ink);
+}

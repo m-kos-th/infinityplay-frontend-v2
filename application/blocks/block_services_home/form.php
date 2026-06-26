@@ -74,6 +74,10 @@
                                 </concrete-file-input>
 </div>
 </div>            <div class="form-group">
+    <label for="<?php echo $view->field('servicesList'); ?>[{{id}}][content]" class="control-label"><?php echo t("Content"); ?></label>
+    <?php echo isset($btFieldsRequired['servicesList']) && in_array('content', $btFieldsRequired['servicesList']) ? '<small class="required">' . t('Required') . '</small>' : null; ?>
+    <textarea name="<?php echo $view->field('servicesList'); ?>[{{id}}][content]" id="<?php echo $view->field('servicesList'); ?>[{{id}}][content]" class="ft-servicesList-content">{{ content }}</textarea>
+</div>            <div class="form-group">
     <label for="<?php echo $view->field('servicesList'); ?>[{{id}}][supportBy]" class="control-label"><?php echo t("Supported by (Optional)"); ?></label>
     <?php echo isset($btFieldsRequired['servicesList']) && in_array('supportBy', $btFieldsRequired['servicesList']) ? '<small class="required">' . t('Required') . '</small>' : null; ?>
     <textarea name="<?php echo $view->field('servicesList'); ?>[{{id}}][supportBy]" id="<?php echo $view->field('servicesList'); ?>[{{id}}][supportBy]" class="ft-servicesList-supportBy">{{ supportBy }}</textarea>

@@ -141,9 +141,12 @@
         heroNavToggle.style.cursor = "pointer";
 
         heroNavToggle.addEventListener("click", (event) => {
-          event.preventDefault();
-          event.stopPropagation();
+          toggle.addEventListener("click", () => {
           setNavState(!siteNav.classList.contains("site-nav--open"));
+        });
+          // event.preventDefault();
+          // event.stopPropagation();
+          // setNavState(!siteNav.classList.contains("site-nav--open"));
         });
       }
 

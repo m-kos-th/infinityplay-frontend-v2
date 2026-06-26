@@ -25,6 +25,7 @@
             <default value="0"/>
             <unsigned/>
         </field>
+        <field name="content" type="X2"></field>
         <field name="supportBy" type="X2"></field>
     </table>
 </schema>

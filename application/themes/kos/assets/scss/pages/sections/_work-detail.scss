@@ -579,7 +579,11 @@
   }
 
   // ── Responsive ─────────────────────────────────────────────
-  @include respond-to(860px) {
+  // Collapse to a single column at md (980px) — the SAME breakpoint where the
+  // aside loses its sticky position + right divider (below). Keeping these in
+  // lock-step avoids a broken 861–980px zone where a 2-column grid would pair
+  // with a destyled, non-sticky aside (leaving a tall empty gutter).
+  @include respond-to(md) {
     &__layout,
     &__pager {
       grid-template-columns: 1fr;
@@ -692,6 +696,24 @@
       padding: 12px 8px;
       padding-right: 8px;
       min-height: 56px;
+    }
+
+    // Tighten the next-project name so more of it shows before the ellipsis
+    // in the narrow mobile bar (the wide 0.28em tracking truncates too early).
+    &__pager-name {
+      font-size: 16px;
+      letter-spacing: 0.08em;
+
+      .ccm-block-next-previous-next-link a {
+        font-size: 16px;
+        letter-spacing: 0.08em;
+      }
+    }
+
+    &__pager-cue {
+      gap: 4px;
+      font-size: 11px;
+      letter-spacing: 0.08em;
     }
 
     &__pager-all {
