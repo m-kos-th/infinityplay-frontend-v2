@@ -59,19 +59,12 @@
     margin-top: 56px;
     color: #fff;
     font-family: var(--font-display);
-    // Scale down on narrow viewports so long words ("ENGINEERING") never
-    // overflow the hero container (which is only calc(100% - 40px) wide on sm).
-    font-size: clamp(28px, 6vw, 40px);
+    font-size: 40px;
     font-style: normal;
     font-weight: 700;
     line-height: 120%; /* 48px */
     letter-spacing: 0.8px;
     text-transform: uppercase;
-    overflow-wrap: break-word;
-
-    @include respond-to(sm) {
-      margin-top: 40px;
-    }
   }
 
   // ── Hero ──────────────────────────────────────────────────
@@ -127,11 +120,10 @@
     aspect-ratio: 89/119;
     z-index: 1;
     pointer-events: none;
-    // Looping hero character video (replaces the working-asawin.png still).
-    // The element is now a <video>, so use object-* instead of background-*
-    // (a .webm can't render via background-image).
-    object-fit: contain;
-    object-position: right bottom;
+    background-image: url("../../images/working/working-asawin.png");
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    background-size: contain;
 
     // Below 980px the character is hidden entirely.
     @include respond-to(980px) {

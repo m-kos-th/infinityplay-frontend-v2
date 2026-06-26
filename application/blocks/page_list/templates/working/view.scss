@@ -20,16 +20,6 @@
   z-index: 2;
   width: var(--wl-container);
   margin: 162px auto 0;
-
-  // The hero character + diagonal cut are hidden below 1200/980px, so the
-  // banner no longer needs to clear them — pull it up to close the blue gap.
-  @media (max-width: 980px) {
-    margin-top: 96px;
-  }
-
-  @media (max-width: 680px) {
-    margin-top: 56px;
-  }
 }
 
 .work-landing__feature-media {
@@ -66,7 +56,6 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 16px;
-    padding: 22px 0 32px;
   }
 }
 
@@ -91,13 +80,6 @@
   font-style: normal;
   font-weight: var(--font-weight-400, 400);
   line-height: var(--line-height-20, 20px); /* 166.667% */
-
-  // In the stacked mobile layout the right-aligned text reads as broken —
-  // align it with the left-aligned title/CTA instead.
-  @media (max-width: 680px) {
-    padding-right: 0;
-    text-align: start;
-  }
 }
 
 .work-landing__feature-cta {
@@ -153,13 +135,6 @@
 .work-landing__card-info {
   display: flex;
   gap: 24px;
-
-  // Side-by-side title/desc gets too cramped on a single-column mobile card
-  // (title is only 38% wide) — stack them instead.
-  @media (max-width: 680px) {
-    flex-direction: column;
-    gap: 0;
-  }
 }
 
 .work-landing__card-title {
@@ -171,10 +146,6 @@
   text-transform: uppercase;
   color: var(--color-ink);
   padding: 24px;
-
-  @media (max-width: 680px) {
-    padding: 18px 0 4px;
-  }
 }
 
 .work-landing__card-desc {
@@ -186,10 +157,6 @@
   padding-top: 24px;
   padding-right: 32px;
   padding-bottom: 38px;
-
-  @media (max-width: 680px) {
-    padding: 0 0 4px;
-  }
 }
 
 // Pagination
